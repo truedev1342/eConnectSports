@@ -1,0 +1,53 @@
+<ul class="breadcrumb">
+    <li>
+  	  <%= link_to 'Dashboard', root_url %> <span class="divider">/</span>
+    </li>
+    <li class="active">Memberships &amp; Invitations</li>
+</ul>
+
+<div class="content-container span12 centered-span" style="margin-bottom:20px;"><div class="content">
+
+<h2>Memberships &amp; Invitations</h2>
+
+<% if current_user.memberships.count > 0 %>
+
+<table class="table">
+
+<% current_user.memberships.each do |membership| %>
+  <% if current_user.id != membership.team.owner_id %>
+    <tr>
+      <td><%= membership.team.name %></td>
+      <td>
+        <center>
+          <% if membership.approved == nil %>
+            <%= link_to '<i class="icon-thumbs-up"></i> Approve'.html_safe, approve_membership_path(membership), :class => "btn btn-success btn-mini" %>
+            <%= link_to '<i class="icon-thumbs-down"></i> Decline'.html_safe, decline_membership_path(membership), :class => "btn btn-danger btn-mini" %>
+          <% elsif membership.approved == false %>
+            <%= link_to '<i class="icon-thumbs-up"></i> Approve'.html_safe, approve_membership_path(membership), :class => "btn btn-success btn-mini" %>
+          <% elsif membership.approved == true %>
+            <span class="text-success">Membership Accepted</span> <%= link_to '<i class="icon-remove"></i> Remove Membership'.html_safe, decline_membership_path(membership), :class => "btn btn-danger btn-mini" %>
+          <% else %>
+            <%= link_to '<i class="icon-thumbs-up"></i> Approve'.html_safe, approve_membership_path(membership), :class => "btn btn-success btn-mini" %>
+            <%= link_to '<i class="icon-thumbs-down"></i> Decline'.html_safe, decline_membership_path(membership), :class => "btn btn-danger btn-mini" %>
+          <% end %>
+        </center>
+      </td>
+    </tr>
+  <% else %>
+    <tr>
+      <td><%= membership.team.name %></td>
+      <td>
+        <center>
+            <%= link_to "Team Owner", url_for(membership.team) %>
+        </center>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+
+<% else %>
+  <p>You have no memberships or pending invitations at this time.</p>
+<% end %>
+
+</div></div>

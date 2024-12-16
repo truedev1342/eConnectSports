@@ -1,0 +1,145 @@
+<% content_for :head do %>
+    <script>
+        function changePrice(){
+          var quantity = parseInt($("#payment_cards_purchased").val()) ? parseInt($("#payment_cards_purchased").val()) : 0;
+          var period = parseInt($('select#payment_period :selected').val())
+          <% if @buy_more == true %>
+            var iPrice = 0.00;
+          <% else %>
+            var iPrice = 4.99;
+          <% end %>
+          var cardPrice = 2.99;
+          <% if @buy_more == true %>
+            var total = quantity * cardPrice;
+          <% else %>
+            var total = (quantity-1) * cardPrice;
+          <% end %>
+          total += iPrice;
+          total = parseFloat(total).toFixed(2);
+
+          $("#total_price").html("<h3>Total Price: $" + total + "</h3>"); // sets the total price input to the quantity * price
+        }
+
+        $(document).ready(function () {
+            changePrice()
+            $('#payment_cards_purchased').keyup(function () {
+              changePrice()
+            });
+            $('select#payment_period').change(function(){
+              changePrice()
+            });
+        });
+    </script>
+<% end %>
+
+<div class="content-container">
+      <div class="content">
+        <% unless @renew_payment %>
+          <% if @buy_more == true %>
+            <h2>Purchase additional cards for season.</h2>
+          <% else %>
+            <h2>You're just about ready to start!</h2>
+          <% end %>
+          <div class="content-container">
+              <div class="content payment_list alert alert-success">
+                  <h4>All this with the purchase of your card!
+                          <ul>
+                              <li>Unlimited access</li>
+                              <li>Unlimited trades via email and social media</li>
+                              <li>Anytime editing</li>
+                              <li>Add web links and social media</li>
+                              <li>Post your card to various social networks</li>
+                              <li>Collect other players’ cards</li>
+                              <li>“Coaches Corner” for team management</li>
+                              <li>Start some friendly competition!</li>
+                              <li>Have fun with the first digital sports trading card!</li>
+                              <li>Mobile App for easy access to your card.</li>
+                          </ul>
+                  </h4>
+              </div>
+          </div>
+        <% else %>
+          <h2>Renew your card.</h2>
+        <% end %>
+        <p><em>All fields required.</em></p>
+        <%= form_for @payment do |f| %>
+          <%= f.hidden_field :card_id %>
+            <% if @payment.errors.any? %>
+                <div class="error_messages">
+                    <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+                    <ul>
+                        <% @payment.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+            <%= f.hidden_field :stripe_card_token %>
+            <%= f.hidden_field :stripe_customer_token %>
+            <%= f.hidden_field :card_id %>
+            <%= f.hidden_field :renew_payment, value: @renew_payment %>
+
+            <div class="field">
+                <span class="">
+                  <%= f.label :cards_purchased, "Number of Cards" %>
+                  <%= f.text_field :cards_purchased, :placeholder => "0", :class => "input-small", value: 1 %>
+                </span>
+            </div>
+            <div id="total_price"><h3>Total Price: $2.99</h3></div>
+            <% if @payment.stripe_customer_token.present? %>
+                Credit card has been provided.
+            <% else %>
+                <div class="field">
+                    <%= f.label :email, "Email Address" %>
+                    <%= f.text_field :email, :value => current_user.email %>
+                </div>
+                <div class="field">
+                    <%= label_tag :card_number, "Credit Card Number" %>
+                    <%= text_field_tag :card_number, nil, name: nil %>
+                </div>
+                <div class="field">
+                    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+                    <%= text_field_tag :card_code, nil, name: nil %>
+                </div>
+                <div class="field">
+                    <%= label_tag :card_month, "Card Expiration" %>
+                    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+                    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+                </div>
+
+
+            <% end %>
+
+            <div id="stripe_error">
+                <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser
+                    settings.
+                </noscript>
+            </div>
+            <br>
+
+            <div class="actions">
+                <%= f.submit "Buy Now", :class => "btn btn-success" %>
+                <%= link_to "HAVE PROMO CODE?", '#', data: {toggle: 'modal', target: '#promomodal'} unless @renew_payment %>
+            </div>
+        <% end %>
+        <br>
+        <a href="http://stripe.com" target="_blank"><%= image_tag "app/stripe.png" %></a>
+        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=yKCaK3t7LZsp451XR5NzawqMfOpLTg2uMwOhLvZXRATdl1d5Q9wGpmBBX8"></script></span>
+    </div>
+</div>
+<div id="promomodal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 364px;margin-left:-182px;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>ENTER YOUR PROMO CODE</h3>
+  </div>
+  <%= form_for @payment do |f|%>
+    <div class="modal-body">
+      <%= text_field_tag :promo_code, nil, style: 'width: 320px;' %>
+      <%= text_field_tag :card_id, params[:card_id], class: 'hide' %>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn">Close</a>
+      <%= f.submit "Submit", :class => "btn btn-success" %>
+    </div>
+  <% end %>
+</div>

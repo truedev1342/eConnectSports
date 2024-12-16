@@ -1,0 +1,69 @@
+<% content_for :head do %>
+<script>
+$(document).ready(function() {
+  $('#team_payment_memberships_purchased').keyup(function() {
+     var quantity = $("#team_payment_memberships_purchased").val();
+     var iPrice = 9.99;
+
+     var total = quantity * iPrice;
+     total = parseFloat(total).toFixed(2);
+
+     $("#total_price").html("<h3>Total Price: $"+total+"</h3>"); // sets the total price input to the quantity * price
+  });
+});
+</script>
+<% end %>
+
+<div class="content-container"><div class="content">
+<h2>Purchase additional memberships for $9.99 each.</h2>
+<p><em>All fields required.</em></p>
+<%= form_for @team_payment do |f| %>
+  <% if @team_payment.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@team_payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+      <ul>
+      <% @team_payment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :stripe_card_token %>
+  <%= f.hidden_field :team_id, :value => params[:team_id] %>
+  <div class="field">
+    <%= f.label :memberships_purchased, "Number of Memberships" %>
+    <%= f.text_field :memberships_purchased, :placeholder => "0", :class => "input-small" %>
+  </div>
+  <div id="total_price"><h3>Total Price: $0.00</h3></div>
+  <% if @team_payment.stripe_card_token.present? %>
+    Credit card has been provided.
+  <% else %>
+    <div class="field">
+      <%= f.label :email, "Email Address" %>
+      <%= f.text_field :email, :value => current_user.email %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+      <%= text_field_tag :card_code, nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
+    </div>
+  <% end %>
+  <div id="stripe_error">
+    <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit "Buy Now", :class => "btn btn-success" %>
+  </div>
+<% end %>
+<br>
+<a href="http://stripe.com" target="_blank"><%= image_tag "app/stripe.png" %></a>
+</div></div>

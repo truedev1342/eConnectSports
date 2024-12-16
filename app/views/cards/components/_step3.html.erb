@@ -1,0 +1,38 @@
+<div class="tabtext">
+  <p><span class="bold">Almost done.</span>Customize your photo and background.</p>
+</div>
+<div class="formblock">
+  <div class="left-half half">
+    <div class="box">
+        <h4>Photo <!-- <div class="pull-right"><i class="icon-question-sign" id="appearance_pop"></i></div> --> </h4>
+        <% if @card.image? %>
+          <%= image_tag @card.image_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>&nbsp;&nbsp;<%= f.check_box :remove_image %> Remove?
+          <br><br>
+        <% end %>
+        <%= f.file_field :image %>
+    </div>
+  </div>
+  <div class="right-half half">
+    <div class="box">
+      <h4>Background <!--<div class="pull-right"><i class="icon-question-sign" id="background_pop"></i></div> -->  </h4>
+      <div>
+      <% if @card.background? %>
+        <%= f.check_box :remove_background %> Remove?
+        <br>
+        <%= image_tag @card.background_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>
+        <br><br>
+      <% end %>
+      <div class="background_field">
+        <%= f.file_field :background%>
+      </div>
+      <%= f.hidden_field :background_cache %>
+      </div>
+      <%= f.check_box :background_tile %> Tile Background
+      <%= f.hidden_field :library_image %>
+      <button type="button" class="btn select-from-library" class="btn">
+        <i class="fa fa-picture-o"></i>
+        Select from library
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,261 @@
+<% @unique_id = 0 %>
+<%= content_for :head do %>
+  <style type="text/css" media="screen">
+     .colorwell {
+       border: 2px solid #fff;
+       width: 6em;
+       text-align: center;
+       cursor: pointer;
+     }
+     body .colorwell-selected {
+       border: 2px solid #000;
+       font-weight: bold;
+     }
+   </style>
+
+   <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      <% unless old_ie? %>
+        $(":file").filestyle({
+          buttonText: "Upload",
+          textField: true,
+          icon: true,
+          classIcon: "icon-upload-alt"
+        });
+      <% end %>
+      $("#advanced").click(function (event) {
+        event.preventDefault();
+        $('#advanced-style').slideToggle('slow');
+        var f = $.farbtastic('#picker');
+        var selected;
+        $('.colorwell')
+          .each(function () { f.linkTo(this); $(this); })
+          .focus(function() {
+            if (selected) {
+              $(selected).removeClass('colorwell-selected');
+            }
+            f.linkTo(this);
+            $(selected = this).addClass('colorwell-selected');
+          });
+        var gTop = '#EFEFEF';
+        var gBottom = '#808080';
+        var dColor = '#585858';
+        var nColor = '#007A9F';
+        var iColor = '#004D74';
+        if($('#card_background1_color').val() == "") {
+          $("#card_background1_color").val(gTop);
+          $('#card_background1_color').focus();
+        };
+        if($('#card_background2_color').val() == "") {
+          $("#card_background2_color").val(gBottom);
+          $('#card_background2_color').focus();
+        };
+        if($('#card_details_color').val() == "") {
+          $("#card_details_color").val(dColor);
+          $('#card_details_color').focus();
+        };
+        if($('#card_name_color').val() == "") {
+          $("#card_name_color").val(nColor);
+          $('#card_name_color').focus();
+        };
+        if($('#card_icon_color').val() == "") {
+          $("#card_icon_color").val(iColor);
+          $('#card_icon_color').focus();
+        };
+        $('#reset-appearence').click(function (event) {
+          event.preventDefault();
+          $('#card_background1_color').val(gTop);
+          $('#card_background1_color').focus();
+          $('#card_background2_color').val(gBottom);
+          $('#card_background2_color').focus();
+          $('#card_details_color').val(dColor);
+          $('#card_details_color').focus();
+          $('#card_name_color').val(nColor);
+          $('#card_name_color').focus();
+          $('#card_icon_color').val(iColor);
+          $('#card_icon_color').focus();
+        });
+      });
+    });
+   </script>
+ <% end %>
+
+<%= form_for([@resource, @card], :html => { :class => "form-inline card-form"}) do |f| %>
+  <%= f.hidden_field :user_token %>
+  <% if @card.errors.any? %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</strong>
+    <ul>
+      <% @card.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="span6"><div class="box">
+
+    <h3>1. Card Information</h3>
+
+    <div class="box">
+      <h4>Basic Info</h4>
+
+      <%= f.text_field :first_name, :placeholder => "First Name", :class => "input-medium" %>
+      <%= f.text_field :last_name, :placeholder => "Last Name", :class => "input-medium" %>
+      <br>
+
+      <%= f.text_field :hometown, :placeholder => "Hometown", :class => "input-medium" %>
+
+      <%= f.text_field :highlights, :size => 100, :placeholder => "Highlights(100 Characters Max)", :style => "width:94%;" %>
+      <br>
+
+      <%= f.text_field :team_name, :placeholder => "Team Name", :class => "input-medium" %>
+      <%= f.text_field :league, :placeholder => "League", :class => "input-medium" %>
+
+      <br>
+
+      <%= f.select(:season, [['Winter', 'Winter'], ['Spring', 'Spring'], ['Summer', 'Summer'], ['Fall', 'Fall']], {}, :id => "handed", :class => "input-small") %>
+      <%= f.text_field :year, :placeholder => "Year", :class => "input-small" %>
+
+      <br>
+
+      <%= f.select(:sport, [['Basketball', 'Basketball'], ['Football', 'Football'], ['Baseball', 'Baseball'], ['Softball', 'Softball'],['Swimming','Swimming'], ['Kickball', 'Kickball'], ['Hockey', 'Hockey'], ['Golf', 'Golf'], ['Lacrosse', 'Lacrosse'], ['Soccer', 'Soccer'], ['Tennis', 'Tennis'], ['Volleyball', 'Volleyball'], ['Wrestling', 'Wrestling'], ['Field Hockey', 'Field Hockey'],['Rugby','Rugby']], {}, :id => "sport", :class => "input-medium") %>
+      <%= f.text_field :position, :placeholder => "Your Position", :class => "input-medium" %>
+      <%= f.select(:handed, [['Right', 'R'], ['Left', 'L'], ['Switch', 'S']], {:prompt => '-Handed/Footed-'}, :id => "handed", :class => "input-medium") %>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <!--<div class="box">
+      <h4>Phone Numbers</h4>
+      <%= f.fields_for :card_phones do |builder| %>
+        <%= render 'card_phone_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add a Phone Number <i class='icon-plus-sign'></i>".html_safe, f, :card_phones %>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="box">
+      <h4>Email Addresses</h4>
+      <%= f.fields_for :card_emails do |builder| %>
+        <%= render 'card_email_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add an Email Address <i class='icon-plus-sign'></i>".html_safe, f, :card_emails %>
+    </div>
+
+    <p>&nbsp;</p> -->
+    <div class="box">
+      <h4>Stats <div class="pull-right"><i class="icon-question-sign" id="stat_pop"></i></div> </h4>
+      <%= f.fields_for :stats do |builder| %>
+        <%= render 'stat_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add a Stat <i class='icon-plus-sign'></i>".html_safe, f, :stats %>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="box">
+      <h4>Websites <div class="pull-right"><i class="icon-question-sign" id="website_pop"></i></div> </h4>
+      <%= f.fields_for :card_websites do |builder| %>
+        <%= render 'card_website_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add a Website <i class='icon-plus-sign'></i>".html_safe, f, :card_websites %>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="box">
+      <h4>Social Networks <div class="pull-right"><i class="icon-question-sign" id="social_pop"></i></div> </h4>
+      <%= f.fields_for :card_socials do |builder| %>
+        <%= render 'card_social_fields', f: builder %>
+      <% end %>
+      <p>
+        <%= link_to_add_fields "Add Social Network <i class='icon-plus-sign'></i>".html_safe, f, :card_socials %>
+      </p>
+    </div>
+
+  </div><p>&nbsp;</p></div>
+
+  <div class="span5">
+
+    <div class="box">
+      <h3>2. Appearance <!--<small><a href="#" role="button" id="advanced">Advanced <i class="icon-magic"></i></a></small>--></h3>
+      <div id="advanced-style" class="box">
+        <h4>Advanced Appearence</h4>
+        <div id="picker" style="float: right;"></div>
+        <div>
+          <%= f.label :background1_color, "Background Top" %>
+          <br>
+          <%= f.text_field :background1_color, :class => "colorwell" %>
+          <br>
+          <%= f.label :background2_color, "Background Bottom" %>
+          <br>
+          <%= f.text_field :background2_color, :class => "colorwell" %>
+          <br>
+          <%= f.label :details_color, "Details" %>
+          <br>
+          <%= f.text_field :details_color, :class => "colorwell" %>
+          <br>
+          <%= f.label :name_color, "Name" %>
+          <br>
+          <%= f.text_field :name_color, :class => "colorwell" %>
+          <br>
+          <%= f.label :icon_color, "Icons" %>
+          <br>
+          <%= f.text_field :icon_color, :class => "colorwell" %>
+        </div>
+        <br>
+        <a class="btn" id="reset-appearence" href="#">Default Colors</a>
+      </div>
+      <div class="box">
+        <h4>Photo</h4>
+        <% if @card.image? %>
+          <%= image_tag @card.image_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>&nbsp;&nbsp;<%= f.check_box :remove_image %> Remove?
+          <br><br>
+        <% end %>
+        <%= f.file_field :image %>
+      </div>
+      <p>&nbsp;</p>
+      <div class="box">
+      <h4>Background <!--<div class="pull-right"><i class="icon-question-sign" id="background_pop"></i></div> -->  </h4>
+      <div>
+      <% if @card.background? %>
+        <%= f.check_box :remove_background %> Remove?
+        <br>
+        <%= image_tag @card.background_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>
+        <br><br>
+      <% end %>
+      <div class="background_field">
+        <%= f.file_field :background%>
+      </div>
+      <%= f.hidden_field :background_cache %>
+      </div>
+      <%= f.check_box :background_tile %> Tile Background
+      <%= f.hidden_field :library_image %>
+      <button type="button" class="btn select-from-library" class="btn">
+        <i class="fa fa-picture-o"></i>
+        Select from library
+      </button>
+    </div>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="box">
+      <h3>3. Name your card</h3>
+      <%= f.text_field :card_name %>
+    </div>
+    <p>&nbsp;</p>
+    <div class="box">
+      <h3>4. Brand your card url</h3>
+      <span>http://idigitalsports.com/</span>
+      <%= f.text_field :url_alias, id: 'card_url_alias', autocomplete: 'off' %>
+    </div>
+
+    <div>
+      <br><%= f.submit :class => 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

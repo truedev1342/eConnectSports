@@ -1,0 +1,35 @@
+<h1>Listing team_payments</h1>
+
+<table>
+  <tr>
+    <th>Status</th>
+    <th>Amount</th>
+    <th>Email</th>
+    <th>Transaction</th>
+    <th>Stripe customer token</th>
+    <th>Team</th>
+    <th>Memberships purchased</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @team_payments.each do |team_payment| %>
+  <tr>
+    <td><%= team_payment.status %></td>
+    <td><%= team_payment.amount %></td>
+    <td><%= team_payment.email %></td>
+    <td><%= team_payment.transaction %></td>
+    <td><%= team_payment.stripe_customer_token %></td>
+    <td><%= team_payment.team %></td>
+    <td><%= team_payment.memberships_purchased %></td>
+    <td><%= link_to 'Show', team_payment %></td>
+    <td><%= link_to 'Edit', edit_team_payment_path(team_payment) %></td>
+    <td><%= link_to 'Destroy', team_payment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Team payment', new_team_payment_path %>

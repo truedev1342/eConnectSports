@@ -1,0 +1,80 @@
+  <div class="card" style="margin-top:40px;">
+    <table align="center" cellpadding="20">
+      <tr valign="top">
+        <% if @public_card.image? %>
+          <td valign="top" align="center">
+            <%= image_tag @public_card.image_url(:thumb).to_s, :class => 'card_image roundedImage' %>
+          </td>
+        <% else %>
+          <td valign="top" align="center">
+            <%= image_tag('app/person-placeholder.jpg', :class => 'card_image roundedImage') %>
+          </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td align="center">
+          <p>
+            <span class="name">
+              <%= @card.name %>
+            </span>
+            <br>
+            <b>Team:</b> <%= @card.team_name %>
+            <br>
+            <b>Position:</b> <%= @card.position %>
+            <br>
+            <b>Highlights:</b> <%= @card.highlights %>
+          </p>
+
+          <% if @public_card.card_websites.count > 0 %>
+            <p>
+              <% @public_card.card_websites.each do |card_website| %>
+        <% 
+        if card_website.name.blank?
+        link_text = card_website.url
+        else
+        link_text = card_website.name
+        end
+        %>
+              <i class="icon-globe"></i>&nbsp;&nbsp;<%= link_to link_text, card_website.sanitized_url.to_s, :target => '_blank' %>
+              <br>
+              <% end %>
+            </p>
+          <% end %>
+
+          <p>
+            <span class="social_heading">Connect Instantly.</span>
+            <br>
+            <%= link_to '<i class="icon-download-alt"></i>'.html_safe, vcard_card_path(@public_card), :class => 'instant_link', :title => 'Download vCard', :rel => "tooltip" %>&nbsp;
+
+            <a class="instant_link" title="Scan QR Code" rel="tooltip" data-toggle="modal" href="#qrModal" ><i class="icon-qrcode"></i></a>
+
+            <br>
+
+  <script type="text/javascript" src="http://download.skype.com/share/skypebuttons/js/skypeCheck.js"></script>
+            <% if @public_card.card_socials.count > 0 %>
+              <% @public_card.card_socials.each do |card_social| %>
+                <% if card_social.kind == 1 %>
+                  &nbsp;<%= link_to "<i class='icon-linkedin'></i>".html_safe, card_social.url.to_s, :class => 'instant_link', :title => 'LinkedIn Profile', :rel => "tooltip", :target => "_blank" %>
+                <% elsif card_social.kind == 2 %>
+                  &nbsp;<%= link_to "<i class='icon-google-plus'></i>".html_safe, card_social.url.to_s, :class => 'instant_link', :title => 'Google+ Profile', :rel => "tooltip", :target => "_blank" %>
+                <% elsif card_social.kind == 3 %>
+                  &nbsp;<%= link_to "<i class='icon-twitter'></i>".html_safe, card_social.url.to_s, :class => 'instant_link', :title => 'Twitter Profile', :rel => "tooltip", :target => "_blank" %>
+                <% elsif card_social.kind == 4 %>
+                  &nbsp;<%= link_to "<i class='icon-facebook'></i>".html_safe, card_social.url.to_s, :class => 'instant_link', :title => 'Facebook Profile', :rel => "tooltip", :target => "_blank" %>
+                <% elsif card_social.kind == 5 %>
+                  &nbsp;<%= link_to "<i class='icon-pinterest'></i>".html_safe, card_social.url.to_s, :class => 'instant_link', :title => 'Pinterest Profile', :rel => "tooltip", :target => "_blank" %>
+                <% elsif card_social.kind == 6 %>
+                  &nbsp;<a href="skype:<%= card_social.url.to_s %>?call" title="Skype Me™!" rel="tooltip" class="instant_link"><i class="icon-skype"></i></a>
+                <% end %>
+              <% end %>
+            <% end %>
+            <br><br><br><br>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <%= form_for(Contact.new) do |f| %>
+      <%= hidden_field :card_id, @public_card.id %>
+      <%= f.submit "+ Add to Contacts", :class => "add-contact" %>
+    <% end %>
+  </div>

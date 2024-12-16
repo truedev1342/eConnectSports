@@ -1,0 +1,8 @@
+<div class="box" style="padding:10px;">
+  <p>Hi, <%= @user.full_name %></p>
+  <p>Your card <%= link_to @card.name, card_url(@card) %> expires in a week.</p>
+  <p>You'll still able to watch your card but no edits will be allowed.</p>
+  <p><%= link_to 'Renew', "#{new_payment_url}?card_id=#{@card.id}"%> your card if you want to continue use.</p>
+  <br>
+  <p>Sincerely, iDigItAllSports Team.</p>
+</div>

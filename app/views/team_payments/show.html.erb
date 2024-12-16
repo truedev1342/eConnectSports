@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Status:</b>
+  <%= @team_payment.status %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @team_payment.amount %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @team_payment.email %>
+</p>
+
+<p>
+  <b>Transaction:</b>
+  <%= @team_payment.transaction %>
+</p>
+
+<p>
+  <b>Stripe customer token:</b>
+  <%= @team_payment.stripe_customer_token %>
+</p>
+
+<p>
+  <b>Team:</b>
+  <%= @team_payment.team %>
+</p>
+
+<p>
+  <b>Memberships purchased:</b>
+  <%= @team_payment.memberships_purchased %>
+</p>
+
+
+<%= link_to 'Edit', edit_team_payment_path(@team_payment) %> |
+<%= link_to 'Back', team_payments_path %>

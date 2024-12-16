@@ -1,0 +1,32 @@
+<div class="content-container span10 offset2"><div class="content">
+	<h3>Accept Invitation</h3>
+
+	<%= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
+	  <%= devise_error_messages! %>
+	  <%= f.hidden_field :invitation_token %>
+	  <div class="row">
+	    <div class="span4"> 
+	        <div><%= f.label :username %>
+	        <%= f.text_field :username, :class => "input-xlarge" %></div>
+
+	        <div><%= f.label :first_name %>
+	        <%= f.text_field :first_name, :class => "input-xlarge" %></div>
+
+	        <div><%= f.label :password %>
+	        <%= f.password_field :password, :autocomplete => "off", :class => "input-xlarge" %></div>
+	    </div>
+	    <div class="span4">
+			<div><%= f.label :email %>
+			<%= f.email_field :email, :class => "input-xlarge" %></div>
+
+			<div><%= f.label :last_name %>
+			<%= f.text_field :last_name, :class => "input-xlarge" %></div>
+
+			<div><%= f.label :password_confirmation %>
+			<%= f.password_field :password_confirmation, :class => "input-xlarge" %></div>
+	    </div>
+	  </div>
+	  <br>
+	  <p><%= f.submit "Register", :class => "btn btn-primary" %></p>
+	<% end %>
+</div></div>

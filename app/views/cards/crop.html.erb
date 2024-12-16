@@ -1,0 +1,46 @@
+<%= content_for :head do %>
+	<script>
+		var ImageCropper,
+		  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+		jQuery(function() {
+		  return new ImageCropper();
+		});
+
+		ImageCropper = (function() {
+
+		  function ImageCropper() {
+		    this.update = __bind(this.update, this);
+		    $('#cropbox').Jcrop({
+		      aspectRatio: 12 / 16,
+		      setSelect: [128, 0, 510, 661],
+		      onSelect: this.update,
+		      onChange: this.update
+		    });
+		  }
+
+		  ImageCropper.prototype.update = function(coords) {
+		    $('#card_crop_x').val(coords.x);
+		    $('#card_crop_y').val(coords.y);
+		    $('#card_crop_w').val(coords.w);
+		    return $('#card_crop_h').val(coords.h);
+		  };
+
+		  return ImageCropper;
+
+		})();
+	</script>
+<% end %>
+
+<div class="content-container span9 offset1"><div class="content">
+	<h1>Crop Image</h1>
+	<p><%= image_tag @card.image_url(:large), id: "cropbox" %></p>
+	<%= form_for @card do |f| %>
+	  <div class="actions">
+	    <% %w[x y w h].each do |attribute| %>
+	      <%= f.hidden_field "crop_#{attribute}"%>
+	    <% end %>
+	    <%= f.submit "Crop", :class => "btn btn-success" %>
+	  </div>
+	<% end %>
+</div></div>

@@ -1,0 +1,23 @@
+<ul class="breadcrumb">
+    <li>
+  	  <%= link_to 'Dashboard', root_url %> <span class="divider">/</span>
+    </li>
+    <li>
+    	<%= link_to "Card Shares", url_for(current_user)+"/shares" %> <span class="divider">/</span>
+    </li>
+    <li class="active">New</li>
+</ul>
+
+	<div class="span7 centered-span">
+		<div class="content-container"><div class="content">
+			<h2>Send via Email</h2>
+			<%= form_for [@shareable, @share] do |f| %>
+				<%= f.hidden_field(:user_id, :value => current_user.id) %>
+				<p><label for="destination_email">Recipient Email Address</label>
+				<%= f.text_field 'destination_email', :placeholder => "name@example.com" %></p>
+				<p><label for="message">Message</label>
+				<%= f.text_area 'message', :rows => '5', :style => "width:90%;" %></p>
+				<%= submit_tag "Send", :class => 'btn btn-primary' %>
+			<% end %>
+		</div></div>
+	</div>

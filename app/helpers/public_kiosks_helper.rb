@@ -1,0 +1,2 @@
+module PublicKiosksHelper
+end

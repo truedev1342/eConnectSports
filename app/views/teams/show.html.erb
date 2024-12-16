@@ -1,0 +1,364 @@
+<% @page = "teams" %>
+<%= content_for :head do %>
+<script>
+	$(document).ready(function(){
+		$('#memberTab a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+	});
+</script>
+<% end %>
+
+<%= @detect_admin %>
+
+<div class="content-container"><div class="content">
+	<h3>
+		<%= @team.name %>
+		<% if current_user == @team.owner %>
+			<small><%= link_to 'Delete'.html_safe, @team, confirm: 'Are you sure?', method: :delete %></small>
+		<% end %>
+	</h3>
+	<div class="span7 box">
+		<ul class="nav nav-tabs" id="memberTab">
+		  <li class="active"><a href="#members">Members</a></li>
+		  <li><a href="#admins">Admins</a></li>
+		  <li><a href="#pending">Pending Requests</a></li>
+		  <li><a href="#denied">Denied Requests</a></li>
+		  <li><a href="#message">Send Message</a></li>
+		</ul>
+
+		<div class="tab-content">
+		  <div class="tab-pane active" id="members">
+		  	<% if @approved_memberships.count > 0 %>
+				<table class="table table-hover" style="border:none;">
+				    <thead>
+				      <tr>
+				        <th>Name</th>
+				        <th>Email</th>
+				        <th>Member Since</th>
+				        <th><center>Actions</center></th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @approved_memberships.each do |approved| %>
+				      	<% approvedcard = Card.find_by_membership_id(approved.id) %>
+				        <tr>
+				          <td><%= approved.user.full_name %></td>
+				          <td><%= approved.user.email %></td>
+				          <td><%= approved.created_at.strftime("%b %d, %Y") %></td>
+				          <td>
+				          	<center>
+				          		<%= link_to '<i class="icon-eye-open"></i>'.html_safe, card_path(approvedcard), :position => "View Card" %>
+				          		<% if @current_user_is_admin == true %>
+				          			<%= link_to '<i class="icon-edit"></i>'.html_safe, edit_card_path(approvedcard), :position => "Edit Card" %>
+				          			<%= link_to '<i class="icon-star"></i>'.html_safe, make_admin_membership_path(approved), :position => "Make Admin" %>
+				          			<%= link_to '<i class="icon-minus-sign"></i>'.html_safe, approved, confirm: 'Are you sure?', method: :delete, :position => "Remove Member" %>
+				          		<% end %>
+				          	</center>
+				          </td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				</table>
+			<% else %>
+				<h4>There are no accepted memberships at this time.</h4>
+				<ul>
+					<li>Members will be displayed here once the user accepts the invite.</li>
+					<li>Invite more members with the form on the right. <i class="icon-arrow-right"></i></li>
+				</ul>
+			<% end %>
+			<%= will_paginate @approved_memberships, previous_label: h("«"), next_label: h("»")  %>
+		  </div>
+		  <div class="tab-pane" id="admins">
+				<table class="table table-hover" style="border:none;">
+				    <thead>
+				      <tr>
+				        <th>Name</th>
+				        <th>Email</th>
+				        <th>Member Since</th>
+				        <th colspan="2"><center>Actions</center></th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @admin_memberships.each do |admin| %>
+				      	<% admincard = Card.find_by_membership_id(admin.id) %>
+				        <tr>
+				          <td>
+				          	<%= admin.user.full_name %>
+				          	<% if admin.user == current_user %>
+				          		&nbsp;(You)
+				          	<% end %>
+				          </td>
+				          <td><%= admin.user.email %></td>
+				          <td><%= admin.created_at.strftime("%b %d, %Y") %></td>
+				          <td><center>
+				          	<%= link_to '<i class="icon-eye-open"></i>'.html_safe, card_path(admincard), :position => "View Card" %>
+			          		<% if @current_user_is_admin == true %>
+			          			<%= link_to '<i class="icon-edit"></i>'.html_safe, edit_card_path(admincard), :position => "Edit Card" %>
+			          			<% if admin.user != @team.owner %><%= link_to '<i class="icon-star-empty"></i>'.html_safe, make_member_membership_path(admin), :position => "Make Member" %>
+			          			<%= link_to '<i class="icon-minus-sign"></i>'.html_safe, admin, confirm: 'Are you sure?', method: :delete, :position => "Remove Member" %><% end %>
+			          		<% end %>
+				          </center></td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				</table>
+			<%= will_paginate @admin_memberships, previous_label: h("«"), next_label: h("»")  %>
+		  </div>
+		  <div class="tab-pane" id="pending">
+		  	<% if @pending_memberships.count > 0 %>
+				<table class="table table-hover" style="border:none;">
+				    <thead>
+				      <tr>
+				        <th>Name</th>
+				        <th>Email</th>
+				        <th>Member Since</th>
+				        <th></th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @pending_memberships.each do |pending| %>
+				      	<% pending.user = User.find(pending.user_id) %>
+				        <tr>
+				          <td><%= pending.user.full_name %></td>
+				          <td><%= pending.user.email %></td>
+				          <td><%= pending.created_at.strftime("%b %d, %Y") %></td>
+				          <td><center>
+				          	<% if @current_user_is_admin == true %>
+				          		<%= link_to 'Remove'.html_safe, pending, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini" %>
+				          	<% end %>
+				          </center></td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				</table>
+			<% else %>
+				<h4>There are no pending membership requests at this time.</h4>
+			<% end %>
+			<%= will_paginate @pending_memberships, previous_label: h("«"), next_label: h("»")  %>
+		  </div>
+		  <div class="tab-pane" id="denied">
+		  	<% if @denied_memberships.count > 0 %>
+				<table class="table table-hover" style="border:none;">
+				    <thead>
+				      <tr>
+				        <th>Name</th>
+				        <th>Email</th>
+				        <th>Member Since</th>
+				        <th></th>
+				      </tr>
+				    </thead>
+
+				    <tbody>
+				      <% @denied_memberships.each do |denied| %>
+				      	<% denied.user = User.find(denied.user_id) %>
+				        <tr>
+				          <td><%= denied.user.full_name %></td>
+				          <td><%= denied.user.email %></td>
+				          <td><%= denied.created_at.strftime("%b %d, %Y") %></td>
+				          <td><center>
+				          	<% if current_user_is_admin = true %>
+				          		<%= link_to 'Remove'.html_safe, denied, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger btn-mini" %>
+				          	<% end %>
+				          </center></td>
+				        </tr>
+				      <% end %>
+				    </tbody>
+				</table>
+			<% else %>
+				<h4>There are no denied membership requests at this time.</h4>
+			<% end %>
+			<%= will_paginate @denied_memberships, previous_label: h("«"), next_label: h("»")  %>
+		  </div>
+			<div class="tab-pane" id="message">
+				<div class="row row-fluid">
+					<div class="span8">
+						<%= form_for :user, :url => send_message_path, :html => {:method => :post, :id => "send_message_to_team"} do |f| %>
+							<h4>Message</h4>
+							<div class="control-group">
+								<div class="controls">
+								  <%= text_area_tag 'message', nil, :rows => "8" %>
+								</div>
+							</div>
+							<%= hidden_field_tag "send_message_to" %>
+							<%= hidden_field_tag "team_id", params[:id] %>
+							<%= f.submit "Send", :class => "btn btn-primary" %>
+						<% end %>
+					</div>
+					<div class="span4">
+						<h4>Send to</h4>
+						<table class="table table-hover" style="border:none;">
+					    <thead>
+					      <tr>
+					        <th>Name</th>
+					        <th><center>Actions</center></th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					      <% @approved_memberships.each do |approved| %>
+					      	<% approvedcard = Card.find_by_membership_id(approved.id) %>
+					        <tr>
+					          <td><%= approved.user.full_name %></td>
+					          <td>
+					          	<center>
+					          		<input type="checkbox" name="send_to" class="send_to" value="<%= approved.user.id %>">
+											</center>
+					          </td>
+					        </tr>
+					      <% end %>
+					    </tbody>
+					</table>
+						<h4 id="send_message_error"></h4>
+					</div>
+				</div>
+		  </div>
+		</div>
+	</div>
+	<div class="span3 box">
+
+		<%= form_for :user, :url => invitation_path(:user), :html => {:method => :post} do |f| %>
+
+			<h4>Invite Team Member(s)</h4>
+			<p>You currently have <%= @current_user.cards_purchased %> card credits available. <%= link_to "Buy More", "/payments/new" %></p>
+			<p><em>Separate multiple emails with a comma.</em></p>
+
+			<%= hidden_field_tag "team_id", params[:id] %>
+
+			<div class="control-group">
+				<div class="control-label">
+				  <%= label_tag 'email_list' %>
+				</div>
+				<div class="controls">
+				  <%= text_area_tag 'email_list', nil, :rows => "8" %>
+				</div>
+			</div>
+			<%= f.submit "Send", :class => "btn btn-primary" %>
+		<% end %>
+	</div>
+
+	<div class="clear"></div>
+
+</div></div>
+
+<div class="row" style="height:260px;">
+	<div class="content-container span12" style="height:100%;"><div class="content dash-public-card">
+				<div class="public-page-heading">
+					<div class="heading">
+						<h3>Your Public Kiosk</h3>
+						<br>
+					</div>
+					<% if @current_user_is_admin == true %>
+						<div class="status-toggle">
+							<input name="public_page[status]" type="hidden" value="0">
+							<!--[if lt IE 9]>
+							Enabled:&nbsp;
+							<![endif]-->
+							<input checked="checked" class="input-switch auto-submit" id="public_page_status" name="public_page[status]" type="checkbox" value="1">
+							<label for="public_page_status" data-off="Off" id="public-kiosk-status-label">On</label>
+						</div>
+					<% end %>
+				</div>
+				<div class="clear"></div>
+				<div class="row">
+						<div class="box" style="margin-left:20px;">
+							<%= form_for(@public_kiosk) do |f| %>
+								<h4>
+									View your kiosk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<% if @current_user_is_admin == true %>
+										<small><a href="#kioskModal" role="button" data-toggle="modal"><i class='icon-edit'></i> Edit</a></small>
+									<% end %>
+                                    <div class="pull-right"><i class="icon-question-sign" id="kiosk_pop"></i></div>
+                                </h4>
+								<% if @current_user_is_admin == true %>
+									<div class="modal hide fade in" id="kioskModal" tabindex="-1" role="dialog" aria-labelledby="kioskModalLabel" aria-hidden="false">
+									  <div class="modal-header">
+									    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+									    <h3 id="kioskModalLabel">Edit Kiosk</h3>
+									  </div>
+
+										  <div class="modal-body">
+										  	<h3>Description</h3>
+										    <%= f.text_area :description, :rows => "5", :style => "width:450px;" %>
+										    <script type="text/javascript">
+											    $('#public_kiosk_description').wysihtml5({"image": false});
+											</script>
+											<h3>Background</h3>
+											<div>
+												<% if @public_kiosk.background? %>
+										          <%= image_tag @public_kiosk.background_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>&nbsp;&nbsp;<%= f.check_box :remove_background %> Remove?
+										          <br><br>
+										        <% end %>
+										        <%= f.file_field :background %>
+										        <br>
+ 												<%= f.check_box :background_tile %> <small>Tile Background?</small>
+ 											</div>
+ 											<h3>Logo</h3>
+											<div>
+												<% if @public_kiosk.logo? %>
+										          <%= image_tag @public_kiosk.logo_url.to_s, :style => "max-width:50px;max-height:50px;padding-right:5px;" %>&nbsp;&nbsp;<%= f.check_box :remove_logo %> Remove?
+										          <br><br>
+										        <% end %>
+										        <%= f.file_field :logo %>
+											</div>
+										  </div>
+										  <div class="modal-footer">
+										    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+										    <%= f.submit "Update", :class => "btn btn-primary", :style => "margin-bottom:9px;" %>
+										  </div>
+									</div>
+								<% end %>
+							<% end %>
+							<%= link_to public_kiosk_url(@public_kiosk), public_kiosk_url(@public_kiosk) %>
+							<br><br>
+							<div class="btn-group">
+								<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-share"></i> Share
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+
+									<li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= current_user.username %>&title=<%= current_user.full_name %>&summary=<%=u 'Checkout my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+
+									<li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= current_user.full_name %> - <%= app_url %>/<%= current_user.username %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+
+									<li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+
+									<li><a href="#"><i class='icon-envelope-alt'></i> Email</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+		<div class="clear"></div>
+	</div>
+
+	<!--<div class="content-container span6" style="height:100%;"><div class="content">
+		<h3>Affiliates</h3>
+			<a title="Constant Contact" rel="tooltip" data-toggle="modal" href="#ccModal" >
+				<%= image_tag "app/ctct-logo.png", :style => "float:left;" %>
+			</a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<a href="http://www.maclocks.com" target="_blank"><%= image_tag "app/maclocks.gif", :style => "float:right;" %></a>
+	</div></div>-->
+</div>
+<p>&nbsp;</p>
+<div class="modal hide fade" id="ccModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <%= image_tag "app/ctct-logo.png" %>
+  </div>
+  <div class="modal-body">
+	<p><strong>Grow with Constant Contact Email Marketing. Guaranteed.<strong></p>
+	<p>With Email Marketing, it's easy for you to connect with your customers, and for customers to share your message with their networks. And the more customers spread the word about your businesss, the more you grow.</p>
+	<p><a class="btn" target="_blank" href="http://www.constantcontact.com/index.jsp?pn=playersbrand">Learn More</a></p>
+  </div>
+</div>

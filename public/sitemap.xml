@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">	  	  
+<!-- www.check-domains.com sitemap generator -->
+
+<url>
+   <loc>https://www.idigitallsports.com/</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>1.0000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/users/sign_in</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.6000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/users/sign_up</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.3000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/sports</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/about</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/affiliate</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.7000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/contact</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.3000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/faq</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/create-demo-card</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.9000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/about.html</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.8000</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/home</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.6400</priority>
+</url>
+<url>
+   <loc>https://www.idigitallsports.com/users/password/new</loc>
+   <lastmod>2014-11-05T18:56:23+00:00</lastmod>
+   <changefreq>weekly</changefreq>
+   <priority>0.200</priority>
+</url>
+</urlset>

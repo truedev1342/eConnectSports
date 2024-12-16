@@ -1,0 +1,147 @@
+<%= content_for :head do %>
+  <% if @public_page.background? %>
+    <% if @public_page.background_tile? %>
+      <style type="text/css">
+        body {
+          background:url(<%= @public_page.background_url.to_s %>) repeat;
+        }
+      </style>
+      <% else %>
+        <script>
+          $.backstretch("<%= @public_page.background_url.to_s %>");
+        </script>
+    <% end %>
+  <% end %>
+  <style>
+    #card-front-wrapper {
+      <% if @card.image? %>
+      background-image: url(<%= @card.image_url(:card).to_s %>);
+      <% else %>
+      background-image: url('/assets/app/person-placeholder.jpg');
+      <% end %>
+      width:364px;
+      height:502px;
+      background-repeat:no-repeat;
+      background-position:center 18px;
+      background-color:#822d19;
+    }
+  </style>
+<% end %>
+<% if !@card.blank? %>
+  <center>
+    <table align="center" style="margin-top:20px;">
+      <tr>
+          <td style="padding-left:10px;">
+            <div class="btn-group">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="icon-share"></i> Trade
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%=u card_url(@card) %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+
+                <li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= card_url(@card) %>&title=<%=u @card.card_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+
+                <li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%=u @card.card_name %> - <%= card_url(@card) %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+
+                <li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= card_url(@card) %>&t=<%=u @card.card_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+
+                <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_public_page_path(@user, @public_page).to_s+"/shares/new" %></li>
+              </ul>
+            </div>
+          </td>
+      </tr>
+    </table>
+  </center>
+<div class="row">
+  <div id="card-front-wrapper" class="span3 offset2">
+    <div id="card-front">
+      <div id="front-name">
+        <% if @card.name.present? %>
+          <%= @card.name.upcase %>
+        <% end %>
+      </div>
+      <div id="front-season">
+        <% if @card.season.present? %>
+          <%= @card.season.upcase %> CLASSIC '<% if @card.year.present? %><%= @card.year.slice!(2,2) %><% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="card-back" class="span3">
+    <div id="card-details">
+      <p id="back-name"><% if @card.name.present? %><%= @card.name.upcase %><% end %></p>
+      <p id="back-position"><%= @card.position %> <%= @card.handed %></p>
+      <p id="back-team"><span class="vitals-title">TEAM:</span> <%= @card.team_name %></p>
+      <p id="back-league"><span class="vitals-title">LEAGUE:</span> <%= @card.league %></p>
+      <p id="back-hometown"><span class="vitals-title">HOMETOWN:</span> <%= @card.hometown %></p>
+      <p id="back-highlights"><span class="vitals-title">HIGHLIGHTS:</span> <%= @card.highlights %></p>
+      <h1>STATS</h1>
+      <div id="back-stats">
+        <% @card.stats.each do |s| %>
+          <div class="stat">
+            <strong><%= s.abbr %></strong>
+            <br>
+            <%= s.value %>
+          </div>
+        <% end %>
+      </div>
+      <div style="clear:both;"></div>
+      <div id="back-vitals">
+        <% if @card.card_websites.count > 0 %>
+          <p>
+            <% @card.card_websites.each do |card_website| %>
+              <% 
+                if card_website.name.blank?
+                  link_text = card_website.sanitized_url
+                else
+                  link_text = card_website.name
+                end
+              %>
+            <center><i class="icon-globe"></i>&nbsp;&nbsp;<%= link_to link_text, card_website.sanitized_url.to_s, :target => '_blank' %></center>
+            <% end %>
+          </p>
+        <% end %>
+        <br>
+        <p>
+          <center>
+          <% if @card.card_socials.count > 0 %>
+            <% @card.card_socials.each do |card_social| %>
+              <% if card_social.kind == 1 %>
+                &nbsp;<%= link_to "<i class='icon-linkedin'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'LinkedIn Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 2 %>
+                &nbsp;<%= link_to "<i class='icon-google-plus'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Google+ Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 3 %>
+                &nbsp;<%= link_to "<i class='icon-twitter'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Twitter Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 4 %>
+                &nbsp;<%= link_to "<i class='icon-facebook'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Facebook Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 5 %>
+                &nbsp;<%= link_to "<i class='icon-pinterest'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Pinterest Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 6 %>
+                &nbsp;<a href="skype:<%= card_social.sanitized_url.to_s %>?call" title="Skype Me™!" rel="tooltip" class="instant_link"><i class="icon-skype"></i></a>
+              <% end %>
+            <% end %>
+          <% end %>
+          <a class="instant_link" title="Scan QR Code" rel="tooltip" data-toggle="modal" href="#qrModal" ><i class="icon-qrcode"></i></a>
+        </center>
+        </p>
+      </div>
+    </div>
+    <%= form_for(Contact.new) do |f| %>
+      <%= hidden_field :contact, :card_id, { :value => @card.id } %>
+      <%= f.submit "+ Add to Collection", :class => "add-contact" %>
+    <% end %>
+  </div>
+</div>
+<div class="modal hide fade" id="qrModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Scan QR Code</h3>
+  </div>
+  <div class="modal-body">
+    <center>
+      <img src='https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=<%= card_url(@card) %>&amp;choe=UTF-8' />
+    </center>
+  </div>
+</div>
+<% end %>

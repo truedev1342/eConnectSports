@@ -1,0 +1,124 @@
+<ul class="breadcrumb">
+    <li>
+      <%= link_to 'Dashboard', root_url %> <span class="divider">/</span>
+    </li>
+    <li class="active">Card Collection</li>
+</ul>
+<div class="content-container"><div class="content">
+  <div class="row">
+    <div class="span7">
+      <h2>Card Collection <small><span class="badge badge-inverse"><%= @user.contacts.count %></span></small></h2>
+
+            <% if current_user.contacts.count > 0 %>
+              <% if mobile_device? %>
+
+                <table class="table">
+                  <% current_user.contacts.each do |contact| %>
+                    <tr>
+                      <td><%= contact.card.first_name %> <%= contact.card.last_name %></td>
+                      <td>
+                        <%= link_to "View", card_path(card) %>
+                      </td>
+                    </tr>
+                  <% end %>
+                </table>
+                <p>&nbsp;</p>
+              <% else %>
+                <div id="rs-carousel" class="rs-carousel module">
+                  <ul class="rs-carousel-runner">
+                    <% current_user.contacts.each do |contact| %>
+                      <% if !contact.card.blank? %>
+                        <li class="rs-carousel-item">
+                          <div class="card flow-card">
+                            <div class="flow-card-nav">
+                              <%= link_to "View", contact.card %>&nbsp;&#953;
+                              <%= link_to 'Delete'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, "data-icon" => "delete" %>&nbsp;&#953;
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Share <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+
+                                <li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= @user.username %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+
+                                <li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/<%= @user.username %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+
+                                <li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+
+                                <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, contact.card.to_s+"/shares/new" %></li>
+                              </ul>
+                            </div>
+                            <table align="center" cellpadding="10" width="120" style="margin-top:15px;">
+                              <tr valign="top">
+                                <td width="120">
+                                      <%= image_tag contact.card.image_url(:thumb).to_s %>
+                                </td>
+                                <td style="vertical-align:middle;">
+                                  <p>
+                                    <span class="name">
+                                      <%= contact.card.first_name %> <%= contact.card.last_name %>
+                                    </span>
+                                  </p>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                        </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                  <p>&nbsp;</p>
+                </div>
+              <% end %>
+            <% else %>
+                <p>&nbsp;</p>
+                <h4>You don't have any cards in your collection yet</h4>
+            <% end %>
+
+      <h4>Directory</h4>
+      <%= form_for @search, :url => user_contacts_path(current_user), :html => {:method => :get, :class => "form-inline"} do |f| %>
+        <i class="icon-search"></i>
+        <%= f.text_field :card_first_name_equals, :placeholder => "First Name" %>
+        <%= f.text_field :card_last_name_equals, :placeholder => "Last Name" %>
+        <%= f.submit "Search", :class => "btn btn-mini" %>
+      <% end %>
+      <table class="table">
+      <% @paginated_contacts.each do |contact| %>
+        <% if !contact.card.blank? %>
+          <tr>
+            <td style="vertical-align:middle;"><%= contact.card.first_name.to_s %> <%= contact.card.last_name.to_s %></td>
+            <td><center><%= link_to '<i class="icon-eye-open"></i>'.html_safe, contact.card, :class => "remove_fields", :title => "View Card" %></center></td>
+            <td><center><%= link_to '<i class="icon-minus-sign"></i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, :class => "remove_fields", :title => "Remove Card from Collection" %></center></td>
+          </tr>
+        <% end %>
+      <% end %>
+      </table>
+      <%= will_paginate @paginated_contacts %>
+    </div>
+    <div class="span4">
+      <br>
+      <%= link_to "Cards Sent: #{current_user.shares.count}", url_for(current_user)+"/shares", :class => "btn btn-mini" %>&nbsp;
+
+      <h6>RECENT ACTIVITY</h6>
+      <table class="table table-bordered table-condensed">
+        <tbody>
+          <% @activities.each do |activity| %>
+          <tr>
+            <td><%= activity.note.html_safe %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="box">
+        <h4>Trade a Card</h4>
+        <%= form_for(Share.new) do |f| %>
+            <%= select("share", "contact_card", @contacts.collect {|p| [ "#{p.card.first_name} #{p.card.last_name}", p.card.id ] }) %>
+          <%= f.hidden_field(:user_id, :value => current_user.id) %>
+          <p><label for="destination_email">Recipient Email Address</label>
+          <%= f.text_field 'destination_email', :placeholder => "name@example.com" %></p>
+          <p><label for="message">Message</label>
+          <%= f.text_area 'message', :rows => '5', :style => "width:90%;" %></p>
+          <%= submit_tag "Send", :class => 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div></div>

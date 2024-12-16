@@ -1,0 +1,210 @@
+/***********************************************************************
+       _________        __    __ 
+      / ____/ (_)____ _/ /_  / /_
+     / /_  / / // __ `/ __ \/ __/
+    / __/ / / // /_/ / / / / /_  
+   /_/   /_/_/ \__, /_/ /_/\__/  
+              /____/             
+      __          ________                 ____      _ __     
+     / / __ __   /_  __/ / ___ __ _ ___   / __/__ __(_) /____ 
+    / _ | // /    / / / _ | -_)  ' | -_) _\ \ / // / / __/ -_)
+   /_.__|_, /    /_/ /_//_|__/_/_/_|__/ /___/ \_,_/_/\__/\__/ 
+       /___/                                                                                     
+
+   Template Name:   ..
+   Description:     Full Screen Slideshow Portfolio Website Template
+   Template URL:    http://www.themesuite.com/../
+   Author:          Theme Suite
+   Author URL:      http://www.themesuite.com/
+   Support:         http://support.themesuite.com/
+   Generated at:    http://demo.themesuite.com/../
+   
+***********************************************************************/
+
+
+/*  GENERAL
+----------------------------*/
+body {
+	background: #1A1A1A;
+}
+
+h1, h2, h3, h4, h5 {
+	color: #fff;
+}
+
+
+
+
+/*  LOGO
+----------------------------*/
+.logo, .logo-map {
+	color: #ffffff;
+}
+
+.logo-right {
+	color: #ffffff;
+	z-index: 0;
+	position: absolute !important;
+	top: 13px !important;
+	right: 20px !important;
+	border: .12em solid #fff;
+	padding: .08em .08em 0;
+	text-transform: uppercase;
+	-webkit-mask-image: url(/assets/website/logo/knockout.png);
+	-o-mask-image: url(/assets/website/logo/knockout.png);
+	-moz-mask-image: url(/assets/website/logo/knockout.png);
+	-ms-mask-image: url(/assets/website/logo/knockout.png);
+	mask-image: url(/assets/website/logo/knockout.png);
+	-webkit-transform: skewY(7deg);
+	-o-transform: skewY(7deg);
+	-moz-transform: skewY(7deg);
+	-ms-transform: skewY(7deg);
+	transform: skewY(7deg);
+}
+
+
+/*  .. MENU
+----------------------------*/
+.menu li.move, .menu-desc div {
+	background: #802A19;
+	background: -webkit-gradient(linear, right top, right bottom, from(#D64A2C), to(#802A19));
+	background: -moz-linear-gradient(#D64A2C, #802A19);
+	background: -webkit-linear-gradient(#D64A2C, #802A19);
+	background: -ms-linear-gradient(#D64A2C, #802A19);
+	background: -o-linear-gradient(#D64A2C, #802A19);
+	-pie-background: linear-gradient(#D64A2C, #802A19);
+	background: linear-gradient(#D64A2C, #802A19);
+	behavior: url(../assets/website/PIE/PIE.htc);
+}
+
+.menu li a, .primary-heading a {
+	color: white;
+}
+
+.menu-desc div span {
+	color: #f0f0f0;
+}
+
+
+/*  HEADER & BOXES
+----------------------------*/
+#header, .box-colored:hover, .box-colored-small:hover {
+	background: linear-gradient(top, #D64A2C 0%,#802A19 100%); /* CSS3 Standard */  
+	background: -moz-linear-gradient(#D64A2C, #802A19); /* FF 3.6+ */ 
+    background: -ms-linear-gradient(#D64A2C, #802A19); /* IE10 */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #D64A2C), color-stop(100%, #802A19)); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(#D64A2C, #802A19); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(#D64A2C, #802A19); /* Opera 11.10 */
+	-pie-background: linear-gradient(#D64A2C, #802A19); /* PIE */
+	behavior: url(../assets/website/PIE/PIE.htc);
+}
+
+
+/*  PRIMARY COLUMN
+----------------------------*/
+.primary-heading, .tertiary-heading, .fullwidth-heading {
+    background: linear-gradient(top, #D64A2C 0%,#802A19 100%); /* CSS3 Standard */  
+	background: -moz-linear-gradient(#D64A2C, #802A19); /* FF 3.6+ */ 
+    background: -ms-linear-gradient(#D64A2C, #802A19); /* IE10 */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #D64A2C), color-stop(100%, #802A19)); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(#D64A2C, #802A19); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(#D64A2C, #802A19); /* Opera 11.10 */
+    -pie-background: linear-gradient(#D64A2C, #802A19); /* PIE */
+	behavior: url(../assets/website/PIE/PIE.htc);
+}
+
+
+/*  SECONDARY COLUMN
+----------------------------*/
+.secondary-heading {
+	background: linear-gradient(top, #D64A2C 0%,#802A19 100%); /* CSS3 Standard */  
+	background: -moz-linear-gradient(#D64A2C, #802A19); /* FF 3.6+ */ 
+    background: -ms-linear-gradient(#D64A2C, #802A19); /* IE10 */ 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #D64A2C), color-stop(100%, #802A19)); /* Safari 4+, Chrome 2+ */  
+    background: -webkit-linear-gradient(#D64A2C, #802A19); /* Safari 5.1+, Chrome 10+ */  
+    background: -o-linear-gradient(#D64A2C, #802A19); /* Opera 11.10 */  
+    -pie-background: linear-gradient(#D64A2C, #802A19); /* PIE */
+	behavior: url(../assets/website/PIE/PIE.htc);
+}
+
+
+/*  BUTTONS
+----------------------------*/
+.button, .button:visited, .page-numbers, .page-numbers:visited {
+	background: #e66c1f url(/assets/website/buttons/button.png) repeat-x;
+	color: #fff;
+}
+
+.button:hover, .page-numbers:hover { 
+	background-color: #802A19; 
+	color: #fff; 
+}
+
+
+/*  TWITTER FEED
+----------------------------*/
+.ts-tweet-list-item {
+	border-bottom: 2px solid #424244;
+	-moz-border-bottom-colors: #272729 #424244;
+}
+
+.ts-tweet-list-item:first-child {
+    border-top: 2px solid #424244;
+	-moz-border-top-colors: #272729 #424244;
+}
+
+.ts-tweet-body, .ts-tweet-text, .ts-loading {
+	color: #bebebe;
+}
+
+.ts-tweet-user-screen-name {
+	color: #fff;
+}
+
+.ts-tweet-user-screen-name-link, .twitter-anywhere-user, .ts-tweet-hashtag, .ts-tweet-user-screen-name-link:hover, .ts-tweet-a:hover, .twitter-anywhere-user:hover, .ts-tweet-hashtag:hover {
+	color: #D64A2C;
+}
+
+.ts-tweet-attributes, .ts-tweet-timestamp-link, .ts-tweet-source-link a, .ts-tweet-inreplyto-link, .ts-tweet-location-link, .ts-tweet-retweeter-link, .ts-tweet-timestamp-link:hover, .ts-tweet-source-link a:hover, .ts-tweet-inreplyto-link:hover, .ts-tweet-location-link:hover, .ts-tweet-retweeter-link:hover, .ts-tweet-actions, .ts-tweet-action-reply a, .ts-tweet-action-retweet a, .ts-tweet-action-favorite a, .ts-tweet-list-controls-button {
+	color: #999;
+}
+
+.ts-tweet-action-reply a:hover, .ts-tweet-action-retweet a:hover, .ts-tweet-action-favorite a:hover {
+    color: #666666;
+}
+
+.ts-tweet-list-controls-button:hover, .ts-tweet-list-autorefresh-trigger:hover, .ts-login-info-sign-out:hover {
+	color: black;
+	background-color: #999;
+}
+
+.ts-tweet-list-autorefresh-trigger, .ts-login-info-sign-out {
+	border: 1px solid #999;
+}
+
+.ts-error {
+	color: #000;
+    background-color: #f00
+}
+
+@media only screen and (max-width: 1279px) {
+	
+#menu a:hover, #menu li a.active {
+	background: #802A19;
+	background: -webkit-gradient(linear, right top, right bottom, from(#D64A2C), to(#802A19));
+	background: -moz-linear-gradient(#D64A2C, #802A19);
+	background: -webkit-linear-gradient(#D64A2C, #802A19);
+	background: -ms-linear-gradient(#D64A2C, #802A19);
+	background: -o-linear-gradient(#D64A2C, #802A19);
+	-pie-background: linear-gradient(#D64A2C, #802A19);
+	background: linear-gradient(#D64A2C, #802A19);
+}
+
+}
+
+.logo_border {
+	border: .12em solid #ffffff;
+}
+
+.logo_left { left: 20px !important; }
+.logo-right { right: 20px !important; font-size:6.5em; }

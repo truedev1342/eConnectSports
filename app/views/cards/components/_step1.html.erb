@@ -1,0 +1,40 @@
+<div class="tabtext">
+  <p><span class="bold">It's easy.</span> Let's start with some basic information:</p>
+</div>
+<div class="formblock">
+  <div class="left-half half">
+    <div class="box basic-info">
+      <%= f.text_field :first_name, :placeholder => "First Name", :class => "input-medium" %>
+        <%= f.text_field :last_name, :placeholder => "Last Name", :class => "input-medium" %>
+        <br>
+
+        <%= f.text_field :hometown, :placeholder => "Hometown", :class => "input-medium" %>
+
+        <%= f.text_field :highlights, :size => 100, :placeholder => "Highlights(100 Characters Max)", :style => "width:94%;" %>
+        <br>
+
+        <%= f.text_field :team_name, :placeholder => "Team Name", :class => "input-medium" %>
+        <%= f.text_field :league, :placeholder => "League", :class => "input-medium" %>
+
+        <br>
+
+        <%= f.select(:season, [['Winter', 'Winter'], ['Spring', 'Spring'], ['Summer', 'Summer'], ['Fall', 'Fall']], {}, :id => "handed", :class => "input-small") %>
+        <%= f.text_field :year, :placeholder => "Year", :class => "input-small" %>
+
+        <br>
+
+        <%= f.select(:sport, [['Basketball', 'Basketball'], ['Football', 'Football'], ['Baseball', 'Baseball'], ['Softball', 'Softball'],['Swimming','Swimming'], ['Kickball', 'Kickball'], ['Hockey', 'Hockey'], ['Golf', 'Golf'], ['Lacrosse', 'Lacrosse'], ['Soccer', 'Soccer'], ['Tennis', 'Tennis'], ['Volleyball', 'Volleyball'], ['Wrestling', 'Wrestling'], ['Field Hockey', 'Field Hockey'],['Rugby','Rugby']], {}, :id => "sport", :class => "input-medium") %>
+        <%= f.text_field :position, :placeholder => "Your Position", :class => "input-medium" %>
+        <%= f.select(:handed, [['Right', 'R'], ['Left', 'L'], ['Switch', 'S']], {:prompt => '-Handed/Footed-'}, :id => "handed", :class => "input-medium") %>
+    </div>
+  </div>
+  <div class="right-half half">
+    <div class="box stats">
+      <h4>Stats <div class="pull-right"><i class="icon-question-sign" id="stat_pop"></i></div> </h4>
+      <%= f.fields_for :stats do |builder| %>
+        <%= render 'stat_fields', f: builder %>
+      <% end %>
+      <%= link_to_add_fields "Add a Stat <i class='icon-plus-sign'></i>".html_safe, f, :stats %>
+    </div>
+  </div>
+</div>

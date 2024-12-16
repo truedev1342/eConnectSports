@@ -1,0 +1,8 @@
+<fieldset>
+	<p>
+		<%= f.text_field :nmbr, :class => "input-medium", :placeholder => "(555) 555-5555", :class => "phone" %>&nbsp;
+		<%= f.select(:location, [['Home', 1], ['Mobile', 2], ['Work', 3], ['Fax', 4]], {}, :class => "input-small") %>
+		<%= f.hidden_field :_destroy %>
+		<%= link_to "<i class='icon-minus-sign'></i>".html_safe, '#', :class => "remove_fields" %>
+	</p>
+</fieldset>

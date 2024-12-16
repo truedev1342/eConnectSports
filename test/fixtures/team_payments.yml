@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: team_payments
+#
+#  id                    :integer          not null, primary key
+#  status                :string(255)
+#  amount                :integer
+#  email                 :string(255)
+#  transaction_number    :string(255)
+#  stripe_customer_token :string(255)
+#  team_id               :integer
+#  memberships_purchased :integer
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  status: MyString
+  amount: 1
+  email: MyString
+  transaction: 
+  stripe_customer_token: MyString
+  team: 
+  memberships_purchased: 1
+
+two:
+  status: MyString
+  amount: 1
+  email: MyString
+  transaction: 
+  stripe_customer_token: MyString
+  team: 
+  memberships_purchased: 1

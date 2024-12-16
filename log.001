@@ -1,0 +1,189 @@
+
+Crafty v23.4 (1 cpus)
+
+White(1): d1
+Illegal move: d1
+White(1): b22-b24
+              time used:   2:06
+              time surplus   0.00  time limit 30.00 (+0.00) (3:00)
+              depth   time  score   variation (1)
+               12     0.11  -0.55   1. ... e6 2. b5 Nf6 3. Nf3 Bd6 4. Nc3
+                                    O-O 5. e3 a6 6. Rb1 axb5 7. Bxb5
+               12->   0.21  -0.55   1. ... e6 2. b5 Nf6 3. Nf3 Bd6 4. Nc3
+                                    O-O 5. e3 a6 6. Rb1 axb5 7. Bxb5
+               13     0.26  -0.58   1. ... e6 2. b5 Nf6 3. Nf3 Bb4 4. Nc3
+                                    O-O 5. Rb1 Qe7 6. e3 d5 7. Bd3 Nbd7
+               13->   0.52  -0.58   1. ... e6 2. b5 Nf6 3. Nf3 Bb4 4. Nc3
+                                    O-O 5. Rb1 Qe7 6. e3 d5 7. Bd3 Nbd7
+               14     0.69  -0.53   1. ... e6 2. b5 Nf6 3. Nf3 Bc5 4. d4
+                                    Be7 5. e3 O-O 6. Nc3 a6 7. Bd3 axb5
+                                    8. O-O
+               14->   1.03  -0.53   1. ... e6 2. b5 Nf6 3. Nf3 Bc5 4. d4
+                                    Be7 5. e3 O-O 6. Nc3 a6 7. Bd3 axb5
+                                    8. O-O
+               15     1.40  -0.57   1. ... e6 2. b5 a6 3. e3 axb5 4. Bxb5
+                                    Qg5 5. Bf1 Nf6 6. Nf3 Qg4 7. Nc3 Nc6
+                                    8. h3 Qb4
+               15->   1.75  -0.57   1. ... e6 2. b5 a6 3. e3 axb5 4. Bxb5
+                                    Qg5 5. Bf1 Nf6 6. Nf3 Qg4 7. Nc3 Nc6
+                                    8. h3 Qb4
+               16     2.23  -0.47   1. ... e6 2. b5 a6 3. e3 Nf6 4. Nf3
+                                    Be7 5. Nc3 O-O 6. Rb1 d5 7. Bd3 axb5
+                                    8. Rxb5 c6 9. Rb3
+               16     3.74  -0.63   1. ... e5 2. b5 Nf6 3. e3 Bc5 4. Ba3
+                                    Bxa3 5. Nxa3 O-O 6. Nf3 e4 7. Nd4 d5
+                                    8. Rb1 c5 9. bxc6 Nxc6 10. Nxc6 bxc6
+               16->   4.38  -0.63   1. ... e5 2. b5 Nf6 3. e3 Bc5 4. Ba3
+                                    Bxa3 5. Nxa3 O-O 6. Nf3 e4 7. Nd4 d5
+                                    8. Rb1 c5 9. bxc6 Nxc6 10. Nxc6 bxc6
+               17     5.85  -0.74   1. ... e5 2. b5 Nf6 3. Nf3 e4 4. Nd4
+                                    Bc5 5. e3 O-O 6. Be2 a6 7. O-O axb5
+                                    8. Nxb5 d5 9. d4 Bb4
+               17->   6.69  -0.74   1. ... e5 2. b5 Nf6 3. Nf3 e4 4. Nd4
+                                    Bc5 5. e3 O-O 6. Be2 a6 7. O-O axb5
+                                    8. Nxb5 d5 9. d4 Bb4
+               18    11.13  -0.64   1. ... e5 2. a3 Nf6 3. Nc3 a5 4. b5
+                                    Bc5 5. Nf3 d6 6. e3 O-O 7. Bd3 Re8
+                                    8. Ng5 h6 9. Nge4 Nxe4 10. Bxe4
+               18->  16.16  -0.64   1. ... e5 2. a3 Nf6 3. Nc3 a5 4. b5
+                                    Bc5 5. Nf3 d6 6. e3 O-O 7. Bd3 Re8
+                                    8. Ng5 h6 9. Nge4 Nxe4 10. Bxe4
+               19    26.81  -0.88   1. ... e5 2. b5 Nf6 3. Bb2 d6 4. Nc3
+                                    Be7 5. Nf3 O-O 6. e4 Nbd7 7. d4 Kh8
+                                    8. Rg1 a6 9. bxa6 bxa6 10. Bc4 Rb8
+               19->  28.69  -0.88   1. ... e5 2. b5 Nf6 3. Bb2 d6 4. Nc3
+                                    Be7 5. Nf3 O-O 6. e4 Nbd7 7. d4 Kh8
+                                    8. Rg1 a6 9. bxa6 bxa6 10. Bc4 Rb8
+              time=30.08  mat=0  n=74074236  fh=89%  nps=2.5M
+              extensions=264K qchecks=795K reduced=9.0M pruned=14.6M
+              predicted=0  evals=36.6M  50move=0  EGTBprobes=0  hits=0
+              SMP->  splits=0  aborts=0  data=0/512  elap=30.08
+Black(1): e5
+              time used:  30.08
+
+       +---+---+---+---+---+---+---+---+
+    8  |<R>|<N>|<B>|<Q>|<K>|<B>|<N>|<R>|
+       +---+---+---+---+---+---+---+---+
+    7  |<P>|<P>|<P>|<P>| . |<P>|<P>|<P>|
+       +---+---+---+---+---+---+---+---+
+    6  |   | . |   | . |   | . |   | . |
+       +---+---+---+---+---+---+---+---+
+    5  | . |   | . |   |<P>|   | . |   |
+       +---+---+---+---+---+---+---+---+
+    4  |   |-P-|   | . |   | . |   | . |
+       +---+---+---+---+---+---+---+---+
+    3  | . |   | . |   | . |   | . |   |
+       +---+---+---+---+---+---+---+---+
+    2  |-P-| . |-P-|-P-|-P-|-P-|-P-|-P-|
+       +---+---+---+---+---+---+---+---+
+    1  |-R-|-N-|-B-|-Q-|-K-|-B-|-N-|-R-|
+       +---+---+---+---+---+---+---+---+
+         a   b   c   d   e   f   g   h
+
+White(2): b5 [pondering]
+              time surplus   0.00  time limit 29.99 (+0.00) (2:59)
+              depth   time  score   variation (18)
+               18     6.49  -0.78   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nc3
+                                    O-O 6. Nf3 a6 7. Rb1 Bd7 8. Na4 Ba7
+                                    9. c4 axb5 10. cxb5 Be6 11. Nc3
+               18->  15.22  -0.78   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nc3
+                                    O-O 6. Nf3 a6 7. Rb1 Bd7 8. Na4 Ba7
+                                    9. c4 axb5 10. cxb5 Be6 11. Nc3
+               19    19.98  -0.78   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Be6 10. Ng5 Bf5 11. d3 Qe7
+               19->  26.71  -0.78   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Be6 10. Ng5 Bf5 11. d3 Qe7
+               20    39.09  -0.76   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qe7 11. Qd2 Ng4 12.
+                                    a4
+               20->   1:01  -0.76   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qe7 11. Qd2 Ng4 12.
+                                    a4
+               21     1:47  -0.70   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qd7 11. Qd2 Nbd5
+                                    12. Ng5 Rfe8
+               21->   3:04  -0.70   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qd7 11. Qd2 Nbd5
+                                    12. Ng5 Rfe8
+               22     3:52  -0.70   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qe7 11. Qd2 Ng4 12.
+                                    a4 d5 13. Rab1
+               22->   4:54  -0.70   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qe7 11. Qd2 Ng4 12.
+                                    a4 d5 13. Rab1
+               23     6:07  -0.68   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qd7 11. Qd2 Bg4 12.
+                                    Ng5 Nbd5 13. Nxd5 Nxd5
+               23->  11:47  -0.68   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. bxa6 Nxa6 8. O-O Nb4
+                                    9. Nc3 Bf5 10. d3 Qd7 11. Qd2 Bg4 12.
+                                    Ng5 Nbd5 13. Nxd5 Nxd5
+               24    16:01  -0.61   2. ... Nf6 3. Bb2 Bc5 4. e3 d6 5. Nf3
+                                    O-O 6. Be2 a6 7. O-O e4 8. Nd4 axb5
+                                    9. Nxb5 c6 10. Nd4 Nbd7 11. d3 Ne5
+                                    12. Nd2 Qb6 13. Qc1 d5 14. a4
+               24    29:09  -0.68   2. ... d5 3. Bb2 e4 4. Nh3 Nf6 5. e3
+                                    Bd6 6. Nf4 O-O 7. Be2 a6 8. Bxf6 Qxf6
+                                    9. Nc3 c6 10. bxc6 bxc6 11. O-O Bxf4
+                                    12. exf4 Qxf4 13. Rb1 Nd7 14. d3 exd3
+                                    15. Bxd3
+               24->  30:07  -0.68   2. ... d5 3. Bb2 e4 4. Nh3 Nf6 5. e3
+                                    Bd6 6. Nf4 O-O 7. Be2 a6 8. Bxf6 Qxf6
+                                    9. Nc3 c6 10. bxc6 bxc6 11. O-O Bxf4
+                                    12. exf4 Qxf4 13. Rb1 Nd7 14. d3 exd3
+                                    15. Bxd3
+               25    35:55  -0.65   2. ... d5 3. Bb2 e4 4. Nh3 Nf6 5. e3
+                                    Bd6 6. Nf4 O-O 7. Be2 Nbd7 8. a4 g5
+                                    9. Nh3 h6 10. d4 exd3 11. cxd3 Nc5
+                                    12. Nc3 Bf5 13. O-O Qd7 14. d4 Nce4
+                                    15. Nxe4 Nxe4
+               25->  47:57  -0.65   2. ... d5 3. Bb2 e4 4. Nh3 Nf6 5. e3
+                                    Bd6 6. Nf4 O-O 7. Be2 Nbd7 8. a4 g5
+                                    9. Nh3 h6 10. d4 exd3 11. cxd3 Nc5
+                                    12. Nc3 Bf5 13. O-O Qd7 14. d4 Nce4
+                                    15. Nxe4 Nxe4
+               26    67:35  -0.58   2. ... d5 3. Bb2 e4 4. Nh3 Nf6 5. e3
+                                    Bd6 6. Nf4 O-O 7. Be2 Nbd7 8. a4 g5
+                                    9. Nh3 h6 10. d4 exd3 11. cxd3 Nc5
+                                    12. O-O Bxh3 13. gxh3 a6 14. Nc3 Re8
+                                    15. d4
+               26   125:57  -0.73   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. d3 Ne6 12.
+                                    Nxe6 Bxe6 13. Nd2 d4 14. Be5 dxe3 15.
+                                    fxe3 Bxa2
+               26-> 135:34  -0.73   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. d3 Ne6 12.
+                                    Nxe6 Bxe6 13. Nd2 d4 14. Be5 dxe3 15.
+                                    fxe3 Bxa2
+               27   178:43  -0.72   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. Bf3 Bd6
+                                    12. Bxd6 Qxd6 13. Nc3 b4 14. Nce2 Re8
+                                    15. Nf4 Nfe4
+               27-> 228:30  -0.72   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. Bf3 Bd6
+                                    12. Bxd6 Qxd6 13. Nc3 b4 14. Nce2 Re8
+                                    15. Nf4 Nfe4
+               28   355:52  -0.75   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. d3 Ne6 12.
+                                    Be5 Nxd4 13. Bxd4 Bd6 14. Nd2 Bf5 15.
+                                    Nf3 Re8 16. Qd2
+               28-> 459:35  -0.75   2. ... a6 3. e3 d5 4. Bb2 axb5 5. Bxe5
+                                    Nd7 6. Bf4 c6 7. Nf3 Ngf6 8. Be2 Be7
+                                    9. O-O O-O 10. Nd4 Nc5 11. d3 Ne6 12.
+                                    Be5 Nxd4 13. Bxd4 Bd6 14. Nd2 Bf5 15.
+                                    Nf3 Re8 16. Qd2
+ok.

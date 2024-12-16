@@ -1,0 +1,90 @@
+<%= content_for :head do %>
+	<style>
+	.social_heading {
+		font-size:12px !important;
+		line-height:12px !important;
+	}
+	.instant_link {
+		font-size:14px !important;
+	}
+	</style>
+	<% if @public_kiosk.background? %>
+		<% if @public_kiosk.background_tile? %>
+		  <style type="text/css">
+		  body {
+		    background-image:url(<%= @public_kiosk.background_url.to_s %>);
+		  }
+		  </style>
+		<% elsif @public_kiosk.background? %>
+		  <script>
+		  $.backstretch("<%= @public_kiosk.background_url.to_s %>");
+		  </script>
+		<% end %>
+	<% end %>
+<% end %>
+<br><br>
+
+	<div class="span4">
+		<div class="content-container"><div class="content">
+			<% if @public_kiosk.logo? %>
+				<%= image_tag @public_kiosk.logo_url.to_s %>
+			<% end %>
+			<h4>Team: <%= @public_kiosk.team.name %></h4>
+			<% if @public_kiosk.description? %>
+				<%= @public_kiosk.description.html_safe %>
+			<% end %>
+			<p>&nbsp;</p>
+			<% if @public_kiosk.team.owner.teams.count > 1 %>
+				<div class="well">
+					<ul class="nav nav-list">
+					  <li class="nav-header">All Teams</li>
+					  <li class="divider"></li>
+					  <% @public_kiosk.team.owner.teams.each do |t| %>
+					  <% 
+					  	if t.public_kiosk == @public_kiosk
+					  		@class = "active"
+					  	else
+					  		@class = ""
+					  	end
+					  %>
+					  <li>
+					  	<%= link_to t.name, t.public_kiosk, :class => @class %>
+					  </li>
+					  <% end %>
+					</ul>
+				</div>
+			<% end %>
+
+		</div></div>
+	</div>
+	<div class="span7">
+		<div class="kiosk-cards" style="height:500px;overflow-y:auto;">
+			<div class="well well-small">
+				<center><strong>Click a card to connect instantly.</strong></center>
+			</div>
+			<% if @approved_memberships.count > 0 %>
+				<% @approved_memberships.each do |m| %>
+					<%= link_to(m.card) do %>
+						<div class="card flow-card" style="float:left;margin:5px;width:290px;height:170px;line-height:12px;">
+							<table align="center" cellpadding="10" height="120" style="margin-top:15px;">
+								<tr valign="middle">
+									<td width="120">
+										<% if m.card.image? %>
+											<%= image_tag m.card.image_url(:thumb).to_s, :class => "roundedImage" %>
+										<% else %>
+											<%= image_tag('app/person-placeholder.jpg', :width => "120", :class => 'roundedImage') %>
+										<% end %>
+									</td>
+									<td style="vertical-align:middle;">
+										<h4><%= m.card.name %></h4>
+										<p><%= m.card.position %></p>
+										<h5><%= link_to "Connect", m.card %></h5>
+									</td>
+								</tr>
+							</table>
+						</div>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>

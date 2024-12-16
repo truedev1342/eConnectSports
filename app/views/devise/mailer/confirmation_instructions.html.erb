@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+</head>
+<body>
+<h4>Welcome <%= @resource.email %>!</h4>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+<p>&nbsp;</p>
+<p>Create your card today!</p>
+<p><a href="<%= root_url %>"><img src="https://s3.amazonaws.com/playersbrand_prod/static_assets/logo.png"></a></p>
+</body>
+</html>

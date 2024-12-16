@@ -1,0 +1,41 @@
+<html>
+<head>
+</head>
+
+<body style="width: 710px;font-family:helvetica;margin:0px; padding:10px;">
+
+<!-- HEADER CODE -->
+<div style="width: 710px;background: #4175A2;height: 130px;">
+  <div style="height: 57px;background: black;color: white;position: relative;top: 10px;box-shadow: 0px 9px 31px #333333;padding:15px;">
+    <%= image_tag(logo_url, style: 'float:left;height:67px;') %>
+    <div class="text">
+      <h3 style="font-size: 13px;text-align: center;margin-top: 4px;">Have questions? Call or <a style="color:#fff;" href="mailto:info@eConnectCard.com">email</a> our account specialist at</h3><h1 style="font-size: 20px;text-align: center;color:#FFAF24; ">866-849-8018  </h1>
+    </div>
+  </div>
+</div>
+<!-- ********** -->
+
+<!-- NAVIGATION -->
+<div class="nav" style="width: 710px;height: 40px;background: #1B3751;color: white;padding-top: 1px;">
+  <ul style="margin-top: 5px; text-align:center; padding:0px; list-style-type: none;">
+    <li style="float:left; width: 12.5%;"><a style="color:white;text-decoration: none;" href="<%= root_url %>">Home</a></li>
+    <%# FIXME: fix the situation with the FAQ page %>
+    <li style="float:left; width: 12.5%;"><a style="color:white;text-decoration: none;" href="<%= faq_url %>">FAQ</a></li>
+    <li style="float:left; width: 12.5%;"><a style="color:white;text-decoration: none;" href="<%= about_url %>">About</a></li>
+    <li style="float:left; width: 12.5%;"><a style="color:white;text-decoration: none;" href="<%= new_user_session_url %>">Login</a></li>
+    <li style="float:left; width: 12.5%;"><a style="color:white;text-decoration: none;" href="<%= new_user_registration_url %>">Sign Up</a></li>
+  </ul>
+</div>
+<!-- ********** -->
+
+<%= yield %>
+
+<!-- FOOTER -->
+<div style="background: #1B3751;height: 60px;color: white;padding:15px;">
+  <div style="float: left;">Email: <a style="color:white;" href="mailto:Info@iDigitallSports.com">Info@iDigitallSports.com</a></div>
+  <div style="float: right;">Phone: (866) 849 8081</div>
+</div>
+<!-- ********** -->
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: card_phones
+#
+#  id         :integer          not null, primary key
+#  nmbr       :string(255)
+#  location   :integer
+#  card_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nmbr: MyString
+  location: MyString
+  card: 
+
+two:
+  nmbr: MyString
+  location: MyString
+  card: 

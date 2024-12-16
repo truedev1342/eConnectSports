@@ -1,0 +1,49 @@
+<% @page = 'settings' %>
+<div class="content-container span9 centered-span"><div class="content">
+
+<h2>Cards Purchased</h2>
+<p>You have created <%= current_user.cards.count %> out of <%= total_cards_purchased %> purchased.</p>
+<%= link_to "Buy More", new_payment_path %>
+
+<h2>Settings</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="row">
+    <div class="span4"> 
+        <div><%= f.label :username %>
+        <%= f.text_field :username, :class => "input-xlarge" %></div>
+
+        <div><%= f.label :first_name %>
+        <%= f.text_field :first_name, :class => "input-xlarge" %></div>
+
+        <div><%= f.label :password %>
+        <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, :autocomplete => "off", :class => "input-xlarge" %></div>
+
+        <div><%= f.label :current_password %>
+        <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, :class => "input-xlarge" %></div>
+
+        <div><%= f.submit "Update", :class => 'btn btn-primary' %></div>
+    </div>
+    <div class="span4">
+      <div><%= f.label :email %>
+      <%= f.email_field :email, :class => "input-xlarge" %></div>
+
+      <div><%= f.label :last_name %>
+      <%= f.text_field :last_name, :class => "input-xlarge" %></div>
+
+      <div><%= f.label :password_confirmation %>
+        <i>(please retype your password)</i><br />
+      <%= f.password_field :password_confirmation, :class => "input-xlarge" %></div>
+    </div>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+</div></div>

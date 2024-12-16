@@ -1,0 +1,15 @@
+<ul id="menu" class="menu">
+  <li class="<%= a['home'] %>"><a class="<%= a['home'] %>" href="/" data-title="Here you have the home field advantage">Home</a></li>
+  <!-- <li><a href="http://idigitallsports.org" data-title="The official place for all things us.">Blog</a></li> -->
+  <% unless current_user %>
+    <li><a href="/sports" data-title="Create your card now">Sports</a></li>
+  <% end %>
+  <li class="<%= a['about'] %>" ><a class="<%= a['about'] %>" href="/about" data-title="Our passion... and what it can do for you.">About</a></li>
+  <li class="<%= a['affiliates'] %>" style="display: none"><a class="<%= a['affiliates'] %>" href="/affiliate" data-title="Become part of the I Dig It All Sports Team.">Affiliates</a></li>
+  <li class="<%= a['sponsor'] %>" ><a class="<%= a['sponsor'] %>" href="/contact" data-title="Your chance to be in the 'Big Show'">Sponsor</a></li>
+  <li class="<%= a['contact_us'] %>" ><a class="<%= a['contact_us'] %>" href="/contact" data-title="Its our goal to get you called up.">Contact Us</a></li>
+  <!--FIX
+  <li class="<%= a['store'] %>" ><a class="<%= a['store'] %>" href="#store-modal" onclick="$('#store-modal').modal('show');return false;" data-title="Welcome to our store place!.">Store</a></li>
+  -->
+  <li class="<%= a['faq'] %>" ><a class="<%= a['faq'] %>" href="/faq" data-title="Have questions? We have answers.">FAQ</a></li>
+  </ul><!-- end menu -->

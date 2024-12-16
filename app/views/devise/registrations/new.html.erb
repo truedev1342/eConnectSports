@@ -1,0 +1,42 @@
+<% @page = 'signup' %>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-inline"} ) do |f| %>
+	
+	<div class="container">
+      <div class="content-container span8 centered-span"><div class="content">
+  		<%= devise_error_messages! %>
+        <h2>Sign Up</h2>
+            <%= f.text_field :username, :placeholder => "Username" %>
+			<%= f.email_field :email, :placeholder => "email@example.com" %>
+			<br>
+            <%= f.text_field :first_name, :placeholder => "First Name" %>
+			<%= f.text_field :last_name, :placeholder => "Last Name" %>
+			<div class="clear"></div>
+			<div>
+				<%= f.label :password %><br>
+            	<%= f.password_field :password, :autocomplete => "off" %>
+			</div>
+			<div>
+            	<%= f.label :password_confirmation %>
+            	<i><small>(please retype your password)</small></i>
+				<br>
+            	<%= f.password_field :password_confirmation %>
+			</div>
+			<div class="clear"></div>
+          <label class="checkbox">
+              <%= check_box_tag(:newsletter, true,checked:true) %>
+              Yes! I would like to subscribe to the I Dig It All Sports newsletter.
+          </label>
+			<br>
+			<%= f.submit "Sign Up", :class => 'btn' %>
+			<br>
+			<br>
+
+        <%= render "devise/shared/links" %>
+        <br><br>
+      </div></div>
+	</div>
+
+	<br><br>
+	
+<% end %>

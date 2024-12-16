@@ -1,0 +1,71 @@
+/***********************************************************************
+       _________        __    __ 
+      / ____/ (_)____ _/ /_  / /_
+     / /_  / / // __ `/ __ \/ __/
+    / __/ / / // /_/ / / / / /_  
+   /_/   /_/_/ \__, /_/ /_/\__/  
+              /____/             
+      __          ________                 ____      _ __     
+     / / __ __   /_  __/ / ___ __ _ ___   / __/__ __(_) /____ 
+    / _ | // /    / / / _ | -_)  ' | -_) _\ \ / // / / __/ -_)
+   /_.__|_, /    /_/ /_//_|__/_/_/_|__/ /___/ \_,_/_/\__/\__/ 
+       /___/                                                                                     
+
+   Template Name:   Flight
+   Description:     Full Screen Slideshow Portfolio Website Template
+   Template URL:    http://www.themesuite.com/flight/
+   Version:         2.1
+   Author:          Theme Suite
+   Author URL:      http://www.themesuite.com/
+   Support:         http://support.themesuite.com/
+   
+***********************************************************************/
+
+
+/*  FLIGHT MENU: RIGHT
+----------------------------*/
+.menu {
+	right: 0;
+}
+
+.menu li {
+	padding-left: 0.8em;
+	float: right;
+}
+
+.menu li.move {
+	right: 0;
+	-moz-border-radius: 0.7em 0 0 0.7em;
+	-webkit-border-radius: 0.7em 0 0 0.7em;
+	border-radius: 0.7em 0 0 0.7em;
+    behavior: url(/assets/website/PIE/PIE.htc);
+}
+
+.menu li a {
+	padding-right: 0.2em;
+}
+
+.menu-desc, .menu-desc div {
+	left: 0;
+}
+
+.menu-desc div  {
+	-moz-border-radius: 0 0.7em 0.7em 0;
+	-webkit-border-radius: 0 0.7em 0.7em 0;
+	border-radius: 0 0.7em 0.7em 0;
+    behavior: url(/assets/website/PIE/PIE.htc);
+}
+
+.menu-desc div span {
+	right: 0;
+	margin-right: 0.8em;
+}
+
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+.menu {
+	right: 10px;
+}
+
+}

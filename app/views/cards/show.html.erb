@@ -1,0 +1,259 @@
+<%= content_for :head do %>
+  <% if @card.background? %>
+    <% if @card.background_tile? %>
+      <style type="text/css">
+      body {
+        background-image:url(<%= @card.background_url.to_s %>);
+      }
+      </style>
+    <% elsif @card.background? %>
+      <script>
+      $.backstretch("<%= @card.background_url.to_s %>");
+      </script>
+    <% end %>
+  <% elsif @card.advanced_data.present? && @card.advanced_data%>
+    <% img_url = asset_path("website/background/slideshow/#{@card.advanced_data}") %>
+    <% if @card.background_tile? %>
+          <style type="text/css">
+            body {
+              background-image:url('<%= img_url %>') !important;
+            }
+          </style>
+        <% else %>
+          <style type="text/css">
+            body {
+              background-image:url('<%= img_url %>') !important;
+              background-size: cover;
+              background-attachment: fixed;
+            }
+          </style>
+        <% end %>
+  <% end %>
+  <style>
+    #card-front-wrapper {
+      <% if @card.image? %>
+      background-image: url(<%= @card.image_url(:card).to_s %>);
+      <% else %>
+      background-image: url('/assets/app/person-placeholder.jpg');
+      <% end %>
+    }
+    .card {
+      background-color: <%= @card.background2_color.to_s %>;
+      background-image: -ms-linear-gradient(top, <%= @card.background1_color.to_s %> 0%, <%= @card.background2_color.to_s %> 100%);
+      background-image: -moz-linear-gradient(top, <%= @card.background1_color.to_s %> 0%, <%= @card.background2_color.to_s %> 100%);
+      background-image: -o-linear-gradient(top, <%= @card.background1_color.to_s %> 0%, <%= @card.background2_color.to_s %> 100%);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, <%= @card.background2_color.to_s %>), color-stop(1, <%= @card.background1_color.to_s %>));
+      background-image: -webkit-linear-gradient(top, <%= @card.background1_color.to_s %> 0%, <%= @card.background2_color.to_s %> 100%);
+      background-image: linear-gradient(to bottom, <%= @card.background1_color.to_s %> 0%, <%= @card.background2_color.to_s %> 100%);
+      /*filter: progid:dximagetransform.microsoft.gradient(startColorstr='<%= @card.background2_color.to_s %>', endColorstr='<%= @card.background2_color.to_s %>', GradientType=0);*/
+      color: <%= @card.details_color.to_s %>;
+    }
+    span.name {
+      color: <%= @card.name_color.to_s %> !important;
+    }
+    .instant_link {
+      color: <%= @card.icon_color.to_s %> !important;
+    }
+  </style>
+  
+<% end %>
+
+<center>
+  <table style="margin-top:20px;">
+    <tr>
+      <% if current_user == @card.user %>
+      <td style="padding-right:10px;">
+        <%= link_to edit_card_path(@card), :class => 'btn' do %>
+          <i class="icon-edit"></i>
+          Edit Card
+        <% end %>
+      </td>
+      <% end %>
+      <td style="padding-left:10px;">
+        <div class="btn-group">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-share"></i> Trade
+            <span class="caret"></span>
+          </a>
+          <% if current_user %>
+            <ul class="dropdown-menu">
+                <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
+                        'app_id=348916705210945&' +
+                        'link=<%=card_url(@card) %>&' +
+                        'redirect_uri=http://www.idigitallsports.com&' +
+                        'picture=<%= @card.image_url(:card).to_s %>&' +
+                        'name=Check out my IdigItAllSports Trading Card!&' +
+                        'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                    <i class="icon-facebook-sign"> </i>Facebook</a></li>
+              <li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= card_url(@card) %>&title=<%=u @card.card_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+              <li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%=u @card.card_name %> - <%= card_url(@card) %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+              <li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= card_url(@card) %>&t=<%=u @card.card_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+              <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, card_url(@card).to_s+"/shares/new" %></li>
+            </ul>
+          <% else %>
+            <ul class="dropdown-menu">
+              <li><a href="<%= new_user_registration_path %>"><i class="icon-facebook-sign"> </i>Facebook</a></li>
+              <li><a href="<%= new_user_registration_path %>"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+              <li><a href="<%= new_user_registration_path %>"><i class="icon-twitter-sign"></i> Twitter</a></li>
+              <li><a href="<%= new_user_registration_path %>"><i class="icon-google-plus-sign"></i> Google+</a></li>
+              <li><a href="<%= new_user_registration_path %>"><i class='icon-envelope-alt'></i> Email</a></li>
+            </ul>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  </table>
+</center>
+
+<div class="row text-center">
+
+<% if request.user_agent =~ /Mobile|webOS/ && (request.user_agent =~ /iPad/) %>
+  <div id="card-front-wrapper" class="span3 offset1">
+<% else %>
+  <div id="card-front-wrapper" class="span3 offset3">
+<% end %>
+
+    <div id="card-front">
+      <div id="front-name">
+        <% if @card.name.present? %>
+          <%= @card.name.upcase %>
+        <% end %>
+      </div>
+      <div id="front-season">
+        <% if @card.season.present? %>
+          <%= @card.season.upcase %> CLASSIC '<% if @card.year.present? %><%= @card.year.slice!(2,2) %><% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div id="card-back" class="span3">
+    <div id="card-details">
+      <p id="back-name"><% if @card.name.present? %><%= @card.name.upcase %><% end %></p>
+      <p id="back-position"><%= @card.position %> <%= @card.handed %></p>
+      <p id="back-team"><span class="vitals-title">TEAM:</span> <%= @card.team_name %></p>
+      <p id="back-league"><span class="vitals-title">LEAGUE:</span> <%= @card.league %></p>
+      <p id="back-hometown"><span class="vitals-title">HOMETOWN:</span> <%= @card.hometown %></p>
+      <p id="back-highlights"><span class="vitals-title">HIGHLIGHTS:</span> <%= @card.highlights %></p>
+      <h1>STATS</h1>
+      <div id="back-stats">
+        <% @card.stats.each do |s| %>
+          <div class="stat">
+            <% if !s.abbr.blank? %>
+              <strong><%= s.abbr %></strong>
+            <% else %>
+              <strong>BA</strong>
+            <% end %>
+            <br>
+            <%= s.value %>
+          </div>
+        <% end %>
+      </div>
+      <div style="clear:both;"></div>
+      <div id="back-vitals">
+        <% if @card.card_websites.count > 0 %>
+          <p>
+            <% @card.card_websites.each do |card_website| %>
+              <%
+                if card_website.name.blank?
+                  link_text = card_website.sanitized_url
+                else
+                  link_text = card_website.name
+                end
+              %>
+            <center><i class="icon-globe"></i>&nbsp;&nbsp;<%= link_to link_text, card_website.sanitized_url.to_s, :target => '_blank' %></center>
+            <% end %>
+          </p>
+        <% end %>
+        <br>
+        <p>
+          <center>
+          <% if @card.card_socials.count > 0 %>
+            <% @card.card_socials.each do |card_social| %>
+              <% if card_social.kind == 1 %>
+                &nbsp;<%= link_to "<i class='icon-linkedin'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'LinkedIn Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 2 %>
+                &nbsp;<%= link_to "<i class='icon-google-plus'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Google+ Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 3 %>
+                &nbsp;<%= link_to "<i class='icon-twitter'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Twitter Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 4 %>
+                &nbsp;<%= link_to "<i class='icon-facebook'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Facebook Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 5 %>
+                &nbsp;<%= link_to "<i class='icon-pinterest'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Pinterest Profile', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 6 %>
+                &nbsp;<a href="skype:<%= card_social.sanitized_url.to_s %>?call" title="Skype Me™!" rel="tooltip" class="instant_link"><i class="icon-skype"></i></a>
+              <% elsif card_social.kind == 7 %>
+                &nbsp;<%= link_to "<i class='icon-instagram fa fa-instagram'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Instagram URL', :rel => "tooltip", :target => "_blank" %>
+              <% elsif card_social.kind == 8 %>
+                &nbsp;<%= link_to "<i class='icon-youtube'></i>".html_safe, card_social.sanitized_url.to_s, :class => 'instant_link', :title => 'Youtube URL', :rel => "tooltip", :target => "_blank" %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <a class="instant_link" title="Scan QR Code" rel="tooltip" data-toggle="modal" href="#qrModal" ><i class="icon-qrcode"></i></a>
+        </center>
+        </p>
+      </div>
+    </div>
+    <%= form_for(Contact.new) do |f| %>
+      <%= hidden_field :contact, :card_id, { :value => @card.id } %>
+      <%= f.submit "+ Add to Collection", :class => "add-contact" %>
+    <% end %>
+  </div>
+</div>
+<div class="modal hide fade" id="qrModal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Scan QR Code</h3>
+  </div>
+  <div class="modal-body">
+    <center>
+      <img src='https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=<%= card_url(@card) %>&amp;choe=UTF-8' />
+    </center>
+  </div>
+</div>
+<% unless @card.paid? && (current_user && current_user.id == @card.user_id) %>
+  <div class="modal hide fade" id="demo-card-modal">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3>Hi!</h3>
+    </div>
+    <% if current_user.nil? %>
+      <div class="modal-body">
+          <p>You're almost ready to start trading your card! Click <a href="<%= new_user_registration_path %>">here</a> to register your account to start trading via email, social networks and Qr code ( Quick Response Code ).</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Sign Up', new_user_registration_path , class: 'btn btn-success action-button' %>
+      </div>
+    <% elsif @card.payments.count > 0 %>
+      <div class="modal-body">
+        <p>You card was expired. You need to <a href="<%= new_payment_path + '?card_id=' + @card.id.to_s %>">renew</a> this card if you want to continue use.</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Renew', new_payment_path + '?card_id=' + @card.id.to_s , class: 'btn btn-success action-button', style: 'margin-bottom: 0;' %>
+        <% if current_user.have_unused_payments? %>
+          <%= link_to 'Use existing payment for this card', payments_path + '?card_id=' + @card.id.to_s , class: 'btn btn-success action-button' %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="modal-body">
+        <p>You need to <a href="<%= new_payment_path + '?card_id=' + @card.id.to_s %>">purchase</a> this card before use.</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Purchase', new_payment_path + '?card_id=' + @card.id.to_s , class: 'btn btn-success action-button', style: 'margin-bottom: 0;' %>
+        <% if current_user.have_unused_payments? %>
+          <%= link_to 'Use existing payment for this card', payments_path + '?card_id=' + @card.id.to_s , class: 'btn btn-success action-button' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <script type="text/javascript">
+    $('body').click(function(){
+      $('#demo-card-modal').modal('show');
+    });
+    setTimeout(function(){
+      $('#demo-card-modal').modal('show');
+    }, 4000);
+    $('#demo-card-modal').on('hide.bs.dropdown', function () {
+      window.location.href = $('.action-button').attr('href');
+    })
+  </script>
+<% end %>

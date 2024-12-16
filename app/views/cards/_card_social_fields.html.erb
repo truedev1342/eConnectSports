@@ -1,0 +1,8 @@
+<fieldset>
+	<p>
+		<%= f.text_field :url, :placeholder => "Paste your profile address here." %>
+		<%= f.select(:kind, [['LinkedIn URL', 1], ['Google+ URL', 2], ['Twitter URL', 3], ['Facebook URL', 4], ['Pinterest URL', 5], ['Skype Username', 6],['Instagram URL', 7],['Youtube URL', 8]], {}, :class => "input-medium") %>
+		<%= f.hidden_field :_destroy %>
+		<%= link_to "<i class='icon-minus-sign'></i>".html_safe, '#', class: "remove_fields" %>
+	</p>
+</fieldset>

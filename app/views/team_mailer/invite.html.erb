@@ -1,0 +1,13 @@
+<h3>Hello <%= @user.full_name %>!</h3>
+
+<h4><%= @inviter.full_name %> has invited you to join their I Dig It All Sports Team</h4>
+<p><strong>Team Name: <%= @team.name %></strong></p>
+
+<p>You can accept the invitation through the link below.</p>
+
+<p><%= link_to 'Accept invitation', "https://#{@current_host}/memberships/invites" %></p>
+
+<p>You can also decline the invitation at the link above.</p>
+<p>&nbsp;</p>
+<p>Create your card today!</p>
+<p><a href="<%= root_url %>"><img src="<%= "https://s3.amazonaws.com/playersbrand_prod/static_assets/logo.png" %>"></a></p>

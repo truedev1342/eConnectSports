@@ -1,0 +1,15 @@
+<fieldset>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.radio_button :status, true %> On <%= f.radio_button :status, false %> Off
+  </div>
+
+  <div class="field">
+    <%= f.label :card %>
+    <%= f.collection_select(:card_id, @cards, :id, :card_name) %>
+  </div>
+
+  
+
+</fieldset>

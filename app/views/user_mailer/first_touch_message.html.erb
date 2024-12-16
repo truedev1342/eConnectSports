@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Congratulations <%= @user.first_name %>!</title>
+  </head>
+  <body class="email">
+    <div class="wrapper">
+      <table class="container">
+        <tr>
+          <td colspan="4"><img src="https://idigitallsports.com/assets/website/logo/idigitall-trading-card-logo.png" alt="iDigItAllSports.com logo" class="center"></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <h2>Congratulations <%= @user.first_name %>!</h2>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4"><p class="text">Thanks for joining the iDigItAll Sports team! If you haven't already, <a class="bold" href="<%= new_card_url %>">click below to create you first player card</a>:</p></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <ul>
+              <li>
+                <img src="http://www.idigitallsports.com/assets/website/icons/slider/icon-baseball.png" alt="">
+                <span>Add your bio, photo, league, position, custom stats &amp; highlights </span>
+              </li>
+              <li>
+                <img src="http://www.idigitallsports.com/assets/website/icons/slider/icon-baseball.png" alt="">
+                <span>Link to your social media profiles amd website</span>
+              </li>
+              <li>
+                <img src="http://www.idigitallsports.com/assets/website/icons/slider/icon-baseball.png" alt="">
+                <span>Use you card to track your stats from game to game in real time</span>
+              </li>
+              <li>
+                <img src="http://www.idigitallsports.com/assets/website/icons/slider/icon-baseball.png" alt="">
+                <span>Easily share with family, friends, teammates, and even scouts</span>
+              </li>
+              <li>
+                <img src="http://www.idigitallsports.com/assets/website/icons/slider/icon-baseball.png" alt="">
+                <span>and so much more!</span>
+              </li>
+            </ul>
+            <p class="center bold text">Step up your game today!</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <%= link_to '<p>CREATE YOUR FIRST CARD</p>'.html_safe, new_card_url, class: 'create-card bold' %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" class="promo-section">
+            <div class="one">
+              <p class="bold">With our ALL NEW mobile app, you can track, record, and share anytime, anywhere!</p>
+              <%= link_to "<img src='https://www.idigitallsports.com/assets/website/gpaywithtext.jpg' alt="">".html_safe, "https://play.google.com/store/apps/details?id=com.idigitallsports.app" %>
+            </div>
+            <div class="two">
+              <img src='https://www.idigitallsports.com/assets/website/mbasketball.png'>
+            </div>
+          </td>
+        <tr>
+          <td colspan="4">
+            <%= link_to 'Click here to sign in to your account now', new_session_url('user'), class: 'sign-in center' %>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4"><hr></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="contacts">
+            <p class="center bold">Need help or more information?</p>
+            <p class="center">Call us <a href="tel:866-849-8081">866-849-8081</a></p>
+            <p class="center">Email us: <a href="mailto:info@iDigItAllSports.com">info@iDigItAllSports.com</a></p>
+            <p class="center">Visit us <a href="https://www.iDigItAllSports.com">www.iDigItAllSports.com</a></p>
+            <p class="center">or <a href="https://www.idigitallsports.com/contact">click here to use our contact form</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" class="footer">
+            <p class="small">eConnectCard Systems, Inc., 12 Jarrell Farms Dr. Newark, DE 19711, United States</p>
+            <p class="small">You may <a href="#">unsubscribe</a> or <a href="<%= edit_user_registration_url %>">change your contact details</a> at any time.</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

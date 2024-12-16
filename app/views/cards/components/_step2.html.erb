@@ -1,0 +1,27 @@
+<div class="tabtext">
+  <p>Now you can add your website(s) and social networks</p>
+</div>
+<div class="formblock">
+  <div class="left-half half">
+    <div class="box">
+      <h4>Websites <div class="pull-right"><i class="icon-question-sign" id="website_pop"></i></div> </h4>
+      <%= f.fields_for :card_websites do |builder| %>
+        <%= render 'card_website_fields', f: builder %>
+      <% end %>
+      <p>
+        <%= link_to_add_fields "Add a Website <i class='icon-plus-sign'></i>".html_safe, f, :card_websites %>
+      </p>
+    </div>
+  </div>
+  <div class="right-half half">
+    <div class="box">
+      <h4>Social Networks <div class="pull-right"><i class="icon-question-sign" id="social_pop"></i></div> </h4>
+      <%= f.fields_for :card_socials do |builder| %>
+        <%= render 'card_social_fields', f: builder %>
+      <% end %>
+      <p>
+        <%= link_to_add_fields "Add Social Network <i class='icon-plus-sign'></i>".html_safe, f, :card_socials %>
+      </p>
+    </div>
+  </div>
+</div>

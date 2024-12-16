@@ -1,0 +1,20 @@
+<%= content_for :head do %>
+<script>
+$(document).ready(function() {
+    $('#calendar').fullCalendar({
+    })
+
+});
+</script>
+<% end %>
+<ul class="breadcrumb">
+    <li>
+  	  <%= link_to 'Card', @card %> <span class="divider">/</span>
+    </li>
+    <li class="active">Calendar</li>
+</ul>
+<div class="content-container"><div class="content">
+	<h3><%= @card.user.full_name %>'s Calendar</h3>
+	<div id='calendar'></div>
+</div></div>
+<p>&nbsp;</p>

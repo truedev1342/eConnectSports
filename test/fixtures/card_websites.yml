@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: card_websites
+#
+#  id         :integer          not null, primary key
+#  url        :string(255)
+#  card_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  url: MyString
+  card: 
+
+two:
+  url: MyString
+  card: 

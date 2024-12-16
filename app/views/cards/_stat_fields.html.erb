@@ -1,0 +1,451 @@
+<% 
+   if f.object.id
+	unique_id=f.object.id
+   else
+   	unique_id=@add_fields_id
+   end
+%>
+<fieldset>
+	<div id="kind-select-div<%=unique_id%>" style="display:inline;"></div>
+	<div style="display:inline;">
+		<%= f.text_field :value, :placeholder => "Value", :class => "input-small" %>
+		<%= f.hidden_field :_destroy %>
+		<%= link_to "<i class='icon-minus-sign'></i>".html_safe, '#', :class => "remove_fields" %>
+	</div>
+</fieldset>
+<script>
+	var sportValue = $('#sport').val();
+    if(sportValue == 'Baseball') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Batting','Batting', {:class=>'Baseball'}],
+							['Fielding','Fielding', {:class=>'Baseball'}],
+							['Pitching','Pitching', {:class=>'Baseball'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Games Played','G',{:class=>'Batting Baseball'}],
+							['AB - At Bats','AB',{:class=>'Batting Baseball'}],
+							['R - Runs','R',{:class=>'Batting Baseball'}],
+							['H - Hits','H',{:class=>'Batting Baseball'}],
+							['2B - Doubles','2B',{:class=>'Batting Baseball'}],
+							['3B - Triples','3B',{:class=>'Batting Baseball'}],
+							['HR - Home Runs','HR',{:class=>'Batting Baseball'}],
+							['RBI - Runs Batted In','RBI',{:class=>'Batting Baseball'}],
+							['SO - Strike Outs','SO',{:class=>'Batting Baseball'}],
+							['BB - Bases on Balls (Walks)','BB',{:class=>'Batting Baseball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Batting Baseball'}],
+							['HBP - Hit by Pitch','HBP',{:class=>'Batting Baseball'}],
+							['SH - Sacrifice Hits','SH',{:class=>'Batting Baseball'}],
+							['SF - Sacrifice Flies','SF',{:class=>'Batting Baseball'}],
+							['GIDP - Grounded into Double Play','GIDP',{:class=>'Batting Baseball'}],
+							['SB - Stolen Bases','SB',{:class=>'Batting Baseball'}],
+							['CS - Caught Stealing','CS',{:class=>'Batting Baseball'}],
+							['BA - Batting Average = H/AB','BA',{:class=>'Batting Baseball'}],
+							['OBP - On Base Percentage = (H + BB + HBP)/(AB + BB + SF + HBP)','OBP',{:class=>'Batting Baseball'}],
+							['SLG - Slugging Percentage = (1B + 2*2B + 3*3B + 4*HR)/AB','SLG',{:class=>'Batting Baseball'}],
+							['OPS - On Base Percentage + Slugging Percentage','OPS',{:class=>'Batting Baseball'}],
+							['G - Games Played','G',{:class=>'Fielding Baseball'}],
+							['GS - Games Started','GS',{:class=>'Fielding Baseball'}],
+							['INN - Number of Innings Played','INN',{:class=>'Fielding Baseball'}],
+							['PO - Putouts','PO',{:class=>'Fielding Baseball'}],
+							['A - Assists','A',{:class=>'Fielding Baseball'}],
+							['E - Errors','E',{:class=>'Fielding Baseball'}],
+							['DP - Double Plays','DP',{:class=>'Fielding Baseball'}],
+							['PB - Passed Balls (for Catchers)','PB',{:class=>'Fielding Baseball'}],
+							['WP - Wild Pitches Allowed (for Catchers)','WP',{:class=>'Fielding Baseball'}],
+							['SB - Stolen Bases Allowed (for Catchers)','SB',{:class=>'Fielding Baseball'}],
+							['CS - Runners Caught Stealing (for Catchers)','CS',{:class=>'Fielding Baseball'}],
+							['G - Games Pitched','G',{:class=>'Pitching Baseball'}],
+							['W - Wins','W',{:class=>'Pitching Baseball'}],
+							['L - Losses','L',{:class=>'Pitching Baseball'}],
+							['IP - Innings Pitched','IP',{:class=>'Pitching Baseball'}],
+							['ERA - Earned Run Average = 9*ER/IP','ERA',{:class=>'Pitching Baseball'}],
+							['GS - Games Started','GS',{:class=>'Pitching Baseball'}],
+							['CG - Complete Games','CG',{:class=>'Pitching Baseball'}],
+							['SHO - Shutouts','SHO',{:class=>'Pitching Baseball'}],
+							['SV - Saves','SV',{:class=>'Pitching Baseball'}],
+							['GF - Games Finished (for Relievers)','GF',{:class=>'Pitching Baseball'}],
+							['H - Hits Allowed','HA',{:class=>'Pitching Baseball'}],
+							['ER - Earned Runs Allowed','ER',{:class=>'Pitching Baseball'}],
+							['HR - Home Runs Allowed','HR',{:class=>'Pitching Baseball'}],
+							['BB - Walked Batters','BB',{:class=>'Pitching Baseball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Pitching Baseball'}],
+							['SO - Strike Outs','SO',{:class=>'Pitching Baseball'}],
+							['WP - Wild Pitches','WP',{:class=>'Pitching Baseball'}],
+							['HBP - Batters Hit','HBP',{:class=>'Pitching Baseball'}],
+							['BK - Balks','BK',{:class=>'Pitching Baseball'}],
+							['BFP - Batters Faced by Pitcher','BFP',{:class=>'Pitching Baseball'}],
+							['WHIP - Walks + Hits Allowed / Innings Pitched = (BB + H)/IP','WHIP',{:class=>'Pitching Baseball'}]
+						], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+
+    else if (sportValue=='Rugby') {
+        $('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+                            ['Rugby','Rugby',{:class=>'Rugby'}],
+                            ],{}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+                            ['C - Carry','C', {:class=>'Rugby'}],
+                            ['P - Pass','P', {:class=>'Rugby'}],
+                            ['C - Offload in contac','C', {:class=>'Rugby'}],
+                            ['K - Kick','K', {:class=>'Rugby'}],
+                            ['T - Tackles Made','T', {:class=>'Rugby'}],
+                            ['A - Tackle Assist ','A', {:class=>'Rugby'}],
+                            ['M - Tackles Missed ','M', {:class=>'Rugby'}],
+                            ['E - Handling Error','E', {:class=>'Rugby'}],
+                            ['R - Ruck','R', {:class=>'Rugby'}],
+                            ['B - Line Break','B', {:class=>'Rugby'}],
+                            ['S - Turnovers Made','S', {:class=>'Rugby'}],
+                            ['Q - Penalty Conceded','Q', {:class=>'Rugby'}],
+                            ['F - Kick Fielded','F', {:class=>'Rugby'}],
+                            ['D - Try Scored','D', {:class=>'Rugby'}],
+
+
+                        ],{:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Softball') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Batting','Batting', {:class=>'Softball'}],
+							['Fielding','Fielding', {:class=>'Softball'}],
+							['Pitching','Pitching', {:class=>'Softball'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Games Played','G',{:class=>'Batting Softball'}],
+							['AB - At Bats','AB',{:class=>'Batting Softball'}],
+							['R - Runs','R',{:class=>'Batting Softball'}],
+							['H - Hits','H',{:class=>'Batting Softball'}],
+							['2B - Doubles','2B',{:class=>'Batting Softball'}],
+							['3B - Triples','3B',{:class=>'Batting Softball'}],
+							['HR - Home Runs','HR',{:class=>'Batting Softball'}],
+							['RBI - Runs Batted In','RBI',{:class=>'Batting Softball'}],
+							['SO - Strike Outs','SO',{:class=>'Batting Softball'}],
+							['BB - Bases on Balls (Walks)','BB',{:class=>'Batting Softball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Batting Softball'}],
+							['HBP - Hit by Pitch','HBP',{:class=>'Batting Softball'}],
+							['SH - Sacrifice Hits','SH',{:class=>'Batting Softball'}],
+							['SF - Sacrifice Flies','SF',{:class=>'Batting Softball'}],
+							['GIDP - Grounded into Double Play','GIDP',{:class=>'Batting Softball'}],
+							['SB - Stolen Bases','SB',{:class=>'Batting Softball'}],
+							['CS - Caught Stealing','CS',{:class=>'Batting Softball'}],
+							['BA - Batting Average = H/AB','BA',{:class=>'Batting Softball'}],
+							['OBP - On Base Percentage = (H + BB + HBP)/(AB + BB + SF + HBP)','OBP',{:class=>'Batting Softball'}],
+							['SLG - Slugging Percentage = (1B + 2*2B + 3*3B + 4*HR)/AB','SLG',{:class=>'Batting Softball'}],
+							['OPS - On Base Percentage + Slugging Percentage','OPS',{:class=>'Batting Softball'}],
+							['G - Games Played','G',{:class=>'Fielding Softball'}],
+							['GS - Games Started','GS',{:class=>'Fielding Softball'}],
+							['INN - Number of Innings Played','INN',{:class=>'Fielding Softball'}],
+							['PO - Putouts','PO',{:class=>'Fielding Softball'}],
+							['A - Assists','A',{:class=>'Fielding Softball'}],
+							['E - Errors','E',{:class=>'Fielding Softball'}],
+							['DP - Double Plays','DP',{:class=>'Fielding Softball'}],
+							['PB - Passed Balls (for Catchers)','PB',{:class=>'Fielding Softball'}],
+							['WP - Wild Pitches Allowed (for Catchers)','WP',{:class=>'Fielding Softball'}],
+							['SB - Stolen Bases Allowed (for Catchers)','SB',{:class=>'Fielding Softball'}],
+							['CS - Runners Caught Stealing (for Catchers)','CS',{:class=>'Fielding Softball'}],
+							['G - Games Pitched','G',{:class=>'Pitching Softball'}],
+							['W - Wins','W',{:class=>'Pitching Softball'}],
+							['L - Losses','L',{:class=>'Pitching Softball'}],
+							['IP - Innings Pitched','IP',{:class=>'Pitching Softball'}],
+							['ERA - Earned Run Average = 9*ER/IP','ERA',{:class=>'Pitching Softball'}],
+							['GS - Games Started','GS',{:class=>'Pitching Softball'}],
+							['CG - Complete Games','CG',{:class=>'Pitching Softball'}],
+							['SHO - Shutouts','SHO',{:class=>'Pitching Softball'}],
+							['SV - Saves','SV',{:class=>'Pitching Softball'}],
+							['GF - Games Finished (for Relievers)','GF',{:class=>'Pitching Softball'}],
+							['H - Hits Allowed','HA',{:class=>'Pitching Softball'}],
+							['ER - Earned Runs Allowed','ER',{:class=>'Pitching Softball'}],
+							['HR - Home Runs Allowed','HR',{:class=>'Pitching Softball'}],
+							['BB - Walked Batters','BB',{:class=>'Pitching Softball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Pitching Softball'}],
+							['SO - Strike Outs','SO',{:class=>'Pitching Softball'}],
+							['WP - Wild Pitches','WP',{:class=>'Pitching Softball'}],
+							['HBP - Batters Hit','HBP',{:class=>'Pitching Softball'}],
+							['BK - Balks','BK',{:class=>'Pitching Softball'}],
+							['BFP - Batters Faced by Pitcher','BFP',{:class=>'Pitching Softball'}],
+							['WHIP - Walks + Hits Allowed / Innings Pitched = (BB + H)/IP','WHIP',{:class=>'Pitching Softball'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Kickball') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Batting','Batting', {:class=>'Kickball'}],
+							['Fielding','Fielding', {:class=>'Kickball'}],
+							['Pitching','Pitching', {:class=>'Kickball'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Games Played','G',{:class=>'Batting Kickball'}],
+							['AB - At Bats','AB',{:class=>'Batting Kickball'}],
+							['R - Runs','R',{:class=>'Batting Kickball'}],
+							['H - Hits','H',{:class=>'Batting Kickball'}],
+							['2B - Doubles','2B',{:class=>'Batting Kickball'}],
+							['3B - Triples','3B',{:class=>'Batting Kickball'}],
+							['HR - Home Runs','HR',{:class=>'Batting Kickball'}],
+							['RBI - Runs Batted In','RBI',{:class=>'Batting Kickball'}],
+							['SO - Strike Outs','SO',{:class=>'Batting Kickball'}],
+							['BB - Bases on Balls (Walks)','BB',{:class=>'Batting Kickball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Batting Kickball'}],
+							['HBP - Hit by Pitch','HBP',{:class=>'Batting Kickball'}],
+							['SH - Sacrifice Hits','SH',{:class=>'Batting Kickball'}],
+							['SF - Sacrifice Flies','SF',{:class=>'Batting Kickball'}],
+							['GIDP - Grounded into Double Play','GIDP',{:class=>'Batting Kickball'}],
+							['SB - Stolen Bases','SB',{:class=>'Batting Kickball'}],
+							['CS - Caught Stealing','CS',{:class=>'Batting Kickball'}],
+							['BA - Batting Average = H/AB','BA',{:class=>'Batting Kickball'}],
+							['OBP - On Base Percentage = (H + BB + HBP)/(AB + BB + SF + HBP)','OBP',{:class=>'Batting Kickball'}],
+							['SLG - Slugging Percentage = (1B + 2*2B + 3*3B + 4*HR)/AB','SLG',{:class=>'Batting Kickball'}],
+							['OPS - On Base Percentage + Slugging Percentage','OPS',{:class=>'Batting Kickball'}],
+							['G - Games Played','G',{:class=>'Fielding Kickball'}],
+							['GS - Games Started','GS',{:class=>'Fielding Kickball'}],
+							['INN - Number of Innings Played','INN',{:class=>'Fielding Kickball'}],
+							['PO - Putouts','PO',{:class=>'Fielding Kickball'}],
+							['A - Assists','A',{:class=>'Fielding Kickball'}],
+							['E - Errors','E',{:class=>'Fielding Kickball'}],
+							['DP - Double Plays','DP',{:class=>'Fielding Kickball'}],
+							['PB - Passed Balls (for Catchers)','PB',{:class=>'Fielding Kickball'}],
+							['WP - Wild Pitches Allowed (for Catchers)','WP',{:class=>'Fielding Kickball'}],
+							['SB - Stolen Bases Allowed (for Catchers)','SB',{:class=>'Fielding Kickball'}],
+							['CS - Runners Caught Stealing (for Catchers)','CS',{:class=>'Fielding Kickball'}],
+							['G - Games Pitched','G',{:class=>'Pitching Kickball'}],
+							['W - Wins','W',{:class=>'Pitching Kickball'}],
+							['L - Losses','L',{:class=>'Pitching Kickball'}],
+							['IP - Innings Pitched','IP',{:class=>'Pitching Kickball'}],
+							['ERA - Earned Run Average = 9*ER/IP','ERA',{:class=>'Pitching Kickball'}],
+							['GS - Games Started','GS',{:class=>'Pitching Kickball'}],
+							['CG - Complete Games','CG',{:class=>'Pitching Kickball'}],
+							['SHO - Shutouts','SHO',{:class=>'Pitching Kickball'}],
+							['SV - Saves','SV',{:class=>'Pitching Kickball'}],
+							['GF - Games Finished (for Relievers)','GF',{:class=>'Pitching Kickball'}],
+							['H - Hits Allowed','HA',{:class=>'Pitching Kickball'}],
+							['ER - Earned Runs Allowed','ER',{:class=>'Pitching Kickball'}],
+							['HR - Home Runs Allowed','HR',{:class=>'Pitching Kickball'}],
+							['BB - Walked Batters','BB',{:class=>'Pitching Kickball'}],
+							['IBB - Intentional Walks','IBB',{:class=>'Pitching Kickball'}],
+							['SO - Strike Outs','SO',{:class=>'Pitching Kickball'}],
+							['WP - Wild Pitches','WP',{:class=>'Pitching Kickball'}],
+							['HBP - Batters Hit','HBP',{:class=>'Pitching Kickball'}],
+							['BK - Balks','BK',{:class=>'Pitching Kickball'}],
+							['BFP - Batters Faced by Pitcher','BFP',{:class=>'Pitching Kickball'}],
+							['WHIP - Walks + Hits Allowed / Innings Pitched = (BB + H)/IP','WHIP',{:class=>'Pitching Kickball'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Basketball') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Basketball','Basketball', {:class=>'Basketball'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Games Played','G',{:class=>'Basketball'}],
+							['Min - Minutes Played','Min',{:class=>'Basketball'}],
+							['MPG - Minutes per Game','MPG',{:class=>'Basketball'}],
+							['Pts - Total Points','Pts',{:class=>'Basketball'}],
+							['PPG - Points per Game','PPG',{:class=>'Basketball'}],
+							['FGM - Field Goals Made','FGM',{:class=>'Basketball'}],
+							['FGA - Field Goals Attempted','FGA',{:class=>'Basketball'}],
+							['FGP - Field Goal Percentage','FGP',{:class=>'Basketball'}],
+							['FTM - Free Throws Made','FTM',{:class=>'Basketball'}],
+							['FTA - Free Throws Attempted','FTA',{:class=>'Basketball'}],
+							['FTP - Free Throw Percentage','FTP',{:class=>'Basketball'}],
+							['3PM - Three Pointers Made','3PM',{:class=>'Basketball'}],
+							['3PA - Three Pointers Attempted','3PA',{:class=>'Basketball'}],
+							['3PP - Three Point Percentage','3PP',{:class=>'Basketball'}],
+							['REB - Total Rebounds','REB',{:class=>'Basketball'}],
+							['RPG - Rebounds per Game','RPG',{:class=>'Basketball'}],
+							['AST - Total Assists','AST',{:class=>'Basketball'}],
+							['APG - Assists per Game','APG',{:class=>'Basketball'}],
+							['STL - Steals','STL',{:class=>'Basketball'}],
+							['BLK - Blocks','BLK',{:class=>'Basketball'}],
+							['TO - Turnovers','TO',{:class=>'Basketball'}],
+							['EFF - Efficiency','EFF',{:class=>'Basketball'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Football') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Passing','Passing', {:class=>'Football'}],
+							['Rushing','Rushing', {:class=>'Football'}],
+							['Receiving','Receiving', {:class=>'Football'}],
+							['Defense','Defense', {:class=>'Football'}],
+							['Interceptions','Interceptions', {:class=>'Football'}],
+							['Punt Returns','Punt-Returns', {:class=>'Football'}],
+							['Kickoff Returns','Kickoff-Returns', {:class=>'Football'}],
+							['Punting','Punting', {:class=>'Football'}],
+							['Kicking','Kicking', {:class=>'Football'}],
+							['Fumbles','Fumbles', {:class=>'Football'}]
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['ATT - Passing attempts','ATT',{:class=>'Passing Football'}],
+							['CMP - Completions','CMP',{:class=>'Passing Football'}],
+							['PCT - Completion percentage','PCT',{:class=>'Passing Football'}],
+							['YDS - Passing yards','YDS',{:class=>'Passing Football'}],
+							['YPA - Passing yards per attempt','YPA',{:class=>'Passing Football'}],
+							['TD - Passing touchdowns','TD',{:class=>'Passing Football'}],
+							['INT - Passing interceptions','INT',{:class=>'Passing Football'}],
+							['SKD - Times sacked','SKD',{:class=>'Passing Football'}],
+							['SKY - Sack yards lost','SKY',{:class=>'Passing Football'}],
+							['RAT - Passer rating','RAT',{:class=>'Passing Football'}],
+							['ATT - Rushing attempts','ATT',{:class=>'Rushing Football'}],
+							['YDS - Rushing yards','YDS',{:class=>'Rushing Football'}],
+							['AVG - Average yards per attempt','AVG',{:class=>'Rushing Football'}],
+							['TD - Rushing touchdowns','TD',{:class=>'Rushing Football'}],
+							['LNG - Long run for the season','LNG',{:class=>'Rushing Football'}],
+							['REC - Receptions','REC',{:class=>'Receiving Football'}],
+							['YDS - Receiving yards','YDS',{:class=>'Receiving Football'}],
+							['AVG - Yards per reception','AVG',{:class=>'Receiving Football'}],
+							['TD - Receiving touchdowns','TD',{:class=>'Receiving Football'}],
+							['LNG - Long reception for the season','LNG',{:class=>'Receiving Football'}],
+							['SK - Sacks','SK',{:class=>'Defense Football'}],
+							['SFY - Safeties','SFY',{:class=>'Defense Football'}],
+							['INT - Interceptions','INT',{:class=>'Interceptions Football'}],
+							['YDS - Yards from interceptions','YDS',{:class=>'Interceptions Football'}],
+							['LNG - Longest interception return','LNG',{:class=>'Interceptions Football'}],
+							['TD - Interception touchdowns','TD',{:class=>'Interceptions Football'}],			
+							['RET - Number of punt returns','RET',{:class=>'Punt-Returns Football'}],
+							['YDS - Punt return yards','YDS',{:class=>'Punt-Returns Football'}],
+							['AVG - Average yards per punt return','AVG',{:class=>'Punt-Returns Football'}],
+							['FC - Number of fair catches','FC',{:class=>'Punt-Returns Football'}],
+							['LNG - Longest punt return of the season','LNG',{:class=>'Punt-Returns Football'}],
+							['TD - Punt return touchdowns','TD',{:class=>'Punt-Returns Football'}],
+							['RET - Number of kickoff returns','RET',{:class=>'Kickoff-Returns Football'}],
+							['YDS - Kickoff return yards','YDS',{:class=>'Kickoff-Returns Football'}],
+							['AVG - Average yards per kickoff return','AVG',{:class=>'Kickoff-Returns Football'}],
+							['LNG - Longest kickoff return of the season','LNG',{:class=>'Kickoff-Returns Football'}],
+							['TD - Kickoff return touchdowns','TD',{:class=>'Kickoff-Returns Football'}],
+							['PT - Number of punts','PT',{:class=>'Punting Football'}],
+							['YDS - Total punt yards','YDS',{:class=>'Punting Football'}],
+							['LNG - Longest punt','LNG',{:class=>'Punting Football'}],
+							['BLK','BLK - Number of punts which were blocked',{:class=>'Punting Football'}],
+							['TB - Number of touchbacks','TB',{:class=>'Punting Football'}],
+							['I20 - Number of punts inside the opponents 20 yardline','I20',{:class=>'Punting Football'}],
+							['NET - Net punting average','NET',{:class=>'Punting Football'}],
+							['AVG - Gross punting average','AVG',{:class=>'Fumbles Football'}],
+							['x-y - Number of kicks made/number of kicks attempted, between those distances','x-y',{:class=>'Kicking Football'}],
+							['LNG - Longest field goal made','LNG',{:class=>'Kicking Football'}],
+							['FGM - Total field goals made','FGM',{:class=>'Kicking Football'}],
+							['FGA - Total field goals attempted','FGA',{:class=>'Kicking Football'}],
+							['XPM - Extra points made','XPM',{:class=>'Kicking Football'}],
+							['XPA - Extra points attempted','XPA',{:class=>'Kicking Football'}],
+							['TOT - Total number of fumbles','TOT',{:class=>'Fumbles Football'}],
+							['OWR - Fumbles by own team recovered','OWR',{:class=>'Fumbles Football'}],
+							['OPR - Fumbles by opponent recovered','OPR',{:class=>'Fumbles Football'}],
+							['YDS - Yards gained on fumble recoveries','YDS',{:class=>'Fumbles Football'}],
+							['TD - Fumble recovery touchdowns','TD',{:class=>'Fumbles Football'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Hockey') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Hockey','Hockey', {:class=>'Hockey'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['GP - Games Played','GP',{:class=>'Forward/Defenseman Hockey'}],
+							['G - Goals','G',{:class=>'Forward/Defenseman Hockey'}],
+							['A - Assists','A',{:class=>'Forward/Defenseman Hockey'}],
+							['PTS - Points','PTS',{:class=>'Forward/Defenseman Hockey'}],
+							['PIM - Penalty Minutes','PIM',{:class=>'Goalie Hockey'}],
+							['MIN - Goalie Minutes','MIN',{:class=>'Goalie Hockey'}],
+							['GA - Goals Allowed','GA',{:class=>'Goalie Hockey'}],
+							['W - Goalie Wins','W',{:class=>'Goalie Hockey'}],
+							['L - Goalie Losses','L',{:class=>'Goalie Hockey'}],
+							['T - Goalie Ties','T',{:class=>'Goalie Hockey'}],
+							['GAA - Goals Against Average','GAA',{:class=>'Goalie Hockey'}],
+							['SO - Shutouts','SO',{:class=>'Goalie Hockey'}],
+							['SV - Saves','SV',{:class=>'Goalie Hockey'}],
+							['PCT	- Save Percentage','PCT',{:class=>'Goalie Hockey'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Swimming') {
+        $('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Swimming','Swimming', {:class=>'Swimming'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+						    ['25 M Free','25mF',{:class=>'Swimming'}],
+						    ['50 M Free','50mF',{:class=>'Swimming'}],
+							['100 M Free','100mF',{:class=>'Swimming'}],
+							['200 M Free','200mF',{:class=>'Swimming'}],
+							['400 M Free','400mF',{:class=>'Swimming'}],
+							['800 M Free','800mF',{:class=>'Swimming'}],
+							['1500 M Free','1500mF',{:class=>'Swimming'}],
+							['25 M Back','25mBa',{:class=>'Swimming'}],
+						    ['50 M Back','50mBa',{:class=>'Swimming'}],
+							['100 M Back','100mBa',{:class=>'Swimming'}],
+							['200 M Back','200mBa',{:class=>'Swimming'}],
+							['25 M Breast','25mBr',{:class=>'Swimming'}],
+						    ['50 M Breast','50mBr',{:class=>'Swimming'}],
+							['100 M Breast','100mBr',{:class=>'Swimming'}],
+							['200 M Breast','200mBr',{:class=>'Swimming'}],
+							['25 M Fly','25mFy',{:class=>'Swimming'}],
+						    ['50 M Fly','50mFy',{:class=>'Swimming'}],
+							['100 M Fly','100mFy',{:class=>'Swimming'}],
+							['200 M Fly','200MFy',{:class=>'Swimming'}],
+							['25 M IM','25mIm',{:class=>'Swimming'}],
+						    ['50 M IM','50mIm',{:class=>'Swimming'}],
+							['100 M IM','100mIm',{:class=>'Swimming'}],
+							['200 M IM','200mIm',{:class=>'Swimming'}],
+
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Golf') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Golf','Golf', {:class=>'Golf'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['Total Tournaments','Total Tournaments',{:class=>'Golfer Golf'}],
+							['Cuts Made','Cuts Made',{:class=>'Golfer Golf'}],
+							['Wins','Wins',{:class=>'Golfer Golf'}],
+							['Top-10 Finishes','Top-10 Finishes',{:class=>'Golfer Golf'}],
+							['Majors Won','Majors Won',{:class=>'Golfer Golf'}],
+							['Highest Finish','Highest Finish',{:class=>'Golfer Golf'}],
+							['Driving','Driving',{:class=>'Golfer Golf'}],
+							['Fairways','Fairways',{:class=>'Golfer Golf'}],
+							['Greens','Greens',{:class=>'Golfer Golf'}],
+							['Putts','Putts',{:class=>'Golfer Golf'}],
+							['Avg. Score','Avg. Score',{:class=>'Golfer Golf'}],
+							['Earnings','Earnings',{:class=>'Golfer Golf'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Lacrosse') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Lacrosse','Lacrosse', {:class=>'Lacrosse'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Goals','G',{:class=>'Lacrosse'}],
+							['A - Assists','A',{:class=>'Lacrosse'}],
+							['GB - Ground Balls','GB',{:class=>'Lacrosse'}],
+							['S - Saves','S',{:class=>'Lacrosse'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Soccer') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Soccer','Soccer', {:class=>'Soccer'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Goals','G',{:class=>'Soccer'}],
+							['GWG - Game Winning Goals','GWG',{:class=>'Soccer'}],
+							['A - Assists','A',{:class=>'Soccer'}],
+							['S - Saves','S',{:class=>'Soccer'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Tennis') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Tennis','Tennis', {:class=>'Tennis'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['Singles W-L','Singles W-L',{:class=>'Tennis'}],
+							['Doubles W-L','Doubles W-L',{:class=>'Tennis'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Volleyball') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Volleyball','Volleyball', {:class=>'Volleyball'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['A - Aces','A',{:class=>'Volleyball'}],
+							['AST - Assists','AST',{:class=>'Volleyball'}],
+							['BS - Blocks','BS',{:class=>'Volleyball'}],
+							['DIG - Digs','DIG',{:class=>'Volleyball'}],
+							['PPS - Points Per Serve','PPS',{:class=>'Volleyball'}],
+							['Pts Avg','Pts Avg',{:class=>'Volleyball'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Wrestling') {
+    	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [
+							['Wrestling','Wrestling', {:class=>'Wrestling'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['Lbs - Weight in Pounds','Lbs',{:class=>'Wrestling'}],
+							['W/L - Wins / Losses','W/L',{:class=>'Wrestling'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    else if(sportValue == 'Field Hockey') {
+    	$('#kind-select-div<%=unique_id.to_s%>').html('<%= f.select(:kind, [
+							['Field Hockey','Field Hockey', {:class=>'Field Hockey'}],
+						], {}, :class => "input-medium", :id => "stat-kind"+unique_id.to_s).squish.html_safe %>&nbsp;<%= f.select(:abbr, [
+							['G - Goals','G',{:class=>'Field Hockey'}],
+							['A - Assists','A',{:class=>'Field Hockey'}],
+							['S - Saves','S',{:class=>'Field Hockey'}],
+							['GWG - Game Winning Goals','GWG',{:class=>'Field Hockey'}],
+							['SS - Solo Shutouts','SS',{:class=>'Field Hockey'}]
+    					], {:prompt => "-Stat-"}, :class => "input-small", :id => "stat-select"+unique_id.to_s).squish.html_safe %>');
+    }
+    $("#stat-select<%=unique_id.to_s%>").chainedTo("#stat-kind<%=unique_id.to_s%>");
+</script>

@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: stats
+#
+#  id         :integer          not null, primary key
+#  card_id    :integer
+#  name       :string(255)
+#  abbr       :string(255)
+#  value      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  kind       :string(255)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  card: 
+  name: MyString
+  abbr: MyString
+  value: MyString
+
+two:
+  card: 
+  name: MyString
+  abbr: MyString
+  value: MyString

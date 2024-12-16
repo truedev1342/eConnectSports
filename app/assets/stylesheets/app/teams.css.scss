@@ -1,0 +1,13 @@
+#message{
+  input[type="text"],textarea{
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .row{
+    margin-left: 0px
+  }
+}
+
+#send_message_error{
+  color: red
+}

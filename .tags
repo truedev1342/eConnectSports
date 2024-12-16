@@ -1,0 +1,4 @@
+activateTab	/Users/comeonandroid/Code/projects/iDigitAllsports/app/assets/javascripts/app/card_new.js.coffee	/^activateTab =(new_tab, old_tab)->$/;"	function	line:15
+firstTab	/Users/comeonandroid/Code/projects/iDigitAllsports/app/assets/javascripts/app/card_new.js.coffee	/^firstTab =->$/;"	function	line:26
+middleTab	/Users/comeonandroid/Code/projects/iDigitAllsports/app/assets/javascripts/app/card_new.js.coffee	/^middleTab =->$/;"	function	line:30
+lastTab	/Users/comeonandroid/Code/projects/iDigitAllsports/app/assets/javascripts/app/card_new.js.coffee	/^lastTab =->$/;"	function	line:34

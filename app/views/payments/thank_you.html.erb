@@ -1,0 +1,28 @@
+    <div class="content-container">
+
+    <div class="content">
+        <h3>Thank you for your purchase</h3>
+        <p>You now have a total of  <%=pluralize(current_user.cards_purchased,'card')%></p>
+        <p>Tell your friends about I Dig It All Sports Cards.</p>
+        <ul class="nav nav-pills">
+            <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
+                'app_id=348916705210945&' +
+                'link=http://www.idigitallsports.com&' +
+                'redirect_uri=http://www.idigitallsports.com&' +
+                'picture=http://www.idigitallsports.com/assets/website/banners/wgolf.jpg&' +
+                'name=Create your personal sports card today&' +
+                'description=The next generation trading card, Fun for all ages.')">
+            <i class="icon-facebook-sign"> </i>Facebook</a></li>
+            <li><a class="hrefless " onClick="window.open('https://plus.google.com/share?' +
+                'url=http://www.idigitallsports.com&' +
+                't=Create your personal sprots card today&')">
+            <i class="icon-google-plus-sign"></i>Google+</a></li>
+            <li><a class="hrefless " onClick="window.open('http://twitter.com/home?' +
+                'status=Create your personal sprots card today-http://www.idigitallsports.com')">
+           <i class="icon-twitter-sign"></i>Twitter</a></li>
+
+        </ul>
+    </div>
+</div>
+
+

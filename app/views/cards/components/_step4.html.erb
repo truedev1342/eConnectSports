@@ -1,0 +1,18 @@
+<div class="tabtext">
+  <p><span class="bold">Last step.</span>Brand your card with a custom URL.</p>
+</div>
+<div class="formblock">
+  <div class="left-half half">
+    <div class="box">
+      <h3>Name your card</h3>
+      <%= f.text_field :card_name %>
+    </div>
+  </div>
+  <div class="right-half half">
+    <div class="box">
+      <h3>Brand your card url</h3>
+      <span>http://idigitalsports.com/</span>
+      <%= f.text_field :url_alias, id: 'card_url_alias', autocomplete: 'off' %>
+    </div>
+  </div>
+</div>

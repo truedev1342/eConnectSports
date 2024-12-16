@@ -1,0 +1,19 @@
+<div class="content-container"><div class="content">
+	<% if @payment.errors.any? %>
+	    <div class="error_messages">
+	      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+	      <ul>
+	      <% @payment.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	<% end %>
+
+	<%= @payment.id %><br>
+	<%= @payment.amount %><br>
+	<%= @payment.email %><br>
+	<%= @payment.stripe_customer_token %><br>
+	<%= @payment.created_at %><br>
+	<%= @payment.updated_at %>
+</div></div>

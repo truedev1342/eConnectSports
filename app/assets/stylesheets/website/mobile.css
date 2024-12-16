@@ -1,0 +1,733 @@
+/***********************************************************************
+       _________        __    __ 
+      / ____/ (_)____ _/ /_  / /_
+     / /_  / / // __ `/ __ \/ __/
+    / __/ / / // /_/ / / / / /_  
+   /_/   /_/_/ \__, /_/ /_/\__/  
+              /____/             
+      __          ________                 ____      _ __     
+     / / __ __   /_  __/ / ___ __ _ ___   / __/__ __(_) /____ 
+    / _ | // /    / / / _ | -_)  ' | -_) _\ \ / // / / __/ -_)
+   /_.__|_, /    /_/ /_//_|__/_/_/_|__/ /___/ \_,_/_/\__/\__/ 
+       /___/                                                                                     
+
+   Template Name:   Flight
+   Description:     Full Screen Slideshow Portfolio Website Template
+   Template URL:    http://www.themesuite.com/flight/
+   Version:         2.1
+   Author:          Theme Suite
+   Author URL:      http://www.themesuite.com/
+   Support:         http://support.themesuite.com/
+   
+***********************************************************************/
+
+
+/*  MEDIA QUERIES
+================================================== */
+
+/* Smaller than standard 1280 (devices and browsers) */
+@media only screen and (max-width: 1279px) {
+
+/*  MENU
+----------------------------*/
+#menu {
+    position: relative;
+    display: inline-block;
+    margin: -10px 0 35px 0;
+    width: 100%;
+    text-align: center;
+}
+
+#menu li {
+	float: none;
+	position: relative;
+	list-style: none;
+}
+
+#menu li:not(:last-child) {
+  margin-right: 2px;
+}
+
+#menu a {
+	display: block;
+	padding:  1px 15px;
+	margin: 0;
+	outline: 0;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	border-radius: 0.2em;
+	behavior: url(/assets/website/PIE/PIE.htc);
+}
+
+#menu a:active {
+	color: #dddddd;
+	top: 1px;
+}
+
+#menu-desc, .move {
+	display: none !important;
+}
+
+#menu, .menu {
+  top: 0 !important;
+}
+
+.menu li {
+	display: inline-block;
+	clear: none;
+	float: none !important;
+	height: 40px;
+	line-height: 0;
+}
+
+.menu li a {
+    position: relative;
+    z-index: 10;
+    font-size: 40px;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    text-decoration: none;
+}
+	
+}
+
+/* Standard 960 to 1280 (devices and browsers) */
+@media only screen and (min-width: 960px) and (max-width: 1279px) {}
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 959px) {
+
+	.slides, header.slider {
+		height: 80% !important;
+	}
+}
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+/*  BODY
+----------------------------*/
+#body {
+	width: 768px;
+}
+
+/*  Main Columns  */
+#main #primary {
+	width: 552px;
+}
+
+
+/*  HEADER & SLIDER
+----------------------------*/
+#header {
+    width: 708px;
+}
+
+.slider {
+	width: 708px;
+    height: 394px;
+}
+
+
+/*  MENU
+----------------------------*/
+#menu li:not(:last-child) {
+  margin-right: 1px;
+}
+
+#menu a {
+	padding:  1px 10px;
+}
+
+.menu li a {
+    font-size: 30px;
+}
+
+
+/*  FULLWIDTH COLUMNS
+----------------------------*/
+#container, #container-footer {
+	width: 711px;
+}
+
+#content .full {
+	width: 711px;
+}
+
+#content .one-half {
+	width: 345px;
+}
+
+#content .one-half-last {
+	width: 346px;
+}
+
+#content .one-third {
+	width: 224px;
+}
+
+#content .one-third-last {
+	width: 223px;
+}
+
+#content .one-fourth, #content-footer .one-fourth {
+	width: 159px;
+}
+
+#content .one-fourth-last, #content-footer .one-fourth-last {
+	width: 159px;
+}
+
+#content .one-fifth {
+	width: 122px;
+}
+
+#content .one-fifth-last {
+	width: 123px;
+}
+
+#content .one-sixth {
+	width: 102px;
+}
+
+#content .one-sixth-last {
+	width: 101px;
+}
+
+#content .three-fourth {
+	width: 527px;
+}
+
+#content .three-fourth-last {
+	width: 527px;
+}
+
+#content .two-thirds {
+	width: 467px;
+}
+
+#content .two-thirds-last {
+	width: 467px;
+}
+
+#content .two-fifths {
+	width: 269px;
+}
+
+#content .two-fifths-last {
+	width: 269px;
+}
+
+
+/*  FOOTER
+----------------------------*/
+/*  Social Icons  */
+.footer-social-icon {
+	margin: 4px 8px 0 0;
+}
+
+/*  Newsletter  */
+#mc_embed_signup {
+	width: 159px;
+}
+
+.newsletter {
+	width: 118px;
+}
+
+
+/*  INDEX PAGES
+----------------------------*/
+/*  Boxes  */
+.box-colored-small h3 {
+	font-size: 18px;
+}
+
+.box-colored-small-icon {
+	margin: 7px 7px 0 20px;
+}
+
+
+.action p {
+	width: 515px;
+}
+
+
+
+
+/*  PAGES PAGE
+----------------------------*/
+.pages-icon-left, .pages-icon-right {
+	width: 85px;
+}
+
+.pages-icon, .pages-icon-last {
+	width: 60px;
+}
+
+
+/*  PORTFOLIO PAGES
+----------------------------*/
+.portfolio-first {
+	max-width: 695px;
+	height: auto;
+}
+
+.portfolio-second {
+	max-width: 330px;
+	height: auto;
+}
+
+.portfolio-third {
+	max-width: 207px;
+	height: auto;
+}
+
+.portfolio-fourth {
+	max-width: 150px;
+	height: auto;
+}
+
+
+/*  BLOG PAGES
+----------------------------*/
+.article-video {
+	width: 485px;
+	height: 273px;	
+}
+
+/*  Add a Comment Form  */
+.comment-field {
+	width: 473px;
+}
+
+
+/*  CONTACT PAGE
+----------------------------*/
+/*  Contact Form  */
+.contact-message {
+	width: 325px;
+}
+
+.business-hours .day {
+	font-size: 11px;
+}
+
+.business-hours .hours {
+	float: right;
+	font-size: 10px;
+}
+
+#contact-social {
+	width: 340px;
+}
+
+}
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) {
+	
+#secondary, #search-wrapper, #social-wrapper, .breadcrumb {
+  display: none;
+}
+
+.categories, .tags, .blog-footer-top {
+	display: none;
+}
+
+
+/*  FOOTER
+----------------------------*/
+/*  Latest From Our Blog  */
+#footer-blog {
+	margin-bottom: 25px;
+}
+
+/*  Services That We Offer  */
+#footer-services {
+	margin-bottom: 25px;
+}
+
+/*  About Our Work */
+#footer-about {
+	margin-bottom: 25px;
+}
+
+/*  Twitter Feed  */
+#footer-twitter {
+	margin-bottom: 25px;
+}
+
+/*  Social Icons  */
+#footer-social {
+	margin-bottom: 25px;
+}
+
+/*  Copyright & Signature  */
+#copyright {
+	margin: 75px auto 0 auto;
+	text-align: center;
+}
+
+.copyright {
+	float: none;
+}
+
+.copyright-nofooter p {
+	margin-top: 35px;
+}
+
+.signature {
+	float: none;
+	clear: both;
+	margin: 10px auto -10px auto;
+	text-align: center;
+}
+
+/*  Bottom Menu  */
+#menu-bottom {
+	margin-top: -65px;
+}
+
+#menu-bottom li {
+	float: none;
+	padding-right: 10px;
+}
+
+
+/*  BLOG PAGES
+----------------------------*/
+hr.post-footer-bottom {
+	display: none;
+}
+
+#pagination div#page, #pagination-portfolio div#page {
+	float: none;
+	text-align: center;
+	margin: 0 auto 20px auto;
+}
+#pagination div#jump, #pagination-portfolio div#jump {
+	float: none;
+	text-align: center;	
+}
+	
+}
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+/*  BODY
+----------------------------*/
+#body {
+	width: 420px;
+}
+
+/*  Main Columns  */
+#main #primary {
+	width: 418px;
+}
+
+
+/*  HEADER & SLIDER
+----------------------------*/
+#header, .slider { 
+    width: 360px;
+	height: auto;
+	padding-bottom: 12px;
+}
+
+
+/*  LOGO
+----------------------------*/
+
+h1.logo {
+ 	font-size: 70px;
+}
+
+
+/*  MENU
+----------------------------*/
+#menu li:not(:last-child) {
+  margin-right: 0px;
+}
+
+#menu a {
+	padding:  1px 9px;
+}
+
+.menu li a {
+    font-size: 32px;
+}
+
+
+/*  FULLWIDTH COLUMNS
+----------------------------*/
+
+#container, #container-footer, #content .full, #content .one-half, #content .one-half-last, #content .one-third, #content .one-third-last, #content .one-fourth, #content-footer .one-fourth, #content .one-fourth-last, #content-footer .one-fourth-last, #content .one-fifth, #content .one-fifth-last, #content .one-sixth, #content .one-sixth-last, #content .three-fourth, #content .three-fourth-last, #content .two-thirds, #content .two-thirds-last, #content .two-fifths, #content .two-fifths-last {
+	width: 363px;
+}
+
+
+/*  FOOTER
+----------------------------*/
+/*  Newsletter  */
+#mc_embed_signup {
+	width: 363px;
+	float: left;
+}
+
+.newsletter {
+	width: 322px;
+}
+
+
+/*  INDEX PAGES
+----------------------------*/
+/*  Boxes  */
+.box-colored-small h3 {
+	font-size: 28px;
+}
+
+.action p {
+	width: 303px;
+	margin-bottom: 10px;
+}
+
+/*  Our Clients Logos  */
+#logo-1, #logo-1:hover, #logo-3, #logo-3:hover, #logo-5, #logo-5:hover {
+	margin: 10px 41px;
+}
+
+#logo-2, #logo-2:hover, #logo-4, #logo-4:hover, #logo-6, #logo-6:hover {
+	margin: 10px 41px 10px 40px;
+}
+
+
+/*  PAGES PAGE
+----------------------------*/
+.pages-icon-left, .pages-icon-right {
+	width: 100px;
+}
+
+.pages-icon {
+	margin-left: 50px;
+}
+
+.pages-icon-last {
+	margin-right: 70px;
+}
+
+
+/*  PORTFOLIO PAGES
+----------------------------*/
+.portfolio-first, .portfolio-second, .portfolio-third, .portfolio-fourth {
+	max-width: 350px;
+	height: auto;
+}
+
+
+/*  BLOG PAGES
+----------------------------*/
+.article-video {
+	width: 350px;
+	height: 197px;	
+}
+
+/*  Add a Comment Form  */
+.comment-field {
+	width: 340px;
+}
+
+
+/*  CONTACT PAGE
+----------------------------*/
+/*  Contact Form  */
+.contact-message {
+	width: 336px;
+}
+
+#contact-social {
+	width: 340px;
+}
+	
+}
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) {
+
+/*  BODY
+----------------------------*/
+#body {
+	width: 300px;
+}
+
+/*  Main Columns  */
+#main #primary {
+	width: 298px;
+}
+
+.primary-heading {
+	width: 229px;
+}
+
+
+/*  HEADER & SLIDER
+----------------------------*/
+#header, .slider { 
+    width: 240px;
+	height: auto;
+	padding-bottom: 12px;
+}
+
+
+/*  MENU
+----------------------------*/
+#menu li:not(:last-child) {
+  margin-right: -9px;
+}
+
+#menu a {
+	padding: 1px 8px;
+}
+
+.menu li a {
+    font-size: 30px;
+}
+
+
+/*  LOGO
+----------------------------*/
+
+h1.logo {
+ 	font-size: 70px;
+}
+
+
+/*  FULLWIDTH COLUMNS
+----------------------------*/
+
+#container, #container-footer, #content .full, #content .one-half, #content .one-half-last, #content .one-third, #content .one-third-last, #content .one-fourth, #content .one-fourth, #content-footer .one-fourth, #content .one-fourth-last, #content-footer .one-fourth-last, #content .one-fifth, #content .one-fifth-last, #content .one-sixth, #content .one-sixth-last, #content .three-fourth, #content .three-fourth-last, #content .two-thirds, #content .two-thirds-last, #content .two-fifths, #content .two-fifths-last {
+	width: 243px;
+}
+
+
+/*  FOOTER
+----------------------------*/
+/*  Social Icons  */
+.footer-social-icon {
+	margin: 4px 9px 0 0;
+}
+
+/*  Newsletter  */
+#mc_embed_signup {
+	width: 243px;
+	float: left;
+}
+
+.newsletter {
+	width: 202px;
+}
+
+/*  Copyright & Signature  */
+.copyright {
+	margin-top: 90px;
+}
+
+/*  Bottom Menu  */
+#menu-bottom {
+	margin-top: -80px;
+}
+
+
+/*  INDEX PAGES
+----------------------------*/
+/*  Boxes  */
+.box-image-left {
+	margin: 0 5px 0 0;
+	width: 75px;
+	height: auto;	
+}
+
+.box-image-right {
+	margin: 0 0 0 5px;
+	width: 75px;
+	height: auto;
+}
+
+.action p {
+	width: 185px;
+	margin-bottom: 10px;
+}
+
+/*  Our Clients Logos  */
+#logo-1, #logo-1:hover, #logo-3, #logo-3:hover, #logo-5, #logo-5:hover {
+	margin: 10px 11px;
+}
+
+#logo-2, #logo-2:hover, #logo-4, #logo-4:hover, #logo-6, #logo-6:hover {
+	margin: 10px 11px 10px 10px;
+}
+
+
+/*  PAGES PAGE
+----------------------------*/
+.pages-icon-left, .pages-icon-right {
+	width: 95px;
+}
+
+.pages-icon {
+	margin-left: 10px;
+}
+
+.pages-icon-last {
+	margin-right: 25px;
+}
+
+
+/*  PORTFOLIO PAGES
+----------------------------*/
+.portfolio-first, .portfolio-second, .portfolio-third, .portfolio-fourth {
+	max-width: 230px;
+	height: auto;
+}
+
+#pagination-portfolio {
+	font-size: 12px;	
+}
+
+
+/*  BLOG PAGES
+----------------------------*/
+.article-video {
+	width: 230px;
+	height: 129px;	
+}
+
+.com, .track {
+	margin-top: 35px;
+	margin-bottom: 15px;
+}
+
+.com {
+	float: left;
+}
+
+/*  Add a Comment Form  */
+.comment-field {
+	width: 220px;
+}
+
+
+/*  CONTACT PAGE
+----------------------------*/
+/*  Contact Form  */
+.contact-message {
+	width: 220px;
+}
+
+#contact-social {
+	width: 240px;
+	margin-bottom: 30px;
+}
+	
+}

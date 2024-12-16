@@ -1,0 +1,79 @@
+<div class="modal hide fade" id="example_qr">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>Example QR code</h3>
+  </div>
+  <div class="modal-body">
+    <img src="/assets/ecqrcodeipad.jpeg" style="display:block;width:300px;margin:0 auto;">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" class="close" data-dismiss="modal" aria-hidden="true">Ok</button>
+  </div>
+</div>
+<div class="modal hide fade" id="vqr_alert">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>You have not branded your Qr Code. </h3>
+  </div>
+  <div class="modal-body">
+    <p style="color: black;font-size: 16px;">Do you wish to continue?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" id="qrsubmit_yes" style="margin-bottom:0px;">Yes</button>
+    <button class="btn btn-primary" class="close" data-dismiss="modal" aria-hidden="true">Take me back</button>
+  </div>
+</div>
+<div class="modal hide fade" id="purchase_plan_modal">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>This feature is not available during a free trial.</h3>
+  </div>
+  <div class="modal-body">
+    <p style="color: black;font-size: 16px;">If you wish to create a branded Qr Code, please choose a plan to proceed.</p>
+    <img src="/assets/ecqrcodeipad.jpeg" style="display:block;width:300px;margin:0 auto;">
+  </div>
+  <div class="modal-footer">
+    <button class="btn" style="margin-bottom:0px;", class="close" data-dismiss="modal" aria-hidden="true">No Thanks</button>
+    <%= link_to "Yes, Proceed", plans_path, class: "btn btn-primary", target: "_blank" %>
+  </div>
+</div>
+<script type="text/javascript">
+    $('#purchase_plan').click(function(){
+      $('#purchase_plan_modal').modal('show');
+      return false;
+    });
+    $('#form-submit').click(function(){
+      if ($('#qr_created').length == 0 && $('#card_qrcode').val() == "") {
+        $('#vqr_alert').modal('show');
+        return false;
+      }
+    });
+    $('#qrsubmit_yes').click(function(){
+        $('form').submit();
+    });
+    $('#show-qr-example').click(function(){
+        $('#example_qr').modal('show');
+    });
+</script>
+
+<!-- New crop function -->
+  <div class="js-crop-modal modal hide fade">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Crop and save image</h3>
+    </div>
+    <div class="modal-body">
+      <img src="" alt="" class="js-img-crop img-crop">
+    </div>
+    <div class="modal-footer">
+      <div class="pull-left">
+        <a href="#" class="js-crop-zoom-in-step">
+          <i class="icon-fa-plus-sign icon-large"></i>
+        </a>
+        <a href="#" class="js-crop-zoom-out-step">
+          <i class="icon-fa-minus-sign icon-large"></i>
+        </a>
+      </div>
+      <a href="#" class="btn btn-primary js-crop-save" data-dismiss="modal">Save changes</a>
+    </div>
+  </div>

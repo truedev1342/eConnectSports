@@ -1,0 +1,396 @@
+<% @page = 'dashboard' %>
+<div class="content-container"><div class="content">
+	<h3>Your Trading Cards <small><%= current_user.cards.count %> out of <%= total_cards_purchased %> purchased</small></h3>
+
+
+	<% if mobile_device? %>
+
+		<table class="table">
+			<% @user.cards.each do |card| %>
+				<tr>
+					<td><%= card.card_name %></td>
+					<td>
+						<% if card.membership %>
+							<%= link_to card.membership.team.name, card.membership.team %>
+						<% end %>
+					</td>
+					<td>
+						<%= link_to "View", card_path(card) %><br>
+						<%= link_to "Edit", edit_card_path(card) %>
+
+						<% if !card.membership %>
+						<br>
+						<%= link_to 'Delete', card, confirm: 'Are you sure you want to delete this card?', method: :delete, "data-icon" => "delete" %>
+						<% end %>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+		<p>&nbsp;</p>
+	<% else %>
+
+		<div id="rs-carousel" class="rs-carousel module">
+			<ul class="rs-carousel-runner">
+				<% if @user.cards.count > 0 %>
+					<% @user.cards.each do |card| %>
+			    		<li class="rs-carousel-item">
+							<div class="card flow-card" style="height:300px;width:350px">
+								<div class="flow-card-nav">
+									<%= link_to "View", card_path(card) %>&nbsp;&#953;
+									<%= link_to "Edit", edit_card_path(card) %>&nbsp;&#953;
+									<%= link_to "Save", user_card_path(@user, card).to_s+"/save", method: "post" %>&nbsp;&#953;
+									<a href="#urlModal<%= card.id %>" role="button" data-toggle="modal">Card URL</a><br>
+
+									<% if !card.membership %>
+									<%= link_to 'Delete', card, confirm: 'Are you sure you want to delete this card?', method: :delete, "data-icon" => "delete" %>&nbsp;&#953;
+									<% end %>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">Trade <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+                                        <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
+                                                'app_id=348916705210945&' +
+                                                'link=<%=u card_url(card) %>&' +
+                                                'redirect_uri=http://www.idigitallsports.com&' +
+                                                'picture=<%= card.image_url(:card).to_s %>&' +
+                                                'name=Check out my IdigItAllSports Trading Card!&' +
+                                                'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                                            <i class="icon-facebook-sign"> </i>Facebook</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i>
+                                                LinkedIn</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i>
+                                                Twitter</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i>
+                                                Google+</a></li>
+
+                                        <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_card_path(@user, card).to_s+"/shares/new" %></li>
+                                    </ul>
+								</div>
+								<table align="center" cellpadding="10" width="320" height="120" style="margin-top:15px;">
+									<tr valign="top">
+										<td width="120">
+											<% if card.image? %>
+												<%= image_tag card.image_url(:thumb).to_s %>
+											<% else %>
+												<%= image_tag('app/person-placeholder.jpg', :width => '154', :class => 'card_image') %>
+											<% end %>
+										</td>
+										<td style="vertical-align:middle;">
+											<p>
+												<span class="name">
+													<%= card.name %>
+												</span>
+												<br>
+												<%= card.card_name %>
+											</p>
+											<% if card.membership %>
+												<p>
+													Team: <%= link_to card.membership.team.name, card.membership.team %>
+												</p>
+											<% end %>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</li>
+					<% end %>
+				<% else %>
+					<li class="rs-carousel-item">
+						<div class="card flow-card" style="height:200px;width:350px;">
+							<table align="center" cellpadding="20" height="140">
+								<tr valign="top">
+									<td>
+										<p>&nbsp;</p>
+										<h4>You don't have any cards yet!</h4>
+										<p>
+											Click "Add a New Card" below to get started.
+										</p>
+										<center><i class="icon-arrow-down" style="font-size:20px;"></i></center>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+				<% end %>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+
+	<% end %>
+
+  	<% @user.cards.each do |card| %>
+		<div class="modal hide fade" id="qrModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Scan QR Code</h3>
+			</div>
+			<div class="modal-body">
+				<center>
+					<img alt='Vcard&amp;choe=utf-8' src='https://chart.googleapis.com/chart?chs=300x300&amp;cht=qr&amp;chl=<%= vcard_card_url(card) %>&amp;choe=UTF-8' />
+				</center>
+			</div>
+		</div>
+	<% end %>
+	<%= link_to new_user_card_path(@user), :class => 'add-card' do %>
+		<i class="icon-plus-sign" style="margin:10px;"></i>
+		Add a New Card
+	<% end %>
+</div></div>
+
+
+
+<div class="row" style="display: none">
+	<div class="content-container span12"><div class="content dash-public-card">
+		<% if @public_page %>
+			<%= form_for([@user, @public_page]) do |f| %>
+				<div class="public-page-heading">
+					<div class="heading">
+						<h3>Your Public Page</h3>
+						<br>
+					</div>
+					<div class="status-toggle">
+						<!--[if lt IE 9]>
+						Enabled:&nbsp;
+						<![endif]-->
+						<%= f.check_box :status, :class => 'input-switch' %>
+						<label for="public_page_status" data-off="Off" id="public-page-status-label">On</label>
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="row">
+					<div class='span6'>
+						<% if mobile_device? %>
+							<% if @public_card %>
+								<h4>Public Card</h4>
+								<p>
+									<strong>Card Name:</strong> <%= @public_card.card_name %>
+									<br>
+									<strong>Title:</strong> <%= @public_card.position %>
+								</p>
+							<% else %>
+								<h5>You don't have a public card.</h5>
+								<p>Please select one from the list.</p>
+							<% end %>
+						<% else %>
+							<div class="card flow-card" style="margin-top:0;height:172px;border:none;">
+								<table align="center" cellpadding="20" height="140">
+									<tr valign="top">
+										<% if @public_card %>
+											<td>
+												<% if @public_card.image? %>
+													<%= image_tag @public_card.image_url(:thumb).to_s %>
+												<% else %>
+													<%= image_tag('app/person-placeholder.jpg', :width => '154', :class => 'card_image') %>
+												<% end %>
+											</td>
+											<td style="vertical-align:middle;">
+												<p>
+													<span class="name">
+														<%= @public_card.name %>
+													</span>
+													<br>
+													<%= @public_card.position %>
+												</p>
+											</td>
+										<% elsif !@public_card %>
+											<td>
+												<br><br>
+												<h4>You don't have a public card.</h4>
+												<p>Please select one from the list <i class="icon-arrow-right" style="font-size:20px;"></i></p>
+											</td>
+										<% end %>
+									</tr>
+								</table>
+							</div>
+						<% end %>
+						<br>
+					</div>
+					<div class='span5'>
+						<%= f.collection_select(:card_id, @cards, :id, :card_name, {:include_blank => "-- Select Card --"}, :style => "width:100%;") %>
+						<div class="box">
+							<h4>View your page&nbsp;&nbsp;&nbsp;&nbsp;<small><a href="#sppModal" role="button" data-toggle="modal"><i class='icon-picture'></i> Style Page</a></small></h4>
+							<% if @user.username %>
+							<a href="/<%= @user.username %>"><%= root_url %><%= @user.username %></a>
+							<br><br>
+							<% end %>
+							<div class="btn-group">
+								<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+									<i class="icon-share"></i> Trade
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+
+									<li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= @user.username %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+
+									<li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/<%= @user.username %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+
+									<li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+
+									<li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_public_page_path(@user, @public_page).to_s+"/shares/new" %></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="span10"><%= f.submit "Update", :class => "btn btn-primary pull-right", :style => "margin:10px 20px 0px 0px;" %></div>
+					</div>
+
+					<div class="modal hide fade in" id="sppModal" tabindex="-1" role="dialog" aria-labelledby="sppModalLabel" aria-hidden="true">
+					  <div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					    <h3 id="sppModalLabel">Style Your Page</h3>
+					  </div>
+					  <div class="modal-body">
+						<h4>Background Image</h4>
+						<div class="control-group">
+							<div class="controls">
+							  <% if @public_page.background? %>
+							    <%= f.check_box :remove_background %> Remove?
+							    <br><br>
+							    <%= image_tag @public_page.background_url(:thumb).to_s, :style => "max-width:50px;max-height:50px;float:left;" %>
+							  <% end %>
+							  <div class="file">
+							    <%= f.file_field :background %>
+							  </div>
+							  <div class="clear"></div>
+							  <br>
+							  <%= f.check_box :background_tile %> Tile Background
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+							  <% if @public_page.logo? %>
+							    <%= f.check_box :remove_logo %> Remove?
+							    <br><br>
+							    <%= image_tag @public_page._url(:thumb).to_s, :style => "max-width:50px;max-height:50px;" %>
+							  <% end %>
+							  <div class="clear"></div>
+							</div>
+						</div>
+					  </div>
+					  <div class="modal-footer">
+					    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					    <%= f.submit "Update", :class => "btn btn-primary pull-right", :style => "margin-bottom:9px;" %>
+					  </div>
+					</div>
+				</div>
+			<% end %>
+		<% end %>
+	</div></div>
+</div>
+<div class="row">
+	<div class="content-container span12"><div class="content">
+		<h3>Your Collection</h3>
+		<%= link_to "Sent: #{@user.shares.count}", url_for(current_user)+"/shares", :class => "btn btn-mini" %>&nbsp;
+		<%= link_to "Collected: #{@user.contacts.count}", url_for(current_user)+"/contacts", :class => "btn btn-mini" %>
+
+		<h6>Recent Activity</h6>
+		<table class="table table-bordered table-condensed">
+			<tbody>
+				<% @activities.each do |activity| %>
+				<tr>
+					<td><%= activity.note.html_safe %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div></div>
+</div>
+<p>&nbsp;</p>
+
+
+<% if @user.cards.count > 0 %>
+	<% @user.cards.each do |card| %>
+		<div class="modal hide fade" id="urlModal<%= card.id %>" tabindex="-1" role="dialog" aria-labelledby="urlModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 id="urlModalLabel">Card URL</h3></div><div class="modal-body">
+				<p><strong><%= "http://#{request.host.to_s}#{url_for(card)}" %></strong></p>
+			</div>
+			<div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Close</button></div>
+		</div>
+	<% end %>
+<% end %>
+
+<div class="row">
+	<div class="content-container span12"><div class="content">
+		<h3>Saved Cards</h3>
+		<div id="rs-carousel" class="rs-carousel module">
+			<ul class="rs-carousel-runner">
+				<% if @user.favorite_cards.count > 0 %>
+					<% @user.favorite_cards.each do |card| %>
+			    		<li class="rs-carousel-item">
+							<div class="card flow-card" style="height:300px;width:350px">
+								<div class="flow-card-nav">
+									<%= link_to "View", card_path(card) %>&nbsp;&#953;
+									<%= link_to "Edit", edit_card_path(card) %>&nbsp;&#953;
+									<a href="#urlModal<%= card.id %>" role="button" data-toggle="modal">Card URL</a><br>
+									<% if !card.membership %>
+									<%= link_to 'Delete from Saved', user_card_path(@user, card).to_s+"/saved_cards", confirm: 'Are you sure you want to delete this card from saved?', method: :delete, "data-icon" => "delete" %>&nbsp;&#953;
+									<% end %>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">Trade <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+                                        <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
+                                                'app_id=348916705210945&' +
+                                                'link=<%=u card_url(card) %>&' +
+                                                'redirect_uri=http://www.idigitallsports.com&' +
+                                                'picture=<%= card.image_url(:card).to_s %>&' +
+                                                'name=Check out my IdigItAllSports Trading Card!&' +
+                                                'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                                            <i class="icon-facebook-sign"> </i>Facebook</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i>
+                                                LinkedIn</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i>
+                                                Twitter</a></li>
+
+                                        <li>
+                                            <a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i>
+                                                Google+</a></li>
+
+                                        <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_card_path(@user, card).to_s+"/shares/new" %></li>
+                                    </ul>
+								</div>
+								<table align="center" cellpadding="10" width="320" height="120" style="margin-top:15px;">
+									<tr valign="top">
+										<td width="120">
+											<% if card.image? %>
+												<%= image_tag card.image_url(:thumb).to_s %>
+											<% else %>
+												<%= image_tag('app/person-placeholder.jpg', :width => '154', :class => 'card_image') %>
+											<% end %>
+										</td>
+										<td style="vertical-align:middle;">
+											<p>
+												<span class="name">
+													<%= card.name %>
+												</span>
+												<br>
+												<%= card.card_name %>
+											</p>
+											<% if card.membership %>
+												<p>
+													Team: <%= link_to card.membership.team.name, card.membership.team %>
+												</p>
+											<% end %>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</li>
+					<% end %>			
+				<% end %>
+			</ul>
+			<p>&nbsp;</p>
+		</div>
+		</div>
+</div>

@@ -1,0 +1,198 @@
+// reset css
+body{
+    margin:0;
+    padding:0;
+}
+img{
+    border:0 none;
+    height:auto;
+    line-height:100%;
+    outline:none;
+    text-decoration:none;
+}
+a img{
+    border:0 none;
+}
+p {
+  line-height: 1.5;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+}
+.email {
+  background: #222222;
+  .container {
+    background: #fff;
+    border-radius: 10px;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+  .w100 {
+    width: 100%;
+  }
+  .center {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .text {
+    line-height: 1.5;
+    font-size: 1.25em;
+    a {
+      color: #983C20;
+    }
+  }
+  .bold {
+    font-weight: bold;
+  }
+  .create-card {
+    text-decoration: none;
+    background: #983C20;
+    color: #fff;
+    padding: 10px;
+    font-size: 1.3em;
+    margin: 12px 10%;
+    display: block;
+    text-align: center;
+  }
+  .benefit {
+    font-size: 1.5em;
+    margin: 10px auto;
+  }
+  .margin {
+    margin: 14px 0 10px;
+  }
+  .list {
+    padding-left: 6%;
+    p {
+      line-height: 1.2;
+      font-weight: bold;
+    }
+  }
+  .mark {
+    color: #0E4071;
+    font-size: 1.5em;
+  }
+  .yellow-text {
+    color: #F07E25;
+  }
+  .learn-more {
+    display: block;
+    text-decoration: none;
+    background: #0D3F70;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  .sign-in {
+    color: #247EEE;
+    font-size: 1.8em;
+    margin: 10px 0;
+    font-weight: bold;
+  }
+  .contacts a {
+    color: #247EEE;
+  }
+  .footer{
+    p {
+      color: #7e7e7e;
+      font-size: 0.7em;
+    }
+    a {
+      color: #247EEE;
+      text-decoration: underline;
+    }
+  }
+  .w100 {
+    width: 100%;
+  }
+  .col-xs-5 {
+    width: 42%;
+    float: left;
+  }
+  .col-xs-2 {
+    width: 16%;
+    float: left;
+  }
+  .blue {
+    text-align: center;
+    color: #004E75;
+    font-weight: bold;
+    font-size: 1.7em;
+  }
+  .after-title {
+    font-size: 1.4em;
+    color: #515151;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .bluelink {
+    text-align: center;
+    color: #004E75;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+  .impression {
+    text-align: center;
+    color: #F07E25;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  .after-impression {
+    text-align: center;
+    color: #515151;
+    font-size: 1.5em;
+    line-height: 15px;
+  }
+  .way {
+    text-align: center;
+    margin-top: -15px;
+    font-size: 1em;
+    color: #515151;
+  }
+  ul {
+    margin: 10px 0 0 0;
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    display: block;
+    margin-bottom: 5px;
+    img {
+      float: left;
+      margin-right: 5px;
+    }
+    span {
+      line-height: 1.8;
+      font-size: 18px;
+    }
+  }
+  .promo-section {
+    border: 2px solid #983C20;
+    border-radius: 10px;
+    .one {
+      width:50%;
+      float: left;
+      display: inline-block;
+      padding-top: 25px;
+      padding-left: 25px;
+      padding-bottom: 8px;
+      img {
+        width: 60%;
+        margin-top: 20px;
+      }
+    }
+    .two {
+      width:45%;
+      float: left;
+      margin-bottom: -5px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

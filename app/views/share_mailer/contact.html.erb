@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+</head>
+<body>
+
+<h4><%= @sender_name %> would like to share a I Dig It All Sports <%= @type %> with you!</h4>
+
+<p>Message from <%= @sender_name %>:</p>
+<p><%= @message.html_safe %></p>
+
+<table cellpadding="20" height="140" width:="320" style="border:3px solid #ccc">
+	<tr valign="top">
+		<td style="vertical-align:middle;">
+			<%= image_tag @card.image_url(:thumb).to_s, :class => "roundedImage", :height => "100" %>
+		</td>
+		<td style="vertical-align:middle;">
+			<p>
+				<strong><%= @sender_name %></strong>
+			</p>
+			<p>
+				<%= link_to "View Card", @share_url %>
+			</p>
+		</td>
+	</tr>
+</table>
+<p>&nbsp;</p>
+<p>Create your card today!</p>
+<p><a href="<%= root_url %>"><img src="<%= "https://s3.amazonaws.com/playersbrand_prod/static_assets/logo.png" %>"></a></p>
+</body>
+</html>

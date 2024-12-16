@@ -1,0 +1,127 @@
+<% @unique_id = 0 %>
+<%= content_for :head do %>
+  <style type="text/css" media="screen">
+     .colorwell {
+       border: 2px solid #fff;
+       width: 6em;
+       text-align: center;
+       cursor: pointer;
+     }
+     body .colorwell-selected {
+       border: 2px solid #000;
+       font-weight: bold;
+     }
+   </style>
+
+   <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      <% unless old_ie? %>
+        $(":file").filestyle({
+          buttonText: "Upload",
+          textField: true,
+          icon: true,
+          classIcon: "icon-upload-alt"
+        });
+      <% end %>
+      $("#advanced").click(function (event) {
+        event.preventDefault();
+        $('#advanced-style').slideToggle('slow');
+        var f = $.farbtastic('#picker');
+        var selected;
+        $('.colorwell')
+          .each(function () { f.linkTo(this); $(this); })
+          .focus(function() {
+            if (selected) {
+              $(selected).removeClass('colorwell-selected');
+            }
+            f.linkTo(this);
+            $(selected = this).addClass('colorwell-selected');
+          });
+        var gTop = '#EFEFEF';
+        var gBottom = '#808080';
+        var dColor = '#585858';
+        var nColor = '#007A9F';
+        var iColor = '#004D74';
+        if($('#card_background1_color').val() == "") {
+          $("#card_background1_color").val(gTop);
+          $('#card_background1_color').focus();
+        };
+        if($('#card_background2_color').val() == "") {
+          $("#card_background2_color").val(gBottom);
+          $('#card_background2_color').focus();
+        };
+        if($('#card_details_color').val() == "") {
+          $("#card_details_color").val(dColor);
+          $('#card_details_color').focus();
+        };
+        if($('#card_name_color').val() == "") {
+          $("#card_name_color").val(nColor);
+          $('#card_name_color').focus();
+        };
+        if($('#card_icon_color').val() == "") {
+          $("#card_icon_color").val(iColor);
+          $('#card_icon_color').focus();
+        };
+        $('#reset-appearence').click(function (event) {
+          event.preventDefault();
+          $('#card_background1_color').val(gTop);
+          $('#card_background1_color').focus();
+          $('#card_background2_color').val(gBottom);
+          $('#card_background2_color').focus();
+          $('#card_details_color').val(dColor);
+          $('#card_details_color').focus();
+          $('#card_name_color').val(nColor);
+          $('#card_name_color').focus();
+          $('#card_icon_color').val(iColor);
+          $('#card_icon_color').focus();
+        });
+      });
+    });
+   </script>
+ <% end %>
+
+<ul class="breadcrumb">
+    <li>
+  	  <%= link_to 'Dashboard', root_url %> <span class="divider">/</span>
+    </li>
+    <li class="active">New Card</li>
+</ul>
+
+<div class="new-card-block breadcrumb">
+  <%= form_for([@resource, @card], :html => { :class => "form-inline card-form"}) do |f| %>
+    <% if @card.errors.any? %>
+      <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</strong>
+        <ul>
+          <% @card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div data-tab="1" class="step-tab step1">
+      <%= render 'cards/components/step1', f: f %>
+    </div>
+    <div data-tab="2" class="step-tab step2 hide-tab">
+      <%= render 'cards/components/step2', f: f %>
+    </div>
+    <div data-tab="3" class="step-tab step3 hide-tab">
+      <%= render 'cards/components/step3', f: f %>
+    </div>
+    <div data-tab="4" class="step-tab step4 hide-tab">
+      <%= render 'cards/components/step4', f: f %>
+    </div>
+    <div class="step buttons formblock">
+      <div class="left-half">
+        <input class="btn btn-primary back" name="commit" type="button" value="BACK" style="display:none">
+      </div>
+      <div class="right-half">
+        <input class="btn btn-primary next" name="commit" type="button" value="NEXT">
+        <input class="btn btn-primary finish" name="commit" type="button" value="FINISH">
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'cards/images_library' %>

@@ -1,0 +1,80 @@
+<%= content_for :head do %>
+  <style type="text/css" media="screen">
+     .colorwell {
+       border: 2px solid #fff;
+       width: 6em;
+       text-align: center;
+       cursor: pointer;
+     }
+     body .colorwell-selected {
+       border: 2px solid #000;
+       font-weight: bold;
+     }
+   </style>
+   
+   <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      <% unless old_ie? %>
+        $(":file").filestyle({
+          buttonText: "Upload",
+          textField: true,
+          icon: true,
+          classIcon: "icon-fa-upload-alt"
+        });
+      <% end %>
+      $("#advanced").click(function (event) {
+        event.preventDefault();
+        $('#advanced-style').slideToggle('slow');
+        var f = $.farbtastic('#picker');
+        var selected;
+        $('.colorwell')
+          .each(function () { f.linkTo(this); $(this); })
+          .focus(function() {
+            if (selected) {
+              $(selected).removeClass('colorwell-selected');
+            }
+            f.linkTo(this);
+            $(selected = this).addClass('colorwell-selected');
+          });
+        var gTop = '#EFEFEF';
+        var gBottom = '#808080';
+        var dColor = '#585858';
+        var nColor = '#007A9F';
+        var iColor = '#004D74';
+        if($('#card_background1_color').val() == "") {
+          $("#card_background1_color").val(gTop);
+          $('#card_background1_color').focus();
+        };
+        if($('#card_background2_color').val() == "") {
+          $("#card_background2_color").val(gBottom);
+          $('#card_background2_color').focus();
+        };
+        if($('#card_details_color').val() == "") {
+          $("#card_details_color").val(dColor);
+          $('#card_details_color').focus();
+        };
+        if($('#card_name_color').val() == "") {
+          $("#card_name_color").val(nColor);
+          $('#card_name_color').focus();
+        };
+        if($('#card_icon_color').val() == "") {
+          $("#card_icon_color").val(iColor);
+          $('#card_icon_color').focus();
+        };
+        $('#reset-appearence').click(function (event) {
+          event.preventDefault();
+          $('#card_background1_color').val(gTop);
+          $('#card_background1_color').focus();
+          $('#card_background2_color').val(gBottom);
+          $('#card_background2_color').focus();
+          $('#card_details_color').val(dColor);
+          $('#card_details_color').focus();
+          $('#card_name_color').val(nColor);
+          $('#card_name_color').focus();
+          $('#card_icon_color').val(iColor);
+          $('#card_icon_color').focus();
+        });
+      });
+    });
+   </script>
+ <% end %>

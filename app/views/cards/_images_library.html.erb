@@ -1,0 +1,15 @@
+<div id="images-library" class="modal hide fade" role="dialog"  aria-hidden="true">
+  <div class="library-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Insert</button>
+    <span>Select an image</span>
+  </div>
+  <div class="modal-body">
+    <div class="image-row">
+      <% (Dir.entries('app/assets/images/website/background/slideshow') - ['.', '..']).compact.each do |image_name| %>
+        <div class="image-container pointer" data-image="<%= image_name %>">
+          <%= image_tag("website/background/slideshow/#{image_name}") %>
+        </div>
+      <% end %>
+  </div>
+</div>
+
