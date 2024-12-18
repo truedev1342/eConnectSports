@@ -21,8 +21,8 @@ test:
   host: localhost
   database: idigitallsports_test
   pool: 5
-  username: idigitallsports
-  password: mypunk
+  username: postgres
+  password: postgres
 
 production:
   adapter: postgresql
