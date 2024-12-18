@@ -105,6 +105,9 @@ gem 'resque_mailer'
 # gem 'debugger'
 
 gem 'mocha', :group => :test
+group :test do
+  gem 'rspec-rails'
+end
 gem 'aweber'
 
 # email styles
