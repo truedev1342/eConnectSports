@@ -3,11 +3,12 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.19'
 
 # database connection
-gem 'pg'
+gem 'pg', '~> 0.11.0'
 
 # web server
 gem 'unicorn'
 gem 'nokogiri', '1.8.5'
+gem 'multipart-post', '2.0.0'
 # Generators / DSLs
 gem 'nifty-generators', :group => :development
 gem 'delayed_job_active_record'
