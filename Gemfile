@@ -90,7 +90,7 @@ group	 :development do
   gem 'binding_of_caller'
   gem 'awesome_pry'
   gem 'colorize'
-  gem 'puma' , '~> 2.16'
+  gem 'puma'
 end
 
 gem 'dotenv-rails'
