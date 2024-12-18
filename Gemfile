@@ -17,11 +17,12 @@ gem 'devise_invitable', '~> 1.1.0'
 gem 'cancan'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', :require => 'google/apis'
+gem 'google-api-client', '~> 0.9.8', :require => 'google/apis'
 gem 'httparty'
 gem 'rack-ssl-enforcer'
 # Uploads
-gem 'carrierwave'
+gem 'carrierwave', '~> 0.7.1'
+gem 'fog-ovirt', '1.0.0'
 gem 'fog'
 gem 'rmagick', require: false
 
@@ -49,6 +50,7 @@ gem 'stripe'
 gem 'paypal-recurring'
 
 # Twitter Bootstrap
+gem 'execjs', '~> 1.4.0'
 gem 'twitter_bootstrap_form_for'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
