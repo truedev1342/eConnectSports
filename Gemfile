@@ -1,13 +1,8 @@
 source 'https://rubygems.org'
-#source 'http://gems.github.com'
 
 gem 'rails', '3.2.19'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 # database connection
-#gem 'sqlite3'                                              r
 gem 'pg'
 
 # web server
@@ -22,7 +17,7 @@ gem 'devise_invitable', '~> 1.1.0'
 gem 'cancan'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', :require => 'google/api_client'
+gem 'google-api-client', :require => 'google/apis'
 gem 'httparty'
 gem 'rack-ssl-enforcer'
 # Uploads
@@ -31,13 +26,9 @@ gem 'fog'
 gem 'rmagick', require: false
 
 gem 'test-unit'
-#gem 'mini_magick'
 
 # Personal Information Management (used for vCard generation)
-#gem 'vpim'
-gem 'vpim', :git => 'git://github.com/xing/vpim.git'
-#gem 'icalendar'
-#gem 'ri_cal'
+gem 'vpim'
 
 # In place editing
 gem 'best_in_place'
@@ -49,9 +40,9 @@ gem 'will_paginate'
 gem 'meta_search'
 
 # Administration
-gem "formtastic", "~> 2.1.1"
+gem 'formtastic', '~> 2.1.1'
 # Easy Forms
-gem "activeadmin", github: 'gregbell/active_admin', branch: '0-6-stable'
+gem 'activeadmin'
 
 # Payments
 gem 'stripe'
@@ -104,13 +95,13 @@ gem 'dotenv-rails'
 
 # Queueing
 gem 'resque', '~> 1.22.0'
-gem "capistrano-resque", '~> 0.1.0', require: false
+gem 'capistrano-resque', '~> 0.1.0', require: false
 gem 'resque_mailer'
 
 # To use debugger
 # gem 'debugger'
 
-gem "mocha", :group => :test
+gem 'mocha', :group => :test
 gem 'aweber'
 
 # email styles
