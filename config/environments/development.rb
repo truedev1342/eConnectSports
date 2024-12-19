@@ -1,6 +1,6 @@
 Players::Application.configure do
 
-  config.time_zone = 'Europe/Kiev'
+  config.time_zone = 'Europe/Kyiv'
 # Settings specified here will take precedence over those in config/application.rb
   $stdout.sync = true
 
