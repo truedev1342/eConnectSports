@@ -140,7 +140,7 @@ Players::Application.routes.draw do
 
   # Root URL
   authenticated :user do
-    root :to => 'users#show'
+    root :to => 'users#show', as: :authenticated_root
   end
   root :to => 'static_pages#home'
 
