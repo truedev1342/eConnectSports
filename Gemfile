@@ -93,6 +93,7 @@ group	 :development do
   gem 'awesome_pry'
   gem 'colorize'
   gem 'puma'
+  gem 'rspec-rails'
 end
 
 gem 'dotenv-rails'
@@ -105,9 +106,9 @@ gem 'resque_mailer'
 # To use debugger
 # gem 'debugger'
 
-gem 'mocha', :group => :test
 group :test do
   gem 'rspec-rails'
+  gem 'mocha'
 end
 gem 'aweber'
 
