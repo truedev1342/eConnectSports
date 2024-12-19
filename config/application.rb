@@ -13,6 +13,8 @@ end
 AWEBER=YAML.load(File.read(File.expand_path('../aweber.yml',__FILE__)))
 AWEBER.symbolize_keys!
 
+Bundler.require(*Rails.groups)
+
 module Players
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

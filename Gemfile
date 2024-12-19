@@ -64,18 +64,15 @@ gem 'font-awesome-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sprockets', '~> 2.8.3'
-  gem 'sass-rails',   '~> 4.0.0'
-  gem 'coffee-rails', '~> 4.0.0'
+gem 'sprockets', '~> 2.8.3'
+gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0.0'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
-  # gem 'twitter-bootstrap-rails'
-
-end
+gem 'uglifier', '>= 1.0.3'
+# gem 'twitter-bootstrap-rails'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
