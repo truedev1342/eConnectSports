@@ -1,6 +1,6 @@
 Players::Application.configure do
 
-  config.time_zone = 'Kyiv'
+  config.time_zone = 'Europe/Kiev'
 # Settings specified here will take precedence over those in config/application.rb
   $stdout.sync = true
 
@@ -70,4 +70,5 @@ Players::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   # config.assets.debug = false
+  config.eager_load = false
 end
