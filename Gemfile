@@ -116,3 +116,4 @@ gem 'premailer-rails'
 
 #regular jobs
 gem 'whenever'
+gem 'protected_attributes'
