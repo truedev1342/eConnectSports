@@ -109,7 +109,7 @@ gem 'resque_mailer'
 group :test do
   gem 'mocha'
 end
-group : development, test do
+group :development, :test do
   gem 'rspec-rails'
 end
 gem 'aweber'
