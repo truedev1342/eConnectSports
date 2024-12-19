@@ -147,7 +147,7 @@ Players::Application.routes.draw do
   # Static Pages
   get 'home', to: 'static_pages#home', as: 'home'
   get 'about', to: 'static_pages#about', as: 'about'
-  get 'contact', to: 'static_pages#contact', as: 'contact'
+  get 'contact_page', to: 'static_pages#contact', as: 'contact'
   get 'affiliate', to: 'static_pages#affiliate', as: 'affiliate'
   get 'sports', to: 'static_pages#sports', as: 'sports'
   get 'faq', to: 'static_pages#faq', as:'faq'
