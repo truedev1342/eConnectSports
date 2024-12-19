@@ -11,6 +11,7 @@ gem 'nokogiri', '1.10.10'
 gem 'multipart-post', '2.0.0'
 gem 'loofah', '2.3.0'
 gem 'rails-html-sanitizer', '1.0.4'
+gem 'activerecord-session_store'
 
 # Generators / DSLs
 gem 'nifty-generators', :group => :development
