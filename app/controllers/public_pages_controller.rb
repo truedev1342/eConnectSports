@@ -12,9 +12,9 @@ class PublicPagesController < ApplicationController
       params[:username] = params[:username].to_s + '.' + params[:format].to_s
     end
     # debugger
-    @user = User.find_by_username(params[:username].to_s)
+    @user = User.find_by(username: params[:username].to_s)
     if @user.nil?
-      @public_card = @card = Card.find_by_url_alias(params[:username])
+      @public_card = @card = Card.find_by(url_alias: params[:username])
       if @card.nil?
         render 'static_pages/not_found', status: 404
         return
@@ -25,12 +25,13 @@ class PublicPagesController < ApplicationController
       end
     end
     # debugger
-    render nothing: true and return if @user.nil? # perhaps just a request to a missing route
+    # render nothing: true and return if @user.nil? # perhaps just a request to a missing route
+    head :ok and return if @user.nil? # perhaps just a request to a missing route
 
     @public_page = @user.public_page
 
     if @public_page.status?
-	    @public_card = Card.find_by_id(@public_page.card_id)
+	    @public_card = Card.find_by(id: @public_page.card_id)
 
 	    respond_to do |format|
 	      format.html # show.html.erb

@@ -13,9 +13,9 @@ class Users::InvitationsController < Devise::InvitationsController
     else
       found_memberships = Array.new
       params[:email_list].split(",").each do |email|
-        found_user = User.find_by_email(email)
+        found_user = User.find_by(email: email)
         if found_user
-          found_membership = team.memberships.find_by_user_id(found_user.id)
+          found_membership = team.memberships.find_by(user_id: found_user.id)
           if found_membership == '' || found_membership == nil
             team.users << found_user
             TeamMailer.invite(found_user, team, current_user, current_host).deliver

@@ -43,7 +43,7 @@
 
 				    <tbody>
 				      <% @approved_memberships.each do |approved| %>
-				      	<% approvedcard = Card.find_by_membership_id(approved.id) %>
+				      	<% approvedcard = Card.find_by(membership_id: approved.id) %>
 				        <tr>
 				          <td><%= approved.user.full_name %></td>
 				          <td><%= approved.user.email %></td>
@@ -84,7 +84,7 @@
 
 				    <tbody>
 				      <% @admin_memberships.each do |admin| %>
-				      	<% admincard = Card.find_by_membership_id(admin.id) %>
+				      	<% admincard = Card.find_by(membership_id: admin.id) %>
 				        <tr>
 				          <td>
 				          	<%= admin.user.full_name %>
@@ -200,7 +200,7 @@
 					    </thead>
 					    <tbody>
 					      <% @approved_memberships.each do |approved| %>
-					      	<% approvedcard = Card.find_by_membership_id(approved.id) %>
+					      	<% approvedcard = Card.find_by(membership_id: approved.id) %>
 					        <tr>
 					          <td><%= approved.user.full_name %></td>
 					          <td>

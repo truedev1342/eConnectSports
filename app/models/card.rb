@@ -109,7 +109,7 @@ class Card < ActiveRecord::Base
   end
 
   def share_user_name=(name)
-    self.share_user = User.find_by_name(name)
+    self.share_user = User.find_by(name: name)
   end
   # End autocomplete
 

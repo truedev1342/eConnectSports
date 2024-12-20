@@ -13,6 +13,8 @@ end
 AWEBER=YAML.load(File.read(File.expand_path('../aweber.yml',__FILE__)))
 AWEBER.symbolize_keys!
 
+Bundler.require(*Rails.groups)
+
 module Players
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -56,7 +58,7 @@ module Players
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
+    # config.active_record.whitelist_attributes = true
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -77,5 +79,6 @@ module Players
     config.filter_parameters += [:password, :password_confirmation]
     config.i18n.enforce_available_locales = false
     I18n.config.enforce_available_locales = false
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

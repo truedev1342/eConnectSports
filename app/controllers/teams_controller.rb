@@ -17,14 +17,14 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @owner = @team.owner
-    @owner_card = @team.cards.find_by_user_id(@owner.id)
+    @owner_card = @team.cards.find_by(user_id: @owner.id)
     @public_kiosk = @team.public_kiosk
     @approved_memberships = @team.memberships.where(:approved => true).where("admin IS NULL OR admin = ?", false).order("created_at DESC").page(params[:page]).per_page(10)
     @pending_memberships = @team.memberships.where(:approved => nil).order("created_at DESC").page(params[:page]).per_page(10)
     @denied_memberships = @team.memberships.where(:approved => false).order("created_at DESC").page(params[:page]).per_page(10)
     @admin_memberships = @team.memberships.where(:admin => true, :approved => true).order("created_at DESC").page(params[:page]).per_page(10)
 
-    is_member = @team.memberships.find_by_user_id(current_user.id)
+    is_member = @team.memberships.find_by(user_id: current_user.id)
     if is_member.blank?
       redirect_to@public_kiosk
     else
