@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.11.3'
+gem 'rails', '~> 5.0.0'
 
 # database connection
 gem 'pg', '~> 0.11'
