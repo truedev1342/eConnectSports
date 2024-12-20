@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.11.3'
 
 # database connection
-gem 'pg', '~> 0.11'
+gem 'pg', '~> 1.2.0'
 
 # web server
 gem 'unicorn'
