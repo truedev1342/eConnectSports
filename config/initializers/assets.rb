@@ -8,5 +8,14 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-application-app.css application-website.css application-app.js application-website.js bootstrap-wysihtml5/wysiwyg-color.css email.css*
+
+Rails.application.config.assets.precompile += %w(
+  application-app.css
+  application-website.css
+  application-app.js
+  application-website.js
+  bootstrap-wysihtml5/wysiwyg-color.css
+  email.css
+)
+
 # Rails.application.config.assets.precompile += %w( search.js )
