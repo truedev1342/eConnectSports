@@ -1,49 +1,38 @@
-Players::Application.routes.draw do
-
+Rails.application.routes.draw do
   get 'first-touch-message', to: 'static_pages#first_touch_email'
 
   resources :team_payments
-
-
   resources :stats
-
   resources :payments
-
   resources :public_kiosks do
     resource :team
   end
-
   resources :contacts
-
   resources :subscriptions
   resources :shares
 
   ActiveAdmin.routes(self)
-
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   get "settings/edit"
   get "settings/update"
 
   # Devise Authentication
-  # devise_for :users, :controllers => { :registrations => "registrations" }
-  # devise_for :users, :controllers => { :invitations => 'users/invitations', :omniauth_callbacks => "users/omniauth_callbacks" }
-  # devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  # devise_scope :user do
-  #  get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-  #  get "/teams/:team_id/invitations/new", :to => "users/invitations#new", as: :team_id
-  # end
+  devise_for :users, controllers: {
+    registrations: "registrations", 
+    invitations: 'users/invitations', 
+    omniauth_callbacks: "users/omniauth_callbacks" 
+  }
 
-  # Devise Authentication
-  devise_for :users, :controllers => {:registrations => "registrations", :invitations => 'users/invitations', :omniauth_callbacks => "users/omniauth_callbacks" }
   devise_scope :user do
     get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
-    get "/teams/:team_id/invitations/new", :to => "users/invitations#new", as: :team_id
+    get "/teams/:team_id/invitations/new", to: "users/invitations#new", as: :team_id
   end
 
   # PayPal Routing
   get "paypal/checkout", to: "subscriptions#paypal_checkout"
   get "/thank_you", to: "payments#thank_you"
+  
   # Requested Memberships
   get "memberships/invites", to: "memberships#invites", as: 'invites'
 
@@ -54,6 +43,7 @@ Players::Application.routes.draw do
     resources :public_pages do
       resources :shares
     end
+    
     resources :cards do
       member do
         get 'share'
@@ -61,13 +51,16 @@ Players::Application.routes.draw do
         get 'calendar'
         post 'send_vcard'
       end
-      delete    'saved_cards' => 'saved_cards#destroy'
-      post      'save'       => 'saved_cards#create'
+      
+      delete 'saved_cards', to: 'saved_cards#destroy'
+      post   'save',        to: 'saved_cards#create'
+      
       resources :card_phones
       resources :card_websites
       resources :shares
       resources :stats
     end
+
     resources :contacts do
       resources :cards do
         member do
@@ -82,6 +75,7 @@ Players::Application.routes.draw do
         resources :stats
       end
     end
+
     resources :shares
     resources :teams
     resources :memberships do
@@ -140,23 +134,20 @@ Players::Application.routes.draw do
 
   # Root URL
   authenticated :user do
-    root :to => 'users#show', as: :authenticated_root
+    root to: 'users#show', as: :authenticated_root
   end
-  root :to => 'static_pages#home'
+  
+  root to: 'static_pages#home'
 
   # Static Pages
-  get 'home', to: 'static_pages#home', as: 'home'
-  get 'about', to: 'static_pages#about', as: 'about'
-  get 'contact', to: 'static_pages#contact', as: 'contact'
+  get 'home',      to: 'static_pages#home',     as: 'home'
+  get 'about',     to: 'static_pages#about',    as: 'about'
+  get 'contact',   to: 'static_pages#contact',  as: 'contact'
   get 'affiliate', to: 'static_pages#affiliate', as: 'affiliate'
-  get 'sports', to: 'static_pages#sports', as: 'sports'
-  get 'faq', to: 'static_pages#faq', as:'faq'
-  match '/email' => 'static_pages#send_mail'
-
-  # Email vCard
-  match '/cards/:card_id/send_vcard' => 'cards#send_vcard'
-
-  # Friendly URL
-  match "/:username" => "public_pages#show", as: :username
-
+  get 'sports',    to: 'static_pages#sports',   as: 'sports'
+  get 'faq',       to: 'static_pages#faq',      as: 'faq'
+  
+  post '/email',   to: 'static_pages#send_mail'
+  post '/cards/:card_id/send_vcard', to: 'cards#send_vcard'
+  get '/:username', to: 'public_pages#show', as: :username
 end
