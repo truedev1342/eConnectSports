@@ -6,7 +6,7 @@ class PublicKiosksController < InheritedResources::Base
   # GET /public_kiosks/1.json
   def show
     if params[:team_id]
-      @team = Team.find_by_id(params[:team_id].to_s)
+      @team = Team.find_by(id: params[:team_id].to_s)
       @public_kiosk = @team.public_kiosk
       @approved_memberships = @team.memberships.where(:approved => true)
     else

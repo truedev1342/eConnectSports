@@ -37,7 +37,7 @@ class CardsController < ApplicationController
       @card = @user.cards.new(params[:card])
     else
       token = session[:user_token] || cookies[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(params[:card])
+      @card = Card.find_by(user_token: token) || Card.new(card_params)
       if @card.id?
         render 'show' and return
       end
@@ -183,10 +183,11 @@ class CardsController < ApplicationController
   def new_demo_card
     if session[:user_token].present?
       token = session[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(user_token: token)
+      @card = Card.find_by(user_token: token) || Card.new(user_token: token)
+
     elsif cookies[:user_token].present?
       token = cookies[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(user_token: token)
+      @card = Card.find_by(user_token: token) || Card.new(user_token: token)
     else
       token = Devise.friendly_token
       @card = Card.new(user_token: token)
@@ -208,11 +209,12 @@ class CardsController < ApplicationController
       render json: {result: 'busy'} and return
     end
     status = 'free'
-    card = Card.find_by_url_alias(params[:url_alias])
+    card = Card.find_by(url_alias: params[:url_alias])
+
     if card
       status = 'busy'
     else
-      user = User.find_by_username(params[:url_alias])
+      user = User.find_by(username: params[:url_alias])
       status = user ? 'busy' : 'free'
     end
     render json: {result: status}

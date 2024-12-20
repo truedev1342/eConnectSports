@@ -24,7 +24,7 @@ class SharesController < ApplicationController
 			record_activity("Shared <b>#{@shareable.card_name}</b> card") #This will call application controller record_activity
 		else
 			share_url = "#{request.host}/#{current_user.username}"
-			card = Card.find_by_id(@shareable.card_id)
+			card = Card.find_by(id: @shareable.card_id)
 			record_activity("Shared <b>Public Page</b>") #This will call application controller record_activity
 		end
 		ShareMailer.contact(recipient, sender_name, card, message, share_url, type).deliver
@@ -50,7 +50,7 @@ private
 	def load_shareable
 	  if params[:share] != nil && params[:share][:contact_card] != nil
 	  	@contact_card = params[:share][:contact_card]
-	  	@shareable = Card.find_by_id(@contact_card)
+	  	@shareable = Card.find_by(id: @contact_card)
 	  else
 		klass = [Card, PublicPage].detect { |c| params["#{c.name.underscore}_id"]}
 		@shareable = klass.find(params["#{klass.name.underscore}_id"])

@@ -50,7 +50,7 @@ class PaymentsController < ApplicationController
     end
 
     if params[:promo_code].present?
-      @promo = PromoCode.find_by_code(params[:promo_code])
+      @promo = PromoCode.find_by(code: params[:promo_code])
       if @promo && !@promo.used
         total_purchased = current_user.cards_purchased.to_i + @promo.cards
         current_user.update_attributes(:cards_purchased => total_purchased)
