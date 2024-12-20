@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.19'
+gem 'rails', '4.0.13'
 
 # Bundle edge Rails instead:
 
@@ -107,3 +107,8 @@ gem 'premailer-rails'
 
 #regular jobs
 gem 'whenever'
+
+gem 'protected_attributes'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
+gem 'actionpack-action_caching'
