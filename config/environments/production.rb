@@ -1,5 +1,11 @@
+# TODO refactor these 2 lines
+uri = URI.parse("redis://root:HPZy1uewryYCZeO8CW5z@localhost:6379/")
+Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+
 Rails.application.configure do
+  config.time_zone = 'Central Time (US & Canada)'
   # Settings specified here will take precedence over those in config/application.rb.
+  $stdout.sync = true
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -34,6 +40,8 @@ Rails.application.configure do
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
+  config.middleware.use Rack::SslEnforcer, :only => '/payments'
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
@@ -58,8 +66,33 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.action_controller.asset_host = 'http://assets.example.com'
+  config.action_controller.asset_host = "https://www.idigitallsports.com"
+  
+  # Set mailer's default url
+  config.action_mailer.default_url_options = { :host => "www.idigitallsports.com", :protocol => 'https' }
+  
+  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.sendgrid.net",
+      :port => 587,
+      :domain => "www.idigitallsports.com",
+      :authentication => :plain,
+      :user_name => "cubetaj",
+      :password => "Lifeisgood!14",
+      :enable_starttls_auto => true
+  }
+  # config.action_mailer.default_url_options = { :host => "idigitallsports.com" }
 
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :address   => "smtp.mandrillapp.com",
+  #   :port      => 587,
+  #   :user_name => 'jamie.fssc@gmail.com',
+  #   :password  => 'LgzLydEPFM851qcAFP7nJg',
+  #   :domain    => 'idigitallsports.com'
+  # }
+  
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -74,6 +107,6 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Do not dump schema after migrations.
+  # Do not dump schema after `mi`grations.
   config.active_record.dump_schema_after_migration = false
 end
