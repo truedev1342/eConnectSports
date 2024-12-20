@@ -18,7 +18,7 @@ gem 'actionpack-action_caching'
 gem 'nifty-generators', :group => :development
 gem 'delayed_job_active_record'
 # Authentication
-gem 'devise',           '~> 3.5'
+gem 'devise',           '~> 4.0'
 gem 'devise_invitable'
 gem 'cancan'
 gem 'omniauth', '~> 1.0'
@@ -68,7 +68,7 @@ gem 'font-awesome-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'sprockets', '~> 2.8.3'
-gem 'sass-rails',   '~> 4.0.5'
+gem 'sass-rails',   '~> 5.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -112,12 +112,14 @@ group :test do
   gem 'mocha'
 end
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.5'
 end
 gem 'aweber'
+gem 'rails-controller-testing'
 
 # email styles
 gem 'premailer-rails'
+gem 'factory_bot_rails'
 
 #regular jobs
 gem 'whenever'
