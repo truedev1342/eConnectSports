@@ -5,7 +5,6 @@ gem 'rails', '4.2.11.3'
 # database connection
 gem 'pg', '~> 0.15.0'
 
-
 # web server
 gem 'unicorn'
 gem 'nokogiri', '1.10.10'
