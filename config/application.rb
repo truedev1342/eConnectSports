@@ -79,5 +79,6 @@ module Players
     config.filter_parameters += [:password, :password_confirmation]
     config.i18n.enforce_available_locales = false
     I18n.config.enforce_available_locales = false
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
