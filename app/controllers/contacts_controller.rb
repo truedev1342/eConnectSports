@@ -4,7 +4,8 @@ before_filter :authenticate_user!
   def index
     require 'will_paginate/array'
     @user = User.find(params[:user_id])
-    @contacts = @user.contacts.find(:all)
+    # @contacts = @user.contacts.find(:all)
+    @contacts = @user.contacts.all
     @search = Contact.search(params[:search], :user_id => params[:user_id])
 
     if params[:search]
@@ -13,7 +14,8 @@ before_filter :authenticate_user!
       @paginated_contacts = @contacts.paginate(:page => params[:page], :per_page => 10)
     end
 
-    @activities = Activity.find_all_by_user_id(current_user.id, :order => 'created_at DESC', :limit => 5)
+    # @activities = Activity.find_all_by_user_id(current_user.id, :order => 'created_at DESC', :limit => 5)
+    @activities = Activity.where(user_id: current_user.id).order(created_at: :desc).limit(5)
 
     respond_to do |format|
       format.html
