@@ -24,7 +24,7 @@ gem 'cancan'
 gem 'omniauth', '~> 1.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', '~> 0.9.8', :require => 'google/apis'
+gem 'google-api-client', '~> 0.50', :require => 'google/apis'
 gem 'httparty'
 gem 'rack-ssl-enforcer'
 # Uploads
@@ -59,7 +59,7 @@ gem 'paypal-recurring'
 # Twitter Bootstrap
 gem 'execjs', '~> 1.4.0'
 # gem 'twitter_bootstrap_form_for'
-gem 'bootstrap_form'
+gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
 gem 'bootstrap-colorpicker-rails'
@@ -123,4 +123,4 @@ gem 'factory_bot_rails'
 
 #regular jobs
 gem 'whenever'
-gem 'protected_attributes'
+# gem 'protected_attributes' --- this 
