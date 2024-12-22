@@ -24,7 +24,6 @@ gem 'devise', '~> 4.9'
 gem 'devise_invitable'
 gem 'cancan'
 gem 'omniauth', '~> 2.0'
-gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.9.28', require: 'google/apis'
 gem 'httparty'
@@ -32,6 +31,7 @@ gem 'rack-ssl-enforcer'
 
 # Uploads
 gem 'carrierwave', '~> 0.7.1'
+
 gem 'fog-ovirt', '1.0.0'
 gem 'fog'
 
@@ -67,7 +67,6 @@ gem 'dotenv-rails'
 
 # Coffee and other assets
 gem 'coffee-rails', '~> 5.0'
-gem 'sass-rails', '~> 5.1.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
