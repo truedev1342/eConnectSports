@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '5.2.8.1'
 
 # database connection
-gem 'pg', '~> 0.11'
+gem 'pg', '~> 0.21'
 
 # web server
 gem 'unicorn'
@@ -18,13 +18,13 @@ gem 'actionpack-action_caching'
 gem 'nifty-generators', :group => :development
 gem 'delayed_job_active_record'
 # Authentication
-gem 'devise',           '~> 4.0'
+gem 'devise',           '~> 4.9'
 gem 'devise_invitable'
 gem 'cancan'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', '~> 0.50', :require => 'google/apis'
+gem 'google-api-client', '~> 0.9.28', :require => 'google/apis'
 gem 'httparty'
 gem 'rack-ssl-enforcer'
 # Uploads
