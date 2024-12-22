@@ -21,7 +21,7 @@ gem 'delayed_job_active_record'
 gem 'devise',           '~> 4.0'
 gem 'devise_invitable'
 gem 'cancan'
-gem 'omniauth', '~> 1.0'
+gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.50', :require => 'google/apis'
@@ -69,7 +69,7 @@ gem 'font-awesome-rails'
 # in production environments by default.
 gem 'sprockets', '~> 2.8.3'
 gem 'sass-rails',   '~> 5.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 5.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platforms => :ruby
