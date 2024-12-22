@@ -8,7 +8,7 @@ gem 'pg', '0.21.0'
 # Web server
 gem 'unicorn'
 
-gem 'nokogiri', '1.10.10'
+gem 'nokogiri', '1.15.7'
 
 # Generators / DSLs
 gem 'nifty-generators', group: :development
