@@ -39,7 +39,7 @@ gem 'test-unit'
 gem 'vpim'
 
 # In place editing
-gem 'best_in_place', '~> 3.1
+gem 'best_in_place', '~> 3.1'
 
 # Pagination
 gem 'will_paginate'
