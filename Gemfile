@@ -13,8 +13,8 @@ gem 'nokogiri', '1.10.10'
 gem 'multipart-post', '2.0.0'
 gem 'loofah', '2.3.0'
 gem 'rails-html-sanitizer', '1.0.4'
-gem 'activerecord-session_store'
-gem 'actionpack-action_caching'
+gem 'activerecord-session_store', '~> 1.1.3'
+gem 'actionpack-action_caching', '~> 1.1.0'
 
 # Generators / DSLs
 gem 'nifty-generators', group: :development
@@ -22,7 +22,7 @@ gem 'delayed_job_active_record'
 
 # Authentication
 gem 'devise', '~> 4.9'
-gem 'devise_invitable', '~> 1.0'
+gem 'devise_invitable', '~> 1.7.5'
 gem 'cancan'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
@@ -44,7 +44,7 @@ gem 'test-unit'
 gem 'vpim'
 
 # In place editing
-gem 'best_in_place', '~> 3.1'
+gem 'best_in_place', '~> 3.1.1'
 
 # Pagination
 gem 'will_paginate'
@@ -53,8 +53,8 @@ gem 'will_paginate'
 gem 'meta_search'
 
 # Administration
-gem 'formtastic', '~> 3.1'
-gem 'activeadmin'
+gem 'formtastic', '~> 3.1.5'
+gem 'activeadmin', '~> 1.3.0'
 
 # Payments
 gem 'stripe'
