@@ -70,6 +70,9 @@ gem 'jquery-ui-themes'
 # Frontend gems
 gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
+gem 'formtastic-bootstrap'
+gem 'bootstrap-colorpicker-rails'
+gem 'font-awesome-rails'
 gem 'formtastic'
 gem 'activeadmin'
 
