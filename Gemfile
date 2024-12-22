@@ -69,7 +69,7 @@ gem 'bootstrap-colorpicker-rails'
 gem 'font-awesome-rails'
 
 # Asset management
-gem 'sprockets', '~> 2.8.3'
+gem 'sprockets', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 5.0.0'
 
@@ -100,7 +100,7 @@ end
 gem 'dotenv-rails'
 
 # Queueing
-gem 'resque', '~> 1.22.0'
+gem 'resque', '~> 1.27.4'
 gem 'capistrano-resque', '~> 0.1.0', require: false
 gem 'resque_mailer', '~> 2.4.3'
 
