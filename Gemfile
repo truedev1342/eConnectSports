@@ -10,6 +10,7 @@ gem 'unicorn'
 
 gem 'nokogiri', '1.15.7'
 gem 'multipart-post', '2.0.0'
+gem 'loofah', '2.3.0'
 
 # Generators / DSLs
 gem 'nifty-generators', group: :development
