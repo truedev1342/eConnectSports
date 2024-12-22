@@ -77,6 +77,10 @@ gem 'font-awesome-rails'
 gem 'formtastic'
 gem 'activeadmin'
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-ui-themes'
+
 gem 'stripe'
 gem 'paypal-recurring'
 
