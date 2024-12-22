@@ -61,8 +61,9 @@ group :development do
   gem 'awesome_pry'
   gem 'colorize'
   gem 'puma'
-  gem 'dotenv-rails'
 end
+
+gem 'dotenv-rails'
 
 # Coffee and other assets
 gem 'coffee-rails', '~> 5.0'
@@ -75,7 +76,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Frontend gems
-gem 'execjs', '~> 1.4.0'
+gem 'execjs', '~> 2.10.0'
 gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
