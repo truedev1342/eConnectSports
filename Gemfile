@@ -68,7 +68,7 @@ gem 'dotenv-rails'
 
 # Coffee and other assets
 gem 'coffee-rails', '~> 5.0'
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
