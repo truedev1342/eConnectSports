@@ -31,6 +31,8 @@ gem 'rack-ssl-enforcer'
 
 # Uploads
 gem 'carrierwave', '~> 0.7.1'
+
+gem 'fog-ovirt', '1.0.0'
 gem 'fog'
 
 # Image processing
