@@ -103,7 +103,7 @@ gem 'dotenv-rails'
 # Queueing
 gem 'resque', '~> 1.22.0'
 gem 'capistrano-resque', '~> 0.1.0', require: false
-gem 'resque_mailer', '~> 2.4.3'
+gem 'resque_mailer', '>= 2.0'
 
 # To use debugger
 # gem 'debugger'
