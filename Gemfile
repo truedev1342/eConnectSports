@@ -53,7 +53,7 @@ end
 
 # Development dependencies
 group :development do
-  gem 'capistrano', '~> 2.0'
+  gem 'capistrano', '~> 3.19.0'
   gem 'rvm-capistrano', require: false
   gem 'byebug'
   gem 'better_errors'
