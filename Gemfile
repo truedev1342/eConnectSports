@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.2.0'
+gem 'rails', '5.2.8.1'
 
 # Database connection
 gem 'pg', '0.21.0'
@@ -51,7 +51,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 
 # Frontend gems
-gem 'bootstrap_form'
+gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic'
 gem 'activeadmin'
@@ -64,7 +64,7 @@ gem 'resque_mailer'
 # Configuration for mailers and others
 gem 'premailer-rails'
 gem 'whenever'
-gem 'protected_attributes'
+# gem 'protected_attributes'
 
 # Add your additional gems accordingly...
 
