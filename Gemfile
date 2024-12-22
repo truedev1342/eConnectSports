@@ -22,7 +22,7 @@ gem 'delayed_job_active_record'
 # Authentication
 gem 'devise', '~> 4.9'
 gem 'devise_invitable'
-gem 'cancan'
+gem 'cancan'delayed_job_active_record
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', '~> 0.9.28', require: 'google/apis'
@@ -31,6 +31,7 @@ gem 'rack-ssl-enforcer'
 
 # Uploads
 gem 'carrierwave', '~> 0.7.1'
+gem 'fog'
 
 # Image processing
 gem 'rmagick', require: false
