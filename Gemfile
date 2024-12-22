@@ -9,6 +9,7 @@ gem 'pg', '0.21.0'
 gem 'unicorn'
 
 gem 'nokogiri', '1.15.7'
+gem 'multipart-post', '2.0.0'
 
 # Generators / DSLs
 gem 'nifty-generators', group: :development
