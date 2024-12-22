@@ -42,6 +42,9 @@ gem 'test-unit'
 gem 'vpim'
 gem 'best_in_place', '~> 3.1.1'
 
+gem 'will_paginate'
+gem 'meta_search'
+
 # Testing
 group :test do
   gem 'mocha'
