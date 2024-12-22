@@ -48,6 +48,7 @@ gem 'meta_search'
 # Testing
 group :test do
   gem 'mocha'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 # Development dependencies
