@@ -67,6 +67,7 @@ gem 'coffee-rails', '~> 5.0'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
+gem 'sprockets', '~> 3.7'
 
 # Frontend gems
 gem 'bootstrap_form', '~> 4.5'
@@ -76,10 +77,6 @@ gem 'bootstrap-colorpicker-rails'
 gem 'font-awesome-rails'
 gem 'formtastic'
 gem 'activeadmin'
-
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'jquery-ui-themes'
 
 gem 'stripe'
 gem 'paypal-recurring'
