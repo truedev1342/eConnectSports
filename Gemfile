@@ -14,7 +14,7 @@ gem 'multipart-post', '2.0.0'
 gem 'loofah', '2.3.0'
 gem 'rails-html-sanitizer', '1.0.4'
 gem 'activerecord-session_store', '~> 1.1.3'
-gem 'actionpack-action_caching', '~> 1.1.0'
+gem 'actionpack-action_caching', '~> 1.2.0'
 
 # Generators / DSLs
 gem 'nifty-generators', group: :development
