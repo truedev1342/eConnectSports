@@ -40,6 +40,7 @@ gem 'rmagick', require: false
 
 gem 'test-unit'
 gem 'vpim'
+gem 'best_in_place', '~> 3.1.1'
 
 # Testing
 group :test do
@@ -79,5 +80,4 @@ gem 'premailer-rails'
 gem 'whenever'
 # gem 'protected_attributes'
 
-# Add your additional gems accordingly...
 
