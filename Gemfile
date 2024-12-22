@@ -68,8 +68,12 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'sprockets', '~> 3.7'
+gem 'uglifier', '>= 1.3.0'
+
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Frontend gems
+gem 'execjs', '~> 1.4.0'
 gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
