@@ -73,6 +73,9 @@ gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic'
 gem 'activeadmin'
 
+gem 'stripe'
+gem 'paypal-recurring'
+
 # Queueing
 gem 'resque', '~> 1.22.0'
 gem 'capistrano-resque', '~> 0.1.0', require: false
