@@ -31,7 +31,7 @@ gem 'rack-ssl-enforcer'
 gem 'carrierwave', '~> 0.7.1'
 gem 'fog-ovirt', '1.0.0'
 gem 'fog'
-gem 'rmagick', require: false
+gem 'rmagick', '~> 2.16', require: false
 
 gem 'test-unit'
 
