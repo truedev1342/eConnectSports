@@ -38,6 +38,9 @@ gem 'fog'
 # Image processing
 gem 'rmagick', require: false
 
+gem 'test-unit'
+gem 'vpim'
+
 # Testing
 group :test do
   gem 'mocha'
