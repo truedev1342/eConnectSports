@@ -12,7 +12,7 @@
 class Contact < ActiveRecord::Base
   belongs_to :user
   belongs_to :card
-  attr_accessible :card_id, :user_id
+  # attr_accessible :card_id, :user_id
 
   validates_presence_of :card_id
 

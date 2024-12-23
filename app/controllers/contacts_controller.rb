@@ -50,4 +50,14 @@ before_action :authenticate_user!
       format.json { head :no_content }
     end
   end
+
+  private
+
+	def activity_params
+		params.require(:activity).permit(:action, :browser, :controller, :ip_address, :note, :params)
+	end
+
+  def contact_params
+		params.require(:contact).permit(:card_id, :user_id)
+	end
 end

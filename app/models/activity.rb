@@ -16,5 +16,5 @@
 
 class Activity < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :action, :browser, :controller, :ip_address, :note, :params
+  # attr_accessible :action, :browser, :controller, :ip_address, :note, :params
 end

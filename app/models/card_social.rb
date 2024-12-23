@@ -12,7 +12,7 @@
 
 class CardSocial < ActiveRecord::Base
   belongs_to :card
-  attr_accessible :kind, :url
+  # attr_accessible :kind, :url
 
   def sanitized_url
     if self.url.starts_with? 'http://' || 'https://'
@@ -21,4 +21,5 @@ class CardSocial < ActiveRecord::Base
       'http://'+self.url
     end
   end
+  def
 end

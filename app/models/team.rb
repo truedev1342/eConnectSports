@@ -23,9 +23,7 @@ class Team < ActiveRecord::Base
 	after_create :automagic_public_kiosk
 
 	def record_activity(note)
-	    @activity = Activity.new
-	    @activity.user = self.owner
-	    @activity.note = note
+	    @activity = Activity.new(user: self.owner, note: note)
 	    @activity.save
 	end
 

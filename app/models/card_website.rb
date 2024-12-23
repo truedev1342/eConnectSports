@@ -12,7 +12,7 @@
 
 class CardWebsite < ActiveRecord::Base
   belongs_to :card
-  attr_accessible :url, :name
+  # attr_accessible :url, :name
 
   def sanitized_url
     if self.url.starts_with? 'http://' || 'https://'

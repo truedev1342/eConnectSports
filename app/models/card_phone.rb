@@ -12,5 +12,5 @@
 
 class CardPhone < ActiveRecord::Base
   belongs_to :card
-  attr_accessible :location, :nmbr
+  # attr_accessible :location, :nmbr
 end

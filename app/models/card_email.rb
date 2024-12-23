@@ -11,5 +11,5 @@
 
 class CardEmail < ActiveRecord::Base
   belongs_to :card
-  attr_accessible :address
+  # attr_accessible :address
 end

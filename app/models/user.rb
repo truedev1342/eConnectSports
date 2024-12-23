@@ -105,9 +105,7 @@ class User < ActiveRecord::Base
 	end
 
 	def record_activity(note)
-	    @activity = Activity.new
-	    @activity.user = self
-	    @activity.note = note
+	    @activity = Activity.new(user: self, note: note)
 	    @activity.save
 	end
 
