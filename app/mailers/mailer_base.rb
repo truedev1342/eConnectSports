@@ -1,6 +1,6 @@
 class MailerBase < ActionMailer::Base
   include AbstractController::Callbacks
-  before_filter :setup_inline_attachments
+  before_action :setup_inline_attachments
 
   layout 'mailer'
 

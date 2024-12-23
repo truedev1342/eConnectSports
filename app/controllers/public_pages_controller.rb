@@ -1,6 +1,6 @@
 class PublicPagesController < ApplicationController
   include UsersHelper
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 
   # GET /public_pages/1

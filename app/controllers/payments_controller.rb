@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   include ActionView::Helpers::TextHelper
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index #use existing payment for card
     if params[:card_id]

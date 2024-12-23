@@ -1,5 +1,5 @@
 class SavedCardsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   def create
     card = Card.find(params['card_id'])
     current_user.favorite_cards << card

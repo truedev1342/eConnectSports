@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 
-	before_filter :force_www!
-	# before_filter :set_cache_buster
+	before_action :force_www!
+	# before_action :set_cache_buster
 
 	def default_url_options
 		if Rails.env.production?

@@ -1,6 +1,6 @@
 class SharesController < ApplicationController
-	before_filter :authenticate_user!
-	before_filter :load_shareable, :except => ["index"]
+	before_action :authenticate_user!
+	before_action :load_shareable, :except => ["index"]
 
 	def index
 		@user = User.find(params[:user_id])

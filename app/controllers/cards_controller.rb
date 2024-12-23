@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :new, :edit]
 
   @@disallowed_aliases = %w(contacts plans shares admin resque users memberships teams public_pages cards appointments easily-accessible customer-interaction-points schedule-appointments personal-digidex create-teams email-signatures qr-code tutorials single-shop industry-connect privacy-policy qrcode-store email 404 422 500)

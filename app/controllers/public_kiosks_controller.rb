@@ -1,5 +1,5 @@
 class PublicKiosksController < InheritedResources::Base
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 
   # GET /public_kiosks/1
