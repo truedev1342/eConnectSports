@@ -98,6 +98,7 @@ gem 'factory_bot_rails'
 gem 'resque', '~> 1.22.0'
 gem 'capistrano-resque', '~> 0.1.0', require: false
 gem 'resque_mailer'
+gem 'resque-scheduler'
 
 # Configuration for mailers and others
 gem 'premailer-rails'
