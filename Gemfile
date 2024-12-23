@@ -95,10 +95,10 @@ gem 'rails-controller-testing'
 gem 'factory_bot_rails'
 
 # Queueing
-gem 'resque', '~> 1.22.0'
+gem 'resque', '~> 1.27.0'
 gem 'capistrano-resque', '~> 0.1.0', require: false
 gem 'resque_mailer'
-gem 'resque-scheduler'
+gem 'resque-scheduler', '~> 4.4.0'
 
 # Configuration for mailers and others
 gem 'premailer-rails'
