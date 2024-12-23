@@ -19,7 +19,7 @@ class TeamPayment < ActiveRecord::Base
 
   PROCESSING, FAILED, SUCCESS = 1, 2, 3
 
-  attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount, :memberships_purchased, :team_id
+#   attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount, :memberships_purchased, :team_id
 
   attr_accessor :stripe_card_token
 

@@ -14,5 +14,5 @@
 
 class Stat < ActiveRecord::Base
   belongs_to :card
-  attr_accessible :abbr, :name, :value, :kind
+  # attr_accessible :abbr, :name, :value, :kind
 end

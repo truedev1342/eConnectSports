@@ -47,19 +47,19 @@ class User < ActiveRecord::Base
 	alias_attribute :name, :first_name
 
 	# Setup accessible (or protected) attributes for your model
-	attr_accessible :public_page_attributes,
-					:username,
-					:admin,
-					:first_name,
-					:last_name,
-					:name,
-					:email,
-					:password,
-					:password_confirmation,
-					:remember_me,
-					:provider,
-					:uid,
-					:cards_purchased
+	# attr_accessible :public_page_attributes,
+	# 				:username,
+	# 				:admin,
+	# 				:first_name,
+	# 				:last_name,
+	# 				:name,
+	# 				:email,
+	# 				:password,
+	# 				:password_confirmation,
+	# 				:remember_me,
+	# 				:provider,
+	# 				:uid,
+	# 				:cards_purchased
 
 	has_many :cards, :dependent => :destroy
 	has_many :activities, :dependent => :destroy

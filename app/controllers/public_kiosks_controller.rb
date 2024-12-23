@@ -53,4 +53,12 @@ class PublicKiosksController < InheritedResources::Base
       format.json { head :no_content }
     end
   end
+  private
+  def public_kiosk_params
+    params.require(:public_kiosk).permit(:background, :background_tile, :logo, :team_id, :description, :remove_background, :remove_logo)
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
+  end
 end

@@ -15,5 +15,5 @@ class Membership < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
   has_one :card, :dependent => :destroy
-  attr_accessible :approved, :admin, :user_id, :team_id
+  # attr_accessible :approved, :admin, :user_id, :team_id
 end

@@ -14,7 +14,7 @@
 class PromoCode < ActiveRecord::Base
   after_initialize :set_code
   before_create :set_code
-  attr_accessible :cards, :code, :used
+  # attr_accessible :cards, :code, :used
 
   belongs_to :user
 

@@ -27,8 +27,8 @@ class Payment < ActiveRecord::Base
   #PRICE = {'8' => 499, '12' => 999, '24' => 1899, '58' => 3999}
   PRICE = 499
   PRICE_PER_CARD = 299
-  attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount,
-    :cards_purchased, :card_id, :period, :renew_payment, :user_id
+  # attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount,
+  #   :cards_purchased, :card_id, :period, :renew_payment, :user_id
 
   attr_accessor :stripe_card_token, :renew_payment
 

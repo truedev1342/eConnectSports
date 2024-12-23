@@ -15,7 +15,7 @@
 
 class PublicPage < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :background, :logo, :status, :user_id, :card_id, :background_tile, :remove_background
+  # attr_accessible :background, :logo, :status, :user_id, :card_id, :background_tile, :remove_background
   has_one :card
   mount_uploader :background, BackgroundUploader
 

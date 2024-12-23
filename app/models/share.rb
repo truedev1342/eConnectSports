@@ -14,7 +14,7 @@
 #
 
 class Share < ActiveRecord::Base
-  attr_accessible :destination_email, :user_id, :message, :contact_card
+  # attr_accessible :destination_email, :user_id, :message, :contact_card
   belongs_to :shareable, polymorphic: true
   belongs_to :user
 end

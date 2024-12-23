@@ -11,7 +11,7 @@
 #
 
 class Team < ActiveRecord::Base
-	attr_accessible :name, :owner_id, :memberships_purchased
+	# attr_accessible :name, :owner_id, :memberships_purchased
 	has_one :public_kiosk
 	has_many :memberships, :dependent => :destroy
 	has_many :users, :through => :memberships
