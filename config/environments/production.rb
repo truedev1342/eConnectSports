@@ -2,7 +2,7 @@
 uri = URI.parse("redis://root:HPZy1uewryYCZeO8CW5z@localhost:6379/")
 Resque.redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 
-Players::Application.configure do
+Rails.application.configure do
   config.time_zone = 'Central Time (US & Canada)'
   # Settings specified here will take precedence over those in config/application.rb
   $stdout.sync = true
@@ -11,6 +11,7 @@ Players::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
+  config.eager_load = true
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
@@ -21,12 +22,14 @@ Players::Application.configure do
   # Compress JavaScripts and CSS
   #config.assets.compress = true
   config.assets.compress = false
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
 
   # Generate digests for assets URLs
   config.assets.digest = false
+  config.assets.js_compressor = :uglifier
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
@@ -60,10 +63,13 @@ Players::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.perform_caching = false
 
   # Set mailer's default url
   config.action_mailer.default_url_options = { :host => "www.idigitallsports.com", :protocol => 'https' }
-  
+  config.active_storage.service = :local
+  config.log_level = :debug
+  config.log_tags = [ :request_id ]
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -96,8 +102,17 @@ Players::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  config.log_formatter = ::Logger::Formatter.new
+
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  config.eager_load = true
+
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
+
+  config.active_record.dump_schema_after_migration = false
 end
