@@ -1,4 +1,4 @@
-class CreateCardPhones < ActiveRecord::Migration
+class CreateCardPhones < ActiveRecord::Migration[5.2]
   def change
     create_table :card_phones do |t|
       t.string :nmbr

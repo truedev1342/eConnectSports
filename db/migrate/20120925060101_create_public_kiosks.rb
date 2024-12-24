@@ -1,4 +1,4 @@
-class CreatePublicKiosks < ActiveRecord::Migration
+class CreatePublicKiosks < ActiveRecord::Migration[5.2]
   def change
     create_table :public_kiosks do |t|
       t.references :team

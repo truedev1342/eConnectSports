@@ -1,4 +1,4 @@
-class CreateCardSocials < ActiveRecord::Migration
+class CreateCardSocials < ActiveRecord::Migration[5.2]
   def change
     create_table :card_socials do |t|
       t.string :url

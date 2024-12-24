@@ -1,4 +1,4 @@
-class CreateCardWebsites < ActiveRecord::Migration
+class CreateCardWebsites < ActiveRecord::Migration[5.2]
   def change
     create_table :card_websites do |t|
       t.string :url

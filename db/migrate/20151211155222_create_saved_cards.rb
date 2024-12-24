@@ -1,4 +1,4 @@
-class CreateSavedCards < ActiveRecord::Migration
+class CreateSavedCards < ActiveRecord::Migration[5.2]
   def change
     create_table :saved_cards do |t|
       t.integer :user_id
