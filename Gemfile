@@ -7,6 +7,7 @@ gem 'pg', '0.21.0'
 
 # Web server
 gem 'unicorn'
+gem 'bootsnap', require: false
 
 gem 'nokogiri', '1.15.7'
 gem 'multipart-post', '2.0.0'
