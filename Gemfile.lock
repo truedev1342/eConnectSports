@@ -91,6 +91,8 @@ GEM
     bigdecimal (3.1.8)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
+    bootsnap (1.18.4)
+      msgpack (~> 1.2)
     bootstrap-colorpicker-rails (0.4.0)
       railties (>= 4.0)
     bootstrap-wysihtml5-rails (0.3.3.8)
@@ -185,7 +187,7 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    ffi (1.17.0)
+    ffi (1.17.0-x86_64-linux-gnu)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (2.0.0)
@@ -440,11 +442,11 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.1203)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
     minitest (5.25.4)
     mocha (2.7.1)
       ruby2_keywords (>= 0.0.5)
     mono_logger (1.1.2)
+    msgpack (1.7.5)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
@@ -467,8 +469,7 @@ GEM
     netrc (0.11.0)
     nifty-generators (0.4.6)
     nio4r (2.7.4)
-    nokogiri (1.15.7)
-      mini_portile2 (~> 2.8.2)
+    nokogiri (1.15.7-x86_64-linux)
       racc (~> 1.4)
     oauth (1.1.0)
       oauth-tty (~> 1.0, >= 1.0.1)
@@ -709,7 +710,7 @@ GEM
       webrick
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   actionpack-action_caching
@@ -721,6 +722,7 @@ DEPENDENCIES
   best_in_place (~> 3.1.1)
   better_errors
   binding_of_caller
+  bootsnap
   bootstrap-colorpicker-rails
   bootstrap-wysihtml5-rails
   bootstrap_form (~> 4.5)
@@ -781,4 +783,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   2.1.4
+   2.3.22

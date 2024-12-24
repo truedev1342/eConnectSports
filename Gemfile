@@ -63,6 +63,8 @@ group :development do
   gem 'awesome_pry'
   gem 'colorize'
   gem 'puma'
+
+  gem 'listen', '~> 3.3'
 end
 
 gem 'dotenv-rails'
