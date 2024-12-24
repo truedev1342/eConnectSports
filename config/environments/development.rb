@@ -87,5 +87,5 @@ Rails.application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  # config.assets.debug = false
+  BetterErrors.maximum_variable_inspect_size = 10_000_000
 end
