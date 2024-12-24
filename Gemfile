@@ -41,6 +41,12 @@ gem 'fog'
 gem 'rmagick', require: false
 
 gem 'test-unit'
+gem 'rack-test' 
+gem 'ruby-prof'
+gem 'benchmark-ips'
+gem 'perf', '~> 0.1.0'
+
+
 gem 'vpim'
 gem 'best_in_place', '~> 3.1.1'
 
