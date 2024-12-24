@@ -106,6 +106,5 @@ gem 'resque-scheduler', '~> 4.4.0'
 # Configuration for mailers and others
 gem 'premailer-rails'
 gem 'whenever'
-# gem 'protected_attributes'
 
 
