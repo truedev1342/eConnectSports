@@ -11,6 +11,8 @@ class CreateCards < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :cards, :user_id
+    unless index_exists?(:cards, :user_id)
+      add_index :cards, :user_id
+    end
   end
 end

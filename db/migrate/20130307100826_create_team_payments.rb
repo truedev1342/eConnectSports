@@ -11,6 +11,8 @@ class CreateTeamPayments < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :team_payments, :team_id
+    unless index_exists?(:team_payments, :team_id)
+      add_index :team_payments, :team_id
+    end
   end
 end

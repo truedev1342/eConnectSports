@@ -8,6 +8,8 @@ class CreateStats < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :stats, :card_id
+    unless index_exists?(:stats, :card_id)
+      add_index :stats, :card_id
+    end
   end
 end

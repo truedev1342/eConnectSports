@@ -6,6 +6,8 @@ class CreateCardEmails < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :card_emails, :card_id
+    unless index_exists?(:card_emails, :card_id)
+      add_index :card_emails, :card_id
+    end
   end
 end

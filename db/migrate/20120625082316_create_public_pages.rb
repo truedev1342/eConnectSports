@@ -8,6 +8,8 @@ class CreatePublicPages < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :public_pages, :user_id
+    unless index_exists?(:public_pages, :user_id)
+      add_index :public_pages, :user_id
+    end
   end
 end

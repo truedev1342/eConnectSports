@@ -6,6 +6,8 @@ class CreateCardWebsites < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :card_websites, :card_id
+    unless index_exists?(:card_websites, :card_id)
+      add_index :card_websites, :card_id
+    end
   end
 end

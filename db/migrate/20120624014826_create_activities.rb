@@ -11,6 +11,8 @@ class CreateActivities < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :activities, :user_id
+    unless index_exists?(:activities, :user_id)
+      add_index :activities, :user_id
+    end
   end
 end

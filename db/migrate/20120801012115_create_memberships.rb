@@ -6,7 +6,14 @@ class CreateMemberships < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :memberships, :user_id
-    add_index :memberships, :team_id
+    
+    unless index_exists?(:memberships, :user_id)
+      add_index :memberships, :user_id
+    end
+
+    unless index_exists?(:memberships, :team_id)
+      add_index :memberships, :team_id
+    end
+    
   end
 end

@@ -7,8 +7,13 @@ class CreateAdminNotes < ActiveRecord::Migration[5.2]
       t.text :body
       t.timestamps
     end
-    add_index :admin_notes, [:resource_type, :resource_id]
-    add_index :admin_notes, [:admin_user_type, :admin_user_id]
+    unless index_exists?(:admin_notes, [:resource_type, :resource_id])
+      add_index :admin_notes, [:resource_type, :resource_id]
+    end
+
+    unless index_exists?(:admin_notes, [:admin_user_type, :admin_user_id])
+      add_index :admin_notes, [:admin_user_type, :admin_user_id]
+    end
   end
 
   def self.down

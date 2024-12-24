@@ -7,6 +7,8 @@ class CreateCardPhones < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :card_phones, :card_id
+    unless index_exists?(:card_phones, :card_id)
+      add_index :card_phones, :card_id
+    end
   end
 end

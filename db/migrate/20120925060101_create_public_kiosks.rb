@@ -8,6 +8,8 @@ class CreatePublicKiosks < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :public_kiosks, :team_id
+    unless index_exists?(:public_kiosks, :team_id)
+      add_index :public_kiosks, :team_id
+    end
   end
 end
