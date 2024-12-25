@@ -27,7 +27,7 @@ gem 'cancan'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', '~> 0.9.28', require: 'google/apis'
+gem 'google-api-client', require: 'google/apis'
 gem 'httparty'
 gem 'rack-ssl-enforcer'
 
