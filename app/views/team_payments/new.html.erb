@@ -17,7 +17,7 @@ $(document).ready(function() {
 <div class="content-container"><div class="content">
 <h2>Purchase additional memberships for $9.99 each.</h2>
 <p><em>All fields required.</em></p>
-<%= form_for @team_payment do |f| %>
+<%= form_with(model: @team_payment, local: true) do |f| %>
   <% if @team_payment.errors.any? %>
     <div class="error_messages">
       <h2><%= pluralize(@team_payment.errors.count, "error") %> prohibited this payment from being saved:</h2>

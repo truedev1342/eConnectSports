@@ -74,7 +74,7 @@
             <% end %>
 
       <h4>Directory</h4>
-      <%= form_for @search, :url => user_contacts_path(current_user), :html => {:method => :get, :class => "form-inline"} do |f| %>
+      <%= form_with(model: @search, url: user_contacts_path(current_user), html: { method: :get, class: "form-inline" }, local: true) do |f| %>
         <i class="icon-search"></i>
         <%= f.text_field :card_first_name_equals, :placeholder => "First Name" %>
         <%= f.text_field :card_last_name_equals, :placeholder => "Last Name" %>
@@ -109,7 +109,7 @@
       </table>
       <div class="box">
         <h4>Trade a Card</h4>
-        <%= form_for(Share.new) do |f| %>
+        <%= form_with(model: Share.new, local: true) do |f| %>
             <%= select("share", "contact_card", @contacts.collect {|p| [ "#{p.card.first_name} #{p.card.last_name}", p.card.id ] }) %>
           <%= f.hidden_field(:user_id, :value => current_user.id) %>
           <p><label for="destination_email">Recipient Email Address</label>

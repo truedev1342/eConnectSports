@@ -73,7 +73,7 @@
         </td>
       </tr>
     </table>
-    <%= form_for(Contact.new) do |f| %>
+    <%= form_with(model: Contact.new, local: true) do |f| %>
       <%= hidden_field :card_id, @public_card.id %>
       <%= f.submit "+ Add to Contacts", :class => "add-contact" %>
     <% end %>

@@ -127,7 +127,7 @@
         </p>
       </div>
     </div>
-    <%= form_for(Contact.new) do |f| %>
+    <%= form_with(model: Contact.new, local: true) do |f| %>
       <%= hidden_field :contact, :card_id, { :value => @card.id } %>
       <%= f.submit "+ Add to Collection", :class => "add-contact" %>
     <% end %>

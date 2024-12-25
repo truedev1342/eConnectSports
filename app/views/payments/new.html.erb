@@ -62,7 +62,7 @@
           <h2>Renew your card.</h2>
         <% end %>
         <p><em>All fields required.</em></p>
-        <%= form_for @payment do |f| %>
+        <%= form_with(model: @payment, local: true) do |f| %>
           <%= f.hidden_field :card_id %>
             <% if @payment.errors.any? %>
                 <div class="error_messages">
@@ -132,7 +132,7 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>ENTER YOUR PROMO CODE</h3>
   </div>
-  <%= form_for @payment do |f|%>
+  <%= form_with(model: @payment, local: true) do |f| %>
     <div class="modal-body">
       <%= text_field_tag :promo_code, nil, style: 'width: 320px;' %>
       <%= text_field_tag :card_id, params[:card_id], class: 'hide' %>

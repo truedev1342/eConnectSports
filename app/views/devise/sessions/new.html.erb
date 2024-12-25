@@ -6,7 +6,7 @@
 
 		<p>&nbsp;</p>
 
-		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+		<%= form_with(model: resource, url: session_path(resource_name), as: resource_name, local: true) do |f| %>
 		  <div><%= f.label :email %>
 		  <%= f.email_field :email %></div>
 

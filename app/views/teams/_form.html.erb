@@ -1,6 +1,6 @@
 
 
-<%= form_for(@team) do |f| %>
+<%= form_with(model: @team, local: true) do |f| %>
   <% if @team.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>

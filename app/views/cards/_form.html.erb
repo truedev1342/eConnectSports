@@ -80,7 +80,7 @@
    </script>
  <% end %>
 
-<%= form_for([@resource, @card], :html => { :class => "form-inline card-form"}) do |f| %>
+ <%= form_with(model: [@resource, @card], html: { class: "form-inline card-form" }) do |f| %>
   <%= f.hidden_field :user_token %>
   <% if @card.errors.any? %>
   <div class="alert alert-error">

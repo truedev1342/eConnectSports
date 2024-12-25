@@ -177,7 +177,7 @@
 			<div class="tab-pane" id="message">
 				<div class="row row-fluid">
 					<div class="span8">
-						<%= form_for :user, :url => send_message_path, :html => {:method => :post, :id => "send_message_to_team"} do |f| %>
+					<%= form_with(model: :user, url: send_message_path, html: { method: :post, id: "send_message_to_team" }, local: true) do |f| %>
 							<h4>Message</h4>
 							<div class="control-group">
 								<div class="controls">
@@ -220,7 +220,7 @@
 	</div>
 	<div class="span3 box">
 
-		<%= form_for :user, :url => invitation_path(:user), :html => {:method => :post} do |f| %>
+	<%= form_with(model: :user, url: invitation_path(:user), html: { method: :post }, local: true) do |f| %>
 
 			<h4>Invite Team Member(s)</h4>
 			<p>You currently have <%= @current_user.cards_purchased %> card credits available. <%= link_to "Buy More", "/payments/new" %></p>
@@ -265,7 +265,7 @@
 				<div class="clear"></div>
 				<div class="row">
 						<div class="box" style="margin-left:20px;">
-							<%= form_for(@public_kiosk) do |f| %>
+						<%= form_with(model: @public_kiosk, local: true) do |f| %>
 								<h4>
 									View your kiosk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<% if @current_user_is_admin == true %>
