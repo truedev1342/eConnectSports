@@ -42,7 +42,7 @@ gem 'rmagick', require: false
 
 gem 'test-unit'
 gem 'vpim'
-gem 'best_in_place', '~> 3.1.1'
+gem 'best_in_place'
 
 gem 'will_paginate'
 # gem 'meta_search'
