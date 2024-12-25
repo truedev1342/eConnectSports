@@ -21,5 +21,4 @@ class CardSocial < ActiveRecord::Base
       'http://'+self.url
     end
   end
-  def
 end
