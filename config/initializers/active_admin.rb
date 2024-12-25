@@ -1,3 +1,4 @@
+require 'admin_footer'
 ActiveAdmin.setup do |config|
 
   # == Site Title
