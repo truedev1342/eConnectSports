@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def create
     Rails.logger.info("Creating user with params: #{params.inspect}")
     if params[:newsletter]
@@ -21,8 +22,8 @@ class RegistrationsController < Devise::RegistrationsController
       add_guest_card(current_user.id)
       current_user.user_agent = request.user_agent
       current_user.save
-      Notifications.new_signup(current_user).deliver
-      UserMailer.first_touch_message(current_user).deliver
+      # Notifications.new_signup(current_user).deliver              # Uncomment after done
+      # UserMailer.first_touch_message(current_user).deliver        # Uncomment after done
     end
   end
 
@@ -47,7 +48,20 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+    params.require(:user).permit(
+      :public_page_attributes, 
+      :username, :admin, 
+      :first_name, :last_name, 
+      :name, :email, :password, 
+      :password_confirmation, 
+      :remember_me, :provider, 
+      :uid, :cards_purchased
+    )
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :first_name, :last_name]) # Permit these parameters for sign up
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :first_name, :last_name]) # Permit these parameters for account update
   end
   
 end

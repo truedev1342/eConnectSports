@@ -24,6 +24,22 @@ class AdminUser < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable
 
+  def self.ransackable_attributes(auth_object = nil)
+    # Return the list of attributes you want to be searchable
+    [
+      "created_at", 
+      "current_sign_in_at", 
+      "current_sign_in_ip", 
+      "email", 
+      "id", 
+      "last_sign_in_at", 
+      "last_sign_in_ip", 
+      "remember_created_at", 
+      "reset_password_sent_at", 
+      "sign_in_count", 
+      "updated_at"
+    ]
+  end
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
 end

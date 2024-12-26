@@ -1,4 +1,5 @@
-ActiveAdmin.register AdminUser do     
+ActiveAdmin.register AdminUser do
+  permit_params :email, :password, :password_confirmation
   index do                            
     column :email                     
     column :current_sign_in_at        
@@ -15,6 +16,6 @@ ActiveAdmin.register AdminUser do
       f.input :password               
       f.input :password_confirmation  
     end                               
-    f.buttons                         
+    f.actions                         
   end                                 
 end                                   

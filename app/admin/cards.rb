@@ -22,6 +22,6 @@ ActiveAdmin.register Card do
       f.input :league
       f.input :handed
     end                               
-    f.buttons                         
+    f.actions                         
   end                               
 end

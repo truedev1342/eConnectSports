@@ -16,6 +16,6 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :cards_purchased
     end                               
-    f.buttons                         
+    f.actions
   end 
 end

@@ -34,7 +34,8 @@ class CardsController < ApplicationController
   def create
     if current_user
       @user = current_user
-      @card = @user.cards.new(params[:card])
+      # @card = @user.cards.new(params[:card])
+      @card = @user.cards.new(card_params)
     else
       token = session[:user_token] || cookies[:user_token]
       @card = Card.find_by(user_token: token) || Card.new(card_params)
