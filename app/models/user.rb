@@ -36,8 +36,9 @@ class User < ActiveRecord::Base
 	# Include default devise modules. Others available are:
 	# :token_authenticatable, :confirmable,
 	# :lockable, :timeoutable and :omniauthable
+	# has_secure_password
 	devise :invitable, :database_authenticatable, :registerable,
-	:recoverable, :rememberable, :trackable, :validatable, :omniauthable
+		:recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
 	# Validations
 	validates_presence_of :first_name, :last_name, :username
@@ -73,7 +74,7 @@ class User < ActiveRecord::Base
 	has_many :contacts
 
 	has_many :saved_card, :dependent => :destroy
-  has_many :favorite_cards, :through => :saved_card, class_name: "Card", source: :card, foreign_key: "user_id"
+	has_many :favorite_cards, :through => :saved_card, class_name: "Card", source: :card, foreign_key: "user_id"
 
 	has_one :public_page, :dependent => :destroy
 	accepts_nested_attributes_for :public_page

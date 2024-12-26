@@ -11,8 +11,8 @@ require 'rails/all'
 # end
 
 #Aweber Config
-# AWEBER=YAML.load(File.read(File.expand_path('../aweber.yml',__FILE__)))
-# AWEBER.symbolize_keys!
+AWEBER=YAML.load(File.read(File.expand_path('../aweber.yml',__FILE__)))
+AWEBER.symbolize_keys!
 
 Bundler.require(*Rails.groups)
 
