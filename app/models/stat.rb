@@ -13,6 +13,9 @@
 #
 
 class Stat < ActiveRecord::Base
+  def self.ransackable_attributes(auth_object = nil)
+    ["abbr", "card_id", "created_at", "id", "kind", "name", "updated_at", "value"]
+  end
   belongs_to :card
   # attr_accessible :abbr, :name, :value, :kind
 end

@@ -11,6 +11,13 @@
 #
 
 class Team < ActiveRecord::Base
+	def self.ransackable_associations(auth_object = nil)
+		["cards", "memberships", "owner", "public_kiosk", "team_payments", "users"]
+	end
+
+	def self.ransackable_attributes(auth_object = nil)
+		["created_at", "id", "memberships_purchased", "name", "owner_id", "updated_at"]
+	end
 	# attr_accessible :name, :owner_id, :memberships_purchased
 	has_one :public_kiosk
 	has_many :memberships, :dependent => :destroy

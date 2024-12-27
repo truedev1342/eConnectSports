@@ -10,6 +10,9 @@
 #
 
 class CardEmail < ActiveRecord::Base
+  def self.ransackable_attributes(auth_object = nil)
+    ["address", "card_id", "created_at", "id", "updated_at"]
+  end
   belongs_to :card
   # attr_accessible :address
 end

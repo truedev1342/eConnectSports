@@ -14,6 +14,12 @@
 #
 
 class PublicPage < ActiveRecord::Base
+  def self.ransackable_attributes(auth_object = nil)
+    ["background", "background_tile", "card_id", "created_at", "id", "id_value", "logo", "status", "updated_at", "user_id"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    ["card", "shares", "user"]
+  end
   belongs_to :user
   # attr_accessible :background, :logo, :status, :user_id, :card_id, :background_tile, :remove_background
   has_one :card

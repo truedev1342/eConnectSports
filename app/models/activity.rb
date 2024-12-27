@@ -15,6 +15,11 @@
 #
 
 class Activity < ActiveRecord::Base
+  
+  def self.ransackable_attributes(auth_object = nil)
+    ["action", "browser", "controller", "created_at", "id", "id_value", "ip_address", "note", "params", "updated_at", "user_id"]
+  end
+
   belongs_to :user
   # attr_accessible :action, :browser, :controller, :ip_address, :note, :params
 end

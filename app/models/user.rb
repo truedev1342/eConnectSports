@@ -33,6 +33,14 @@
 #
 
 class User < ActiveRecord::Base
+	def self.ransackable_associations(auth_object = nil)
+		["activities", "cards", "contacts", "favorite_cards", "invited_by", "memberships", "payments", "public_page", "saved_card", "shares", "teams"]
+	end
+
+	def self.ransackable_attributes(auth_object = nil)
+		["cards_purchased", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "first_name", "id", "id_value", "invitation_accepted_at", "invitation_limit", "invitation_sent_at", "invitation_token", "invited_by_id", "invited_by_type", "last_name", "last_sign_in_at", "last_sign_in_ip", "name", "provider", "public_card_id", "public_page", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "uid", "updated_at", "user_agent", "username"]
+	end
+	
 	# Include default devise modules. Others available are:
 	# :token_authenticatable, :confirmable,
 	# :lockable, :timeoutable and :omniauthable

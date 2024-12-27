@@ -15,6 +15,9 @@
 #
 
 class TeamPayment < ActiveRecord::Base
+	def self.ransackable_attributes(auth_object = nil)
+		["amount", "created_at", "email", "id", "memberships_purchased", "status", "stripe_customer_token", "team_id", "transaction_number", "updated_at"]
+	end
   belongs_to :team
 
   PROCESSING, FAILED, SUCCESS = 1, 2, 3

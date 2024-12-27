@@ -11,6 +11,9 @@
 #
 
 class CardPhone < ActiveRecord::Base
+  def self.ransackable_attributes(auth_object = nil)
+    ["card_id", "created_at", "id", "location", "nmbr", "updated_at"]
+  end
   belongs_to :card
   # attr_accessible :location, :nmbr
 end

@@ -15,5 +15,14 @@ class Membership < ActiveRecord::Base
   belongs_to :user
   belongs_to :team
   has_one :card, :dependent => :destroy
+
+  def self.ransackable_associations(auth_object = nil)
+    ["card", "team", "user"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["admin", "approved", "created_at", "id", "team_id", "updated_at", "user_id"]
+  end
+
   # attr_accessible :approved, :admin, :user_id, :team_id
 end
