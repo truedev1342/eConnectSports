@@ -1,4 +1,5 @@
 ActiveAdmin.register Card do
+  permit_params :first_name, :last_name, :position, :highlights, :team_name, :card_name, :sport, :hometown, :season, :year, :league, :handed
   index do
     column :id
   	column :user_id
