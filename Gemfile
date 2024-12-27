@@ -39,6 +39,7 @@ gem 'fog'
 
 # Image processing
 gem 'rmagick', require: false
+gem 'mini_magick'
 
 gem 'test-unit'
 gem 'vpim'

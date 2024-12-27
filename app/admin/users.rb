@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  permit_params :email, :username, :first_name, :last_name, :cards_purchased
   index do
   	column :email
   	column :username                            
