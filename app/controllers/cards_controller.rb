@@ -34,7 +34,6 @@ class CardsController < ApplicationController
   def create
     if current_user
       @user = current_user
-      # @card = @user.cards.new(params[:card])
       @card = @user.cards.new(card_params)
     else
       token = session[:user_token] || cookies[:user_token]
@@ -231,7 +230,45 @@ class CardsController < ApplicationController
     end
     
     def card_params
-      params.require(:card).permit(:first_name, :last_name, :position, :highlights, :team_name, :card_name, :remove_image, :background, :background_tile, :remove_background, :card_phones_attributes, :card_emails_attributes, :card_websites_attributes, :card_socials_attributes, :stats_attributes, :membership_id, :user_id, :background1_color, :background2_color, :details_color, :name_color, :icon_color, :sport, :hometown, :season, :year, :league, :handed, :image, :crop_x, :crop_y, :crop_w, :crop_h, :user_token,:url_alias, :library_image, :background_cache)
+      params.require(:card).permit(
+        :first_name,
+        :last_name,
+        :position,
+        :highlights,
+        :team_name,
+        :card_name,
+        :remove_image,
+        :background,
+        :background_tile,
+        :remove_background,
+        :membership_id,
+        :user_id,
+        :background1_color,
+        :background2_color,
+        :details_color,
+        :name_color,
+        :icon_color,
+        :sport, :hometown,
+        :season,
+        :year,
+        :league,
+        :handed,
+        :image,
+        :crop_x,
+        :crop_y,
+        :crop_w,
+        :crop_h,
+        :user_token,
+        :url_alias,
+        :library_image,
+        :background_cache,
+
+        stats_attributes: [:kind, :abbr, :value, :_destroy],
+        card_websites_attributes: [:name, :url, :_destroy],
+        card_socials_attributes: [:url, :kind, :_destroy],
+        card_phones_attributes: [:location, :nmbr, :_destroy],
+        card_emails_attributes: [:address, :_destroy]        
+      )
     end
 
     def user_params

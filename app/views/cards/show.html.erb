@@ -193,10 +193,10 @@
         </p>
       </div>
     </div>
-    <%= form_for(Contact.new) do |f| %>
-      <%= hidden_field :contact, :card_id, { :value => @card.id } %>
-      <%= f.submit "+ Add to Collection", :class => "add-contact" %>
-    <% end %>
+    <%= form_for([@card, Contact.new]) do |f| %>
+      <%= f.hidden_field :card_id, value: @card.id %>
+      <%= f.submit "+ Add to Collection", class: "add-contact" %>
+    <% end %>    
   </div>
 </div>
 <div class="modal hide fade" id="qrModal">

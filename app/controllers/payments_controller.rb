@@ -36,7 +36,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = Payment.new(params[:payment])
+    @payment = Payment.new(payment_params)
     @payment.user = current_user
     @payment.email = current_user.email
     @previous_purchased = current_user.cards_purchased

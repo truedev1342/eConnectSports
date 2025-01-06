@@ -1,4 +1,4 @@
-class CreateVanities < ActiveRecord::Migration[5.2]
+class CreateVanities < ActiveRecord::Migration[7.2]
   def self.up
     # Create the vanities table
     create_table :vanities do |t|

@@ -1,4 +1,4 @@
-class CreateTeamPayments < ActiveRecord::Migration[5.2]
+class CreateTeamPayments < ActiveRecord::Migration[7.2]
   def change
     create_table :team_payments do |t|
       t.string :status

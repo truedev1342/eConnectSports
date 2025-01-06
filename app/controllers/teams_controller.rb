@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   # GET /teams/new.json
   def new
-    if current_user.cards_purchased == nil || current_user.cards.count >= current_user.cards_purchased
+    if check_unpaid(current_user)
       redirect_to new_payment_path
     else
       @team = Team.new
@@ -68,7 +68,7 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(params[:team])
+    @team = Team.new(team_params)
 
     if @team.save
       respond_to do |format|
@@ -82,12 +82,15 @@ class TeamsController < ApplicationController
           "card_name" => "#{@membership.team.name} Card"
           )
           if @card.save
-            format.html { redirect_to edit_membership_card_path(@membership, @card), notice: "You have created the #{@membership.team.name} team. Please fill out your details below for your member card." }
+            format.html do
+              redirect_to edit_user_membership_card_path(user_id: current_user.id, membership_id: @membership.id, id: @card.id), 
+                          notice: "You have created the #{@membership.team.name} team. Please fill out your details below for your member card."
+            end            
           else
-            format.html { redirect_to :back, notice: "Could not create card." }
+            format.html { redirect_back(fallback_location: teams_path, notice: "Could not create card.") }
           end
         else
-          format.html { redirect_to :back, notice: "Could not create membership." }
+          format.html { redirect_back(fallback_location: teams_path, notice: "Could not create membership.") }
         end
       end
     else
@@ -135,6 +138,13 @@ class TeamsController < ApplicationController
   end
 
   private
+  def check_unpaid(current_user)
+    if current_user.cards_purchased.nil? || current_user.cards.count >= current_user.cards_purchased
+      true
+    else
+      false
+    end
+  end
   def card_params
     params.require(:card).permit(:first_name, :last_name, :position, :highlights, :team_name, :card_name, :remove_image, :background, :background_tile, :remove_background, :card_phones_attributes, :card_emails_attributes, :card_websites_attributes, :card_socials_attributes, :stats_attributes, :membership_id, :user_id, :background1_color, :background2_color, :details_color, :name_color, :icon_color, :sport, :hometown, :season, :year, :league, :handed, :image, :crop_x, :crop_y, :crop_w, :crop_h, :user_token,:url_alias, :library_image, :background_cache)
   end

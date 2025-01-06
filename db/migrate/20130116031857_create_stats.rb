@@ -1,4 +1,4 @@
-class CreateStats < ActiveRecord::Migration[5.2]
+class CreateStats < ActiveRecord::Migration[7.2]
   def change
     create_table :stats do |t|
       t.references :card

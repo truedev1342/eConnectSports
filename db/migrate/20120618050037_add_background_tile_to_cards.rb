@@ -1,4 +1,4 @@
-class AddBackgroundTileToCards < ActiveRecord::Migration[5.2]
+class AddBackgroundTileToCards < ActiveRecord::Migration[7.2]
   def change
     add_column :cards, :background_tile, :boolean
   end

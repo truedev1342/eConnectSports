@@ -1,4 +1,4 @@
-class ChangeParamsFormatInActivities < ActiveRecord::Migration[5.2]
+class ChangeParamsFormatInActivities < ActiveRecord::Migration[7.2]
   def up
   	change_column :activities, :params, :text
   end

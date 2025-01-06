@@ -43,8 +43,10 @@ class Payment < ActiveRecord::Base
 
   def purchase(buy_more = false)
     if self.stripe_customer_token.blank? && !self.user.admin?
-      customer = Stripe::Customer.create(description: email, card: stripe_card_token)
-      self.stripe_customer_token = customer.id
+      # Uncomment after done
+      # customer = Stripe::Customer.create(description: email, card: stripe_card_token)
+      # self.stripe_customer_token = customer.id
+      self.stripe_customer_token = "mock_stripe_customer_#{SecureRandom.hex(10)}"
     end
     if valid?
       self.status = PROCESSING
@@ -55,18 +57,21 @@ class Payment < ActiveRecord::Base
       end
       # Charge
       if !self.user.admin?
-        charge = Stripe::Charge.create(
-         :amount => amount.to_i, # $15.00 this time
-         :currency => "usd",
-         :customer => stripe_customer_token,
-         :description => "Card subscription purchase on iDigitallSports #{self.email}"
-        )
-        if charge.paid
-          self.transaction_number = charge.id
-          self.status = SUCCESS
-        else
-          self.status = FAILED
-        end
+        # Uncomment after done
+        # charge = Stripe::Charge.create(
+        #  :amount => amount.to_i, # $15.00 this time
+        #  :currency => "usd",
+        #  :customer => stripe_customer_token,
+        #  :description => "Card subscription purchase on iDigitallSports #{self.email}"
+        # )
+        # if charge.paid
+        #   self.transaction_number = charge.id
+        #   self.status = SUCCESS
+        # else
+        #   self.status = FAILED
+        # end
+        self.transaction_number = "MOCK_TRANSACTION_#{SecureRandom.hex(10)}"
+        self.status = SUCCESS
       else
         self.transaction_number = "ADMIN_TRANSACTION"
         self.status = SUCCESS

@@ -1,4 +1,4 @@
-class CreateCardEmails < ActiveRecord::Migration[5.2]
+class CreateCardEmails < ActiveRecord::Migration[7.2]
   def change
     create_table :card_emails do |t|
       t.string :address
