@@ -1,4 +1,4 @@
-class AddInfoToCards < ActiveRecord::Migration
+class AddInfoToCards < ActiveRecord::Migration[7.2]
   def change
     add_column :cards, :hometown, :string
     add_column :cards, :season, :string

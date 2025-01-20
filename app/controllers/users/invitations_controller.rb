@@ -36,4 +36,13 @@ class Users::InvitationsController < Devise::InvitationsController
       redirect_to team, notice: "Invite sent. The people you invite must accept membership. Once they do, they will show up in the Members tab below. #{members_found_notification}"
     end
   end
+
+  private
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
+  end
+
+  def user_params
+		params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+	end
 end

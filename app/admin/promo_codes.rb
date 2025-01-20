@@ -1,4 +1,5 @@
 ActiveAdmin.register PromoCode do
+  permit_params :code, :cards, :used
   index do
     column :id
   	column :code

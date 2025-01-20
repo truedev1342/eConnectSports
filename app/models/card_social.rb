@@ -11,8 +11,11 @@
 #
 
 class CardSocial < ActiveRecord::Base
+  def self.ransackable_attributes(auth_object = nil)
+    ["card_id", "created_at", "id", "kind", "updated_at", "url"]
+  end
   belongs_to :card
-  attr_accessible :kind, :url
+  # attr_accessible :kind, :url
 
   def sanitized_url
     if self.url.starts_with? 'http://' || 'https://'

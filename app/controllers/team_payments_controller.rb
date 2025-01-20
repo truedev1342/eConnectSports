@@ -18,4 +18,12 @@ class TeamPaymentsController < InheritedResources::Base
       render :new
     end
   end
+  private
+  def team_payment_params
+		params.require(:team_payment).permit(:stripe_card_token, :stripe_customer_token, :email, :amount, :memberships_purchased, :team_id)
+	end
+
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
+  end
 end

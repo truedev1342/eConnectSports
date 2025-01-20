@@ -1,5 +1,5 @@
 class PublicKiosksController < InheritedResources::Base
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 
   # GET /public_kiosks/1
@@ -52,5 +52,13 @@ class PublicKiosksController < InheritedResources::Base
       format.html { redirect_to team_path(@team) }
       format.json { head :no_content }
     end
+  end
+  private
+  def public_kiosk_params
+    params.require(:public_kiosk).permit(:background, :background_tile, :logo, :team_id, :description, :remove_background, :remove_logo)
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
   end
 end

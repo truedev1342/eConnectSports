@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 
-	before_filter :force_www!
-	# before_filter :set_cache_buster
+	before_action :force_www!
+	# before_action :set_cache_buster
 
 	def default_url_options
 		if Rails.env.production?
@@ -69,5 +69,11 @@ class ApplicationController < ActionController::Base
 		response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
 		response.headers["Pragma"] = "no-cache"
 		response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+	end
+
+	private
+
+	def activity_params
+		params.require(:activity).permit(:action, :browser, :controller, :ip_address, :note, :params)
 	end
 end

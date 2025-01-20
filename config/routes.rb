@@ -88,6 +88,7 @@ Rails.application.routes.draw do
 
   resources :cards do # Removed redundant member routes and nested resources.
     resources :card_phones, :card_websites, :shares, :stats
+    resources :contacts
   end
 
   get '/create-demo-card', to: 'cards#new_demo_card', as: :new_demo_card # Changed to symbol

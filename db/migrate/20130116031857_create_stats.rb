@@ -1,4 +1,4 @@
-class CreateStats < ActiveRecord::Migration
+class CreateStats < ActiveRecord::Migration[7.2]
   def change
     create_table :stats do |t|
       t.references :card
@@ -8,6 +8,8 @@ class CreateStats < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :stats, :card_id
+    unless index_exists?(:stats, :card_id)
+      add_index :stats, :card_id
+    end
   end
 end

@@ -1,4 +1,4 @@
-class CreateCardSocials < ActiveRecord::Migration
+class CreateCardSocials < ActiveRecord::Migration[7.2]
   def change
     create_table :card_socials do |t|
       t.string :url
@@ -7,6 +7,8 @@ class CreateCardSocials < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :card_socials, :card_id
+    unless index_exists?(:card_socials, :card_id)
+      add_index :card_socials, :card_id
+    end
   end
 end

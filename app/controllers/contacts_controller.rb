@@ -1,5 +1,5 @@
 class ContactsController < InheritedResources::Base
-before_filter :authenticate_user!
+before_action :authenticate_user!
 
   def index
     require 'will_paginate/array'
@@ -50,4 +50,19 @@ before_filter :authenticate_user!
       format.json { head :no_content }
     end
   end
+
+  private
+
+	def activity_params
+		params.require(:activity).permit(:action, :browser, :controller, :ip_address, :note, :params)
+	end
+
+  def contact_params
+		params.require(:contact).permit(:card_id, :user_id)
+	end
+
+  def user_params
+		params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+	end
+  
 end

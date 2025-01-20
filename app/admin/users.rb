@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  permit_params :email, :username, :first_name, :last_name, :cards_purchased
   index do
   	column :email
   	column :username                            
@@ -16,6 +17,6 @@ ActiveAdmin.register User do
       f.input :last_name
       f.input :cards_purchased
     end                               
-    f.buttons                         
+    f.actions
   end 
 end

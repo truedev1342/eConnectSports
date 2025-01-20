@@ -1,4 +1,4 @@
-class CreateAdminNotes < ActiveRecord::Migration
+class CreateAdminNotes < ActiveRecord::Migration[7.2]
   def self.up
     create_table :admin_notes do |t|
       t.string :resource_id, :null => false
@@ -7,8 +7,13 @@ class CreateAdminNotes < ActiveRecord::Migration
       t.text :body
       t.timestamps
     end
-    add_index :admin_notes, [:resource_type, :resource_id]
-    add_index :admin_notes, [:admin_user_type, :admin_user_id]
+    unless index_exists?(:admin_notes, [:resource_type, :resource_id])
+      add_index :admin_notes, [:resource_type, :resource_id]
+    end
+
+    unless index_exists?(:admin_notes, [:admin_user_type, :admin_user_id])
+      add_index :admin_notes, [:admin_user_type, :admin_user_id]
+    end
   end
 
   def self.down
