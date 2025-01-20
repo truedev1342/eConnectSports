@@ -19,6 +19,11 @@
 #
 
 class Payment < ActiveRecord::Base
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["amount", "card_id", "cards_purchased", "created_at", "email", "id", "paid_to", "parent_id", "period", "status", "stripe_customer_token", "transaction_number", "updated_at", "user_id"]
+  end
+  
   before_save :activate_period
   belongs_to :card
   belongs_to :user
@@ -27,8 +32,8 @@ class Payment < ActiveRecord::Base
   #PRICE = {'8' => 499, '12' => 999, '24' => 1899, '58' => 3999}
   PRICE = 499
   PRICE_PER_CARD = 299
-  attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount,
-    :cards_purchased, :card_id, :period, :renew_payment, :user_id
+  # attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount,
+  #   :cards_purchased, :card_id, :period, :renew_payment, :user_id
 
   attr_accessor :stripe_card_token, :renew_payment
 
@@ -38,8 +43,10 @@ class Payment < ActiveRecord::Base
 
   def purchase(buy_more = false)
     if self.stripe_customer_token.blank? && !self.user.admin?
-      customer = Stripe::Customer.create(description: email, card: stripe_card_token)
-      self.stripe_customer_token = customer.id
+      # Uncomment after done
+      # customer = Stripe::Customer.create(description: email, card: stripe_card_token)
+      # self.stripe_customer_token = customer.id
+      self.stripe_customer_token = "mock_stripe_customer_#{SecureRandom.hex(10)}"
     end
     if valid?
       self.status = PROCESSING
@@ -50,18 +57,21 @@ class Payment < ActiveRecord::Base
       end
       # Charge
       if !self.user.admin?
-        charge = Stripe::Charge.create(
-         :amount => amount.to_i, # $15.00 this time
-         :currency => "usd",
-         :customer => stripe_customer_token,
-         :description => "Card subscription purchase on iDigitallSports #{self.email}"
-        )
-        if charge.paid
-          self.transaction_number = charge.id
-          self.status = SUCCESS
-        else
-          self.status = FAILED
-        end
+        # Uncomment after done
+        # charge = Stripe::Charge.create(
+        #  :amount => amount.to_i, # $15.00 this time
+        #  :currency => "usd",
+        #  :customer => stripe_customer_token,
+        #  :description => "Card subscription purchase on iDigitallSports #{self.email}"
+        # )
+        # if charge.paid
+        #   self.transaction_number = charge.id
+        #   self.status = SUCCESS
+        # else
+        #   self.status = FAILED
+        # end
+        self.transaction_number = "MOCK_TRANSACTION_#{SecureRandom.hex(10)}"
+        self.status = SUCCESS
       else
         self.transaction_number = "ADMIN_TRANSACTION"
         self.status = SUCCESS

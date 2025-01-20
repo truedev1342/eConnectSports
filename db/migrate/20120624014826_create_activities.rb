@@ -1,4 +1,4 @@
-class CreateActivities < ActiveRecord::Migration
+class CreateActivities < ActiveRecord::Migration[7.2]
   def change
     create_table :activities do |t|
       t.references :user
@@ -11,6 +11,8 @@ class CreateActivities < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :activities, :user_id
+    unless index_exists?(:activities, :user_id)
+      add_index :activities, :user_id
+    end
   end
 end

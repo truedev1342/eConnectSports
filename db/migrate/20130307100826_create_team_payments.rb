@@ -1,4 +1,4 @@
-class CreateTeamPayments < ActiveRecord::Migration
+class CreateTeamPayments < ActiveRecord::Migration[7.2]
   def change
     create_table :team_payments do |t|
       t.string :status
@@ -11,6 +11,8 @@ class CreateTeamPayments < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :team_payments, :team_id
+    unless index_exists?(:team_payments, :team_id)
+      add_index :team_payments, :team_id
+    end
   end
 end

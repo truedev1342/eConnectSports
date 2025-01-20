@@ -33,11 +33,20 @@
 #
 
 class User < ActiveRecord::Base
+	def self.ransackable_associations(auth_object = nil)
+		["activities", "cards", "contacts", "favorite_cards", "invited_by", "memberships", "payments", "public_page", "saved_card", "shares", "teams"]
+	end
+
+	def self.ransackable_attributes(auth_object = nil)
+		["cards_purchased", "created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "first_name", "id", "id_value", "invitation_accepted_at", "invitation_limit", "invitation_sent_at", "invitation_token", "invited_by_id", "invited_by_type", "last_name", "last_sign_in_at", "last_sign_in_ip", "name", "provider", "public_card_id", "public_page", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "uid", "updated_at", "user_agent", "username"]
+	end
+	
 	# Include default devise modules. Others available are:
 	# :token_authenticatable, :confirmable,
 	# :lockable, :timeoutable and :omniauthable
+	# has_secure_password
 	devise :invitable, :database_authenticatable, :registerable,
-	:recoverable, :rememberable, :trackable, :validatable, :omniauthable
+		:recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
 	# Validations
 	validates_presence_of :first_name, :last_name, :username
@@ -47,19 +56,19 @@ class User < ActiveRecord::Base
 	alias_attribute :name, :first_name
 
 	# Setup accessible (or protected) attributes for your model
-	attr_accessible :public_page_attributes,
-					:username,
-					:admin,
-					:first_name,
-					:last_name,
-					:name,
-					:email,
-					:password,
-					:password_confirmation,
-					:remember_me,
-					:provider,
-					:uid,
-					:cards_purchased
+	# attr_accessible :public_page_attributes,
+	# 				:username,
+	# 				:admin,
+	# 				:first_name,
+	# 				:last_name,
+	# 				:name,
+	# 				:email,
+	# 				:password,
+	# 				:password_confirmation,
+	# 				:remember_me,
+	# 				:provider,
+	# 				:uid,
+	# 				:cards_purchased
 
 	has_many :cards, :dependent => :destroy
 	has_many :activities, :dependent => :destroy
@@ -73,7 +82,7 @@ class User < ActiveRecord::Base
 	has_many :contacts
 
 	has_many :saved_card, :dependent => :destroy
-  has_many :favorite_cards, :through => :saved_card, class_name: "Card", source: :card, foreign_key: "user_id"
+	has_many :favorite_cards, :through => :saved_card, class_name: "Card", source: :card, foreign_key: "user_id"
 
 	has_one :public_page, :dependent => :destroy
 	accepts_nested_attributes_for :public_page
@@ -105,9 +114,7 @@ class User < ActiveRecord::Base
 	end
 
 	def record_activity(note)
-	    @activity = Activity.new
-	    @activity.user = self
-	    @activity.note = note
+	    @activity = Activity.new(user: self, note: note)
 	    @activity.save
 	end
 

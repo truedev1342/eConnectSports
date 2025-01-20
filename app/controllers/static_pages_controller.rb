@@ -30,4 +30,10 @@ class StaticPagesController < ApplicationController
     @user = User.last
     render 'user_mailer/first_touch_message'
   end
+
+  private
+
+  def user_params
+		params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+	end
 end

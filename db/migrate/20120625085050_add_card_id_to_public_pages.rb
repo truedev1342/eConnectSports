@@ -1,4 +1,4 @@
-class AddCardIdToPublicPages < ActiveRecord::Migration
+class AddCardIdToPublicPages < ActiveRecord::Migration[7.2]
   def change
     add_column :public_pages, :card_id, :integer
   end

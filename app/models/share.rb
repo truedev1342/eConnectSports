@@ -14,7 +14,13 @@
 #
 
 class Share < ActiveRecord::Base
-  attr_accessible :destination_email, :user_id, :message, :contact_card
+  def self.ransackable_attributes(auth_object = nil)
+    ["contact_card", "created_at", "destination_email", "id", "message", "shareable_id", "shareable_type", "updated_at", "user_id"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    ["shareable", "user"]
+  end
+  # attr_accessible :destination_email, :user_id, :message, :contact_card
   belongs_to :shareable, polymorphic: true
   belongs_to :user
 end

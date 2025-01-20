@@ -1,4 +1,4 @@
-class AddApprovedToMemberships < ActiveRecord::Migration
+class AddApprovedToMemberships < ActiveRecord::Migration[7.2]
   def change
     add_column :memberships, :approved, :boolean
   end

@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :new, :edit]
 
   @@disallowed_aliases = %w(contacts plans shares admin resque users memberships teams public_pages cards appointments easily-accessible customer-interaction-points schedule-appointments personal-digidex create-teams email-signatures qr-code tutorials single-shop industry-connect privacy-policy qrcode-store email 404 422 500)
@@ -34,7 +34,7 @@ class CardsController < ApplicationController
   def create
     if current_user
       @user = current_user
-      @card = @user.cards.new(params[:card])
+      @card = @user.cards.new(card_params)
     else
       token = session[:user_token] || cookies[:user_token]
       @card = Card.find_by(user_token: token) || Card.new(card_params)
@@ -227,5 +227,51 @@ class CardsController < ApplicationController
           params[:card].delete(:url_alias)
         end
       end
+    end
+    
+    def card_params
+      params.require(:card).permit(
+        :first_name,
+        :last_name,
+        :position,
+        :highlights,
+        :team_name,
+        :card_name,
+        :remove_image,
+        :background,
+        :background_tile,
+        :remove_background,
+        :membership_id,
+        :user_id,
+        :background1_color,
+        :background2_color,
+        :details_color,
+        :name_color,
+        :icon_color,
+        :sport, :hometown,
+        :season,
+        :year,
+        :league,
+        :handed,
+        :image,
+        :crop_x,
+        :crop_y,
+        :crop_w,
+        :crop_h,
+        :user_token,
+        :url_alias,
+        :library_image,
+        :background_cache,
+
+        stats_attributes: [:kind, :abbr, :value, :_destroy],
+        card_websites_attributes: [:name, :url, :_destroy],
+        card_socials_attributes: [:url, :kind, :_destroy],
+        card_phones_attributes: [:location, :nmbr, :_destroy],
+        card_emails_attributes: [:address, :_destroy]        
+      )
+    end
+
+    def user_params
+      params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
     end
 end

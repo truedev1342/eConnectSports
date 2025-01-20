@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   include ActionView::Helpers::TextHelper
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index #use existing payment for card
     if params[:card_id]
@@ -36,7 +36,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = Payment.new(params[:payment])
+    @payment = Payment.new(payment_params)
     @payment.user = current_user
     @payment.email = current_user.email
     @previous_purchased = current_user.cards_purchased
@@ -105,5 +105,16 @@ class PaymentsController < ApplicationController
       p_id=params[:trans_id]
       redirect_to new_payment_path unless d_id==p_id
     end
+  end
+  def card_params
+    params.require(:card).permit(:first_name, :last_name, :position, :highlights, :team_name, :card_name, :remove_image, :background, :background_tile, :remove_background, :card_phones_attributes, :card_emails_attributes, :card_websites_attributes, :card_socials_attributes, :stats_attributes, :membership_id, :user_id, :background1_color, :background2_color, :details_color, :name_color, :icon_color, :sport, :hometown, :season, :year, :league, :handed, :image, :crop_x, :crop_y, :crop_w, :crop_h, :user_token,:url_alias, :library_image, :background_cache)
+  end
+
+  def payment_params
+    params.require(:payment).permit(:stripe_card_token, :stripe_customer_token, :email, :amount, :cards_purchased, :card_id, :period, :renew_payment, :user_id)
+  end
+
+  def promo_code_params
+    params.require(:promo_code).permit(:cards, :code, :used)
   end
 end

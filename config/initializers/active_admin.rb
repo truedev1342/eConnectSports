@@ -1,3 +1,4 @@
+require 'admin_footer'
 ActiveAdmin.setup do |config|
 
   # == Site Title
@@ -101,6 +102,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   # config.allow_comments = true
+  config.comments = false
   #
   # You can turn them on and off for any given namespace by using a
   # namespace config block.
@@ -123,7 +125,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources from here.
   #
-  # config.before_filter :do_something_awesome
+  # config.before_action :do_something_awesome
 
 
   # == Register Stylesheets & Javascripts
