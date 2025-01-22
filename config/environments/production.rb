@@ -7,6 +7,11 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   $stdout.sync = true
 
+  # Used to verify signed cookies and encrypted messages. Was hardcoded in
+  # config/initializers/secret_token.rb, which used the Rails 3 `secret_token`
+  # setting that no longer exists.
+  config.secret_key_base = ENV.fetch('SECRET_KEY_BASE')
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
