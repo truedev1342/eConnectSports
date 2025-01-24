@@ -10,7 +10,7 @@
 #  memberships_purchased :integer
 #
 
-class Team < ActiveRecord::Base
+class Team < ApplicationRecord
 	def self.ransackable_associations(auth_object = nil)
 		["cards", "memberships", "owner", "public_kiosk", "team_payments", "users"]
 	end

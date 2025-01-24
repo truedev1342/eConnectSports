@@ -12,7 +12,7 @@
 #  kind       :string(255)
 #
 
-class Stat < ActiveRecord::Base
+class Stat < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["abbr", "card_id", "created_at", "id", "kind", "name", "updated_at", "value"]
   end

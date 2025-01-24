@@ -32,7 +32,7 @@
 #  user_agent             :string(255)
 #
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 	def self.ransackable_associations(auth_object = nil)
 		["activities", "cards", "contacts", "favorite_cards", "invited_by", "memberships", "payments", "public_page", "saved_card", "shares", "teams"]
 	end

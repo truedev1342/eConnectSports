@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class CardSocial < ActiveRecord::Base
+class CardSocial < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["card_id", "created_at", "id", "kind", "updated_at", "url"]
   end

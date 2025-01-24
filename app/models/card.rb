@@ -32,7 +32,7 @@
 #  url_alias         :string(255)
 #
 
-class Card < ActiveRecord::Base
+class Card < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["address_color", "advanced_data", "background", "background1_color", "background2_color", "background_tile", "card_name", "created_at", "details_color", "first_name", "handed", "highlights", "hometown", "icon_color", "id", "image", "last_name", "league", "membership_id", "name_color", "position", "season", "sport", "team_name", "updated_at", "url_alias", "user_id", "user_token", "year"]

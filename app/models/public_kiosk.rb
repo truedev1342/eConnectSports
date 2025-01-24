@@ -12,7 +12,7 @@
 #  description     :text
 #
 
-class PublicKiosk < ActiveRecord::Base
+class PublicKiosk < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["team"]
   end

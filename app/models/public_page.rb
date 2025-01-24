@@ -13,7 +13,7 @@
 #  background_tile :boolean
 #
 
-class PublicPage < ActiveRecord::Base
+class PublicPage < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["background", "background_tile", "card_id", "created_at", "id", "id_value", "logo", "status", "updated_at", "user_id"]
   end

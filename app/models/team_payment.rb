@@ -14,7 +14,7 @@
 #  updated_at            :datetime         not null
 #
 
-class TeamPayment < ActiveRecord::Base
+class TeamPayment < ApplicationRecord
 	def self.ransackable_attributes(auth_object = nil)
 		["amount", "created_at", "email", "id", "memberships_purchased", "status", "stripe_customer_token", "team_id", "transaction_number", "updated_at"]
 	end

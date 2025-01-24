@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-class PromoCode < ActiveRecord::Base
+class PromoCode < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["user"]
   end

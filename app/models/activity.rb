@@ -14,7 +14,7 @@
 #  updated_at :datetime         not null
 #
 
-class Activity < ActiveRecord::Base
+class Activity < ApplicationRecord
   
   def self.ransackable_attributes(auth_object = nil)
     ["action", "browser", "controller", "created_at", "id", "id_value", "ip_address", "note", "params", "updated_at", "user_id"]

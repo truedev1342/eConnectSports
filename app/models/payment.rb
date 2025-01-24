@@ -18,7 +18,7 @@
 #  period                :integer          default(8)
 #
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["amount", "card_id", "cards_purchased", "created_at", "email", "id", "paid_to", "parent_id", "period", "status", "stripe_customer_token", "transaction_number", "updated_at", "user_id"]

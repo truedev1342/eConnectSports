@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class Contact < ActiveRecord::Base
+class Contact < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["card_id", "created_at", "id", "updated_at", "user_id"]
   end

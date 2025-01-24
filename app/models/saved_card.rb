@@ -1,4 +1,4 @@
-class SavedCard < ActiveRecord::Base
+class SavedCard < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["card_id", "created_at", "id", "updated_at", "user_id"]

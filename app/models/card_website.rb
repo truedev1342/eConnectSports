@@ -10,7 +10,7 @@
 #  name       :string(255)
 #
 
-class CardWebsite < ActiveRecord::Base
+class CardWebsite < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ["card_id", "created_at", "id", "name", "updated_at", "url"]
