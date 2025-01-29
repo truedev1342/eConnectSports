@@ -5,16 +5,10 @@ Rails.application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
-  config.cache_classes = true
-
-  # Configure static asset server for tests with Cache-Control for performance
-  # config.serve_static_assets = true
-  config.serve_static_files = true
-  config.static_cache_control = "public, max-age=3600"
+  config.enable_reloading = false
   config.eager_load = false
 
-  # Log error messages when you accidentally call methods on nil
-  config.whiny_nils = true
+  # Serve static files with a Cache-Control header for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
     'Cache-Control' => "public, max-age=#{1.hour.to_i}"
@@ -25,7 +19,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates
-  config.action_dispatch.show_exceptions = false
+  config.action_dispatch.show_exceptions = :none
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection = false
@@ -38,8 +32,8 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-  # Raise exception on mass assignment protection for Active Record models
-  # config.active_record.mass_assignment_sanitizer = :strict
+  # Mailer tests build absolute URLs, so a host has to be available.
+  config.action_mailer.default_url_options = { host: 'www.example.com' }
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
