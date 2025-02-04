@@ -31,9 +31,6 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   config.action_controller.asset_host = 'https://www.idigitallsports.com'
 
-  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( application-app.css application-website.css application-app.js application-website.js bootstrap-wysihtml5/wysiwyg-color.css email.css*)
-
   config.action_mailer.perform_caching = false
 
   # Set mailer's default url
