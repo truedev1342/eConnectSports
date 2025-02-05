@@ -32,7 +32,7 @@ class PublicKiosksController < InheritedResources::Base
   def update
     @public_kiosk = PublicKiosk.find(params[:id])
 
-    if @public_kiosk.update_attributes(params[:public_kiosk])
+    if @public_kiosk.update(public_kiosk_params)
     	record_activity("You updated your <b>public kiosk</b>") #This will call application controller record_activity
     	redirect_to @public_kiosk, notice: 'Public kiosk was successfully updated.'
     else

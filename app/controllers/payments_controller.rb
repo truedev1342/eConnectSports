@@ -53,7 +53,7 @@ class PaymentsController < ApplicationController
       @promo = PromoCode.find_by(code: params[:promo_code])
       if @promo && !@promo.used
         total_purchased = current_user.cards_purchased.to_i + @promo.cards
-        current_user.update_attributes(:cards_purchased => total_purchased)
+        current_user.update(cards_purchased: total_purchased)
         @promo.user_id = current_user.id
         @promo.used = true
         @promo.save

@@ -23,7 +23,7 @@ before_action :authenticate_user!
     @membership = Membership.find(params[:id])
 
     respond_to do |format|
-      if @membership.update_attributes(params[:membership])
+      if @membership.update(membership_params)
         format.html { redirect_to :back, notice: 'Membership was successfully updated.' }
         format.json { head :no_content }
       else

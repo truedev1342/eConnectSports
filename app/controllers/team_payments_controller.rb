@@ -11,7 +11,7 @@ class TeamPaymentsController < InheritedResources::Base
       else
         @total_purchased = @previous_purchased+@new_purchased
       end
-      @current_team.update_attributes(:memberships_purchased => @total_purchased)
+      @current_team.update(memberships_purchased: @total_purchased)
       @current_team.save!
       redirect_to url_for(@current_team), :notice => "Success! You can now have #{@total_purchased} members!"
     else

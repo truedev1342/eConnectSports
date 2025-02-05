@@ -81,7 +81,7 @@ class CardsController < ApplicationController
     check_availability_of_url_alias
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.update(card_params)
         if params[:card][:image].present?
           format.html { render :crop }
         else

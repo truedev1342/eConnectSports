@@ -37,7 +37,7 @@ class RegistrationsController < Devise::RegistrationsController
     token = session[:user_token] || cookies[:user_token]
     if token.present?
       card = Card.where(user_token: token).first
-      card.update_attributes(user_id: user_id) if card
+      card.update(user_id: user_id) if card
       session.delete :user_token
       cookies[:user_token] = {value: '', expires: Time.now - 1.minute}
     end

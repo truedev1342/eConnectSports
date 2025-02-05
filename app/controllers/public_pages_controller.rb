@@ -56,7 +56,7 @@ class PublicPagesController < ApplicationController
     @user = User.find(params[:user_id])
     @public_page = @user.public_page
 
-    if @public_page.update_attributes(params[:public_page])
+    if @public_page.update(public_page_params)
     	record_activity("You updated your <b>public page</b>") #This will call application controller record_activity
     	redirect_to "/#{@user.username}", notice: 'Public page was successfully updated.'
     else
