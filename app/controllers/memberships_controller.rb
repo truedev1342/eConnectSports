@@ -4,7 +4,7 @@ before_action :authenticate_user!
   # POST /memberships
   # POST /memberships.json
   def create
-    @membership = Membership.new(params[:membership])
+    @membership = Membership.new(membership_params)
 
     respond_to do |format|
       if @membership.save

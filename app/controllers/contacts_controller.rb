@@ -25,7 +25,7 @@ before_action :authenticate_user!
 
   def create
     @user = current_user
-    @contact = @user.contacts.new(params[:contact])
+    @contact = @user.contacts.new(contact_params)
 
     respond_to do |format|
       if @contact.save

@@ -1,6 +1,6 @@
 class TeamPaymentsController < InheritedResources::Base
   def create
-    @team_payment = TeamPayment.new(params[:team_payment])
+    @team_payment = TeamPayment.new(team_payment_params)
     @current_team = Team.find_by(id: params[:team_payment][:team_id])
     @team_payment.team = @current_team
     @previous_purchased = @current_team.memberships_purchased

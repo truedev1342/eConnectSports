@@ -24,7 +24,7 @@ class PublicKiosksController < InheritedResources::Base
   # POST /public_kiosks.json
   def create
     @team = Team.find(params[:team_id])
-    @public_kiosk = @team.public_kiosk.new(params[:public_kiosk])
+    @public_kiosk = @team.build_public_kiosk(public_kiosk_params)
   end
 
   # PUT /public_kiosks/1

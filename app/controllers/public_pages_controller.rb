@@ -47,7 +47,7 @@ class PublicPagesController < ApplicationController
   # POST /public_pages.json
   def create
     @user = current_user
-    @public_page = @user.public_page.new(params[:public_page])
+    @public_page = @user.build_public_page(public_page_params)
   end
 
   # PUT /public_pages/1
