@@ -5,7 +5,7 @@ class SavedCardsController < ApplicationController
     current_user.favorite_cards << card
     current_user.save
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end
   end
@@ -14,7 +14,7 @@ class SavedCardsController < ApplicationController
     saved_card = SavedCard.where(user_id: current_user.id, card_id: params['card_id']).first
     saved_card.destroy
     respond_to do |format|
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end
   end

@@ -46,7 +46,7 @@ before_action :authenticate_user!
 
     respond_to do |format|
       record_activity("Deleted contact") #This will call application controller record_activity
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: root_path) }
       format.json { head :no_content }
     end
   end

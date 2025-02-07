@@ -36,7 +36,7 @@ class PublicKiosksController < InheritedResources::Base
     	record_activity("You updated your <b>public kiosk</b>") #This will call application controller record_activity
     	redirect_to @public_kiosk, notice: 'Public kiosk was successfully updated.'
     else
-    	redirect_to :back, error: 'Sorry, something went wrong.'
+    	redirect_back(fallback_location: root_path, flash: { error: 'Sorry, something went wrong.' })
     end
   end
 

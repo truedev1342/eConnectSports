@@ -94,7 +94,7 @@ class TeamsController < ApplicationController
         end
       end
     else
-      format.html { redirect_to :back, notice: "Could not create team." }
+      format.html { redirect_back(fallback_location: root_path, notice: "Could not create team.") }
       format.json { render json: @team.errors, status: :unprocessable_entity }
     end
   end

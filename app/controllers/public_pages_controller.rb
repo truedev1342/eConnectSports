@@ -60,7 +60,7 @@ class PublicPagesController < ApplicationController
     	record_activity("You updated your <b>public page</b>") #This will call application controller record_activity
     	redirect_to "/#{@user.username}", notice: 'Public page was successfully updated.'
     else
-    	redirect_to :back, error: 'Sorry, something went wrong.'
+    	redirect_back(fallback_location: root_path, flash: { error: 'Sorry, something went wrong.' })
     end
   end
 
