@@ -27,7 +27,7 @@ class SharesController < ApplicationController
 			card = Card.find_by(id: @shareable.card_id)
 			record_activity("Shared <b>Public Page</b>") #This will call application controller record_activity
 		end
-		ShareMailer.contact(recipient, sender_name, card, message, share_url, type).deliver
+		ShareMailer.contact(recipient, sender_name, card, message, share_url, type).deliver_now
 		return if request.xhr?
 	    redirect_to [current_user, :shares], notice: "#{type} shared with #{recipient}."
 	  else
@@ -40,7 +40,7 @@ class SharesController < ApplicationController
 		recipient = email["recipient"]
 		subject = 'New I Dig It All Sports Card Share'
 		message = email["message"]
-		ShareMailer.contact(recipient, subject, message).deliver
+		ShareMailer.contact(recipient, subject, message).deliver_now
 		return if request.xhr?
 		redirect_back(fallback_location: root_path)
 	end

@@ -131,7 +131,7 @@ class TeamsController < ApplicationController
       user = User.find(id)
       mails.push user.email
     end
-    TeamMailer.send_message(current_user, mails, params['message']).deliver
+    TeamMailer.send_message(current_user, mails, params['message']).deliver_now
     respond_to do |format|
       format.html {redirect_to team_path(id: params["team_id"]), notice: "Message sent."}
     end

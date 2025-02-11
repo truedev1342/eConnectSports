@@ -22,8 +22,8 @@ class RegistrationsController < Devise::RegistrationsController
       add_guest_card(current_user.id)
       current_user.user_agent = request.user_agent
       current_user.save
-      # Notifications.new_signup(current_user).deliver              # Uncomment after done
-      # UserMailer.first_touch_message(current_user).deliver        # Uncomment after done
+      # Notifications.new_signup(current_user).deliver_now              # Uncomment after done
+      # UserMailer.first_touch_message(current_user).deliver_now        # Uncomment after done
     end
   end
 

@@ -108,7 +108,7 @@ class Card < ApplicationRecord
 
   def send_notification
     if self.user_id.blank?
-      Notifications.new_card(self).deliver
+      Notifications.new_card(self).deliver_now
     end
   end
 

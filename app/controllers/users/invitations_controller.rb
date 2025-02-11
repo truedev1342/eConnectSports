@@ -18,7 +18,7 @@ class Users::InvitationsController < Devise::InvitationsController
           found_membership = team.memberships.find_by(user_id: found_user.id)
           if found_membership == '' || found_membership == nil
             team.users << found_user
-            TeamMailer.invite(found_user, team, current_user, current_host).deliver
+            TeamMailer.invite(found_user, team, current_user, current_host).deliver_now
           else
             found_memberships << found_user
           end

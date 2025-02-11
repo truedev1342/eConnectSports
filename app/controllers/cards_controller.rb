@@ -175,7 +175,7 @@ class CardsController < ApplicationController
 
   def send_vcard
     @card = Card.find(params[:card_id])
-    VcardMailer.send_vcard(params[:vcard_email], @card).deliver
+    VcardMailer.send_vcard(params[:vcard_email], @card).deliver_now
     flash[:notice] = "Email was sent successfully."
     redirect_back(fallback_location: root_path)
   end
