@@ -1,4 +1,4 @@
-class MailerBase < ActionMailer::Base
+class ApplicationMailer < ActionMailer::Base
   before_action :setup_inline_attachments
 
   layout 'mailer'

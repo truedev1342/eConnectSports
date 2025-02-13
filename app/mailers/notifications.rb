@@ -1,4 +1,4 @@
-class Notifications < MailerBase
+class Notifications < ApplicationMailer
   default from: "info@idigitallsports.com", to: "info@idigitallsports.com"
 
   def contact(email_params, sent_at = Time.now)
