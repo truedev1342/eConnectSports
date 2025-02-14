@@ -1,4 +1,4 @@
-class VcardMailer < ActionMailer::Base
+class VcardMailer < ApplicationMailer
 	default from: "info@idigitallsports.com"
 
 	def send_vcard(vcard_recipient, card, sent_at = Time.now)
