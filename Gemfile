@@ -14,11 +14,6 @@ gem 'multipart-post', '2.0.0'
 gem 'loofah', '2.23.1'
 gem 'rails-html-sanitizer', '1.6.2'
 gem 'activerecord-session_store'
-gem 'actionpack-action_caching'
-
-# Generators / DSLs
-gem 'nifty-generators', group: :development
-gem 'delayed_job_active_record'
 
 # Authentication
 gem 'devise', '~> 4.9'
@@ -27,8 +22,6 @@ gem 'cancan'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'google-api-client', require: 'google/apis'
-gem 'httparty'
 gem 'rack-ssl-enforcer'
 
 # Uploads
@@ -39,30 +32,19 @@ gem 'fog'
 
 # Image processing
 gem 'rmagick', require: false
-gem 'mini_magick'
 
-gem 'test-unit'
 gem 'vpim'
 gem 'best_in_place'
 
 gem 'will_paginate'
 # gem 'meta_search'
 
-# Testing
-group :test do
-  gem 'mocha'
-  gem 'rspec-rails', '~> 3.5'
-end
-
 # Development dependencies
 group :development do
   gem 'capistrano', '~> 3.19.0'
-  gem 'rvm-capistrano', require: false
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'awesome_pry'
-  gem 'colorize'
   gem 'puma'
 
   gem 'listen', '~> 3.3'
@@ -83,7 +65,6 @@ gem 'bcrypt'
 
 # Frontend gems
 gem 'execjs', '~> 2.10.0'
-gem 'bootstrap_form', '~> 4.5'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
 gem 'bootstrap-colorpicker-rails'
@@ -96,17 +77,13 @@ gem 'paypal-recurring'
 
 gem 'aweber'
 gem 'rails-controller-testing'
-gem 'factory_bot_rails'
 
 # Queueing
 gem 'resque', '~> 1.27.0'
 gem 'capistrano-resque', '~> 0.1.0', require: false
-gem 'resque_mailer'
 gem 'resque-scheduler', '~> 4.4.0'
 
 # Configuration for mailers and others
 gem 'premailer-rails'
 gem 'whenever'
 # gem 'protected_attributes'
-
-
