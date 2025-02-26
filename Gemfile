@@ -18,7 +18,6 @@ gem 'activerecord-session_store'
 # Authentication
 gem 'devise', '~> 4.9'
 gem 'devise_invitable'
-gem 'cancan'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
