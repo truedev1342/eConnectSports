@@ -26,8 +26,7 @@ gem 'rack-ssl-enforcer'
 # Uploads
 gem 'carrierwave'
 
-gem 'fog-ovirt', '1.0.0'
-gem 'fog'
+gem 'fog-aws'
 
 # Image processing
 gem 'rmagick', require: false
