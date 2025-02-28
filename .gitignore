@@ -25,3 +25,4 @@ Thumbs.*
 .ruby-version
 /public/assets*
 /public/_*
+/config/fog_credentials.yml
