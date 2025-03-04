@@ -22,7 +22,6 @@ Gemfile.lock
 Thumbs.*
 .rvmrc
 .ruby-gemset
-.ruby-version
 /public/assets*
 /public/_*
 /config/fog_credentials.yml
