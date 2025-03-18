@@ -1,13 +1,20 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path('../../config/environment', __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
 require 'rails/test_help'
 
-class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
-  #
-  # Note: You'll currently still have to declare fixtures explicitly in integration tests
-  # -- they do not yet inherit this setting
-  fixtures :all
+module ActiveSupport
+  class TestCase
+    # Setup all fixtures in test/fixtures/*.yml for all tests.
+    fixtures :all
+  end
+end
 
-  # Add more helper methods to be used by all tests here...
+# Nearly every controller sits behind `authenticate_user!`, so the Devise test
+# helpers need to be available to the controller and integration tests.
+class ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+end
+
+class ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
 end
