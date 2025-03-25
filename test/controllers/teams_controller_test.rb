@@ -18,30 +18,30 @@ class TeamsControllerTest < ActionController::TestCase
 
   test "should create team" do
     assert_difference('Team.count') do
-      post :create, team: { name: @team.name }
+      post :create, params: { team: { name: @team.name } }
     end
 
     assert_redirected_to team_path(assigns(:team))
   end
 
   test "should show team" do
-    get :show, id: @team
+    get :show, params: { id: @team }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @team
+    get :edit, params: { id: @team }
     assert_response :success
   end
 
   test "should update team" do
-    put :update, id: @team, team: { name: @team.name }
+    put :update, params: { id: @team, team: { name: @team.name } }
     assert_redirected_to team_path(assigns(:team))
   end
 
   test "should destroy team" do
     assert_difference('Team.count', -1) do
-      delete :destroy, id: @team
+      delete :destroy, params: { id: @team }
     end
 
     assert_redirected_to teams_path

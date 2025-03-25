@@ -18,30 +18,30 @@ class MembershipsControllerTest < ActionController::TestCase
 
   test "should create membership" do
     assert_difference('Membership.count') do
-      post :create, membership: {  }
+      post :create, params: { membership: {  } }
     end
 
     assert_redirected_to membership_path(assigns(:membership))
   end
 
   test "should show membership" do
-    get :show, id: @membership
+    get :show, params: { id: @membership }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @membership
+    get :edit, params: { id: @membership }
     assert_response :success
   end
 
   test "should update membership" do
-    put :update, id: @membership, membership: {  }
+    put :update, params: { id: @membership, membership: {  } }
     assert_redirected_to membership_path(assigns(:membership))
   end
 
   test "should destroy membership" do
     assert_difference('Membership.count', -1) do
-      delete :destroy, id: @membership
+      delete :destroy, params: { id: @membership }
     end
 
     assert_redirected_to memberships_path

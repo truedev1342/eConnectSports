@@ -18,30 +18,30 @@ class TeamPaymentsControllerTest < ActionController::TestCase
 
   test "should create team_payment" do
     assert_difference('TeamPayment.count') do
-      post :create, team_payment: { amount: @team_payment.amount, email: @team_payment.email, memberships_purchased: @team_payment.memberships_purchased, status: @team_payment.status, stripe_customer_token: @team_payment.stripe_customer_token, transaction: @team_payment.transaction }
+      post :create, params: { team_payment: { amount: @team_payment.amount, email: @team_payment.email, memberships_purchased: @team_payment.memberships_purchased, status: @team_payment.status, stripe_customer_token: @team_payment.stripe_customer_token, transaction: @team_payment.transaction } }
     end
 
     assert_redirected_to team_payment_path(assigns(:team_payment))
   end
 
   test "should show team_payment" do
-    get :show, id: @team_payment
+    get :show, params: { id: @team_payment }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @team_payment
+    get :edit, params: { id: @team_payment }
     assert_response :success
   end
 
   test "should update team_payment" do
-    put :update, id: @team_payment, team_payment: { amount: @team_payment.amount, email: @team_payment.email, memberships_purchased: @team_payment.memberships_purchased, status: @team_payment.status, stripe_customer_token: @team_payment.stripe_customer_token, transaction: @team_payment.transaction }
+    put :update, params: { id: @team_payment, team_payment: { amount: @team_payment.amount, email: @team_payment.email, memberships_purchased: @team_payment.memberships_purchased, status: @team_payment.status, stripe_customer_token: @team_payment.stripe_customer_token, transaction: @team_payment.transaction } }
     assert_redirected_to team_payment_path(assigns(:team_payment))
   end
 
   test "should destroy team_payment" do
     assert_difference('TeamPayment.count', -1) do
-      delete :destroy, id: @team_payment
+      delete :destroy, params: { id: @team_payment }
     end
 
     assert_redirected_to team_payments_path

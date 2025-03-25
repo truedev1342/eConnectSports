@@ -18,30 +18,30 @@ class ContactsControllerTest < ActionController::TestCase
 
   test "should create contact" do
     assert_difference('Contact.count') do
-      post :create, contact: {  }
+      post :create, params: { contact: {  } }
     end
 
     assert_redirected_to contact_path(assigns(:contact))
   end
 
   test "should show contact" do
-    get :show, id: @contact
+    get :show, params: { id: @contact }
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @contact
+    get :edit, params: { id: @contact }
     assert_response :success
   end
 
   test "should update contact" do
-    put :update, id: @contact, contact: {  }
+    put :update, params: { id: @contact, contact: {  } }
     assert_redirected_to contact_path(assigns(:contact))
   end
 
   test "should destroy contact" do
     assert_difference('Contact.count', -1) do
-      delete :destroy, id: @contact
+      delete :destroy, params: { id: @contact }
     end
 
     assert_redirected_to contacts_path
