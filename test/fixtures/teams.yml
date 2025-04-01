@@ -1,19 +1,11 @@
-# == Schema Information
-#
-# Table name: teams
-#
-#  id                    :integer          not null, primary key
-#  name                  :string(255)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  owner_id              :integer
-#  memberships_purchased :integer
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: First Team
+  owner: one
+  memberships_purchased: 10
 
 two:
-  name: MyString
+  name: Second Team
+  owner: two
+  memberships_purchased: 0

@@ -1,22 +1,13 @@
-# == Schema Information
-#
-# Table name: memberships
-#
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  team_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  approved   :boolean
-#  admin      :boolean
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user: 
-  team: 
+  user: one
+  team: one
+  approved: true
+  admin: true
 
 two:
-  user: 
-  team: 
+  user: two
+  team: one
+  approved: false
+  admin: false

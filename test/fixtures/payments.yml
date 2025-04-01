@@ -1,33 +1,23 @@
-# == Schema Information
-#
-# Table name: payments
-#
-#  id                    :integer          not null, primary key
-#  status                :string(255)
-#  amount                :integer
-#  email                 :string(255)
-#  transaction_number    :string(255)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  stripe_customer_token :string(255)
-#  user_id               :integer
-#  cards_purchased       :integer
-#  card_id               :integer
-#  paid_to               :datetime
-#  parent_id             :integer
-#  period                :integer          default(8)
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
-  amount: 1.5
-  email: MyString
-  transaction_number: MyString
+  status: '3'
+  amount: 499
+  email: test1@test.com
+  transaction_number: MOCK_TRANSACTION_ONE
+  stripe_customer_token: mock_customer_one
+  cards_purchased: 1
+  period: 8
+  user: one
+  card: one
 
 two:
-  status: MyString
-  amount: 1.5
-  email: MyString
-  transaction_number: MyString
+  status: '3'
+  amount: 998
+  email: test2@test.com
+  transaction_number: MOCK_TRANSACTION_TWO
+  stripe_customer_token: mock_customer_two
+  cards_purchased: 2
+  period: 12
+  user: two
+  card: two
