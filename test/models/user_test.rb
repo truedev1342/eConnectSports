@@ -1,41 +1,82 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default("")
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0)
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  first_name             :string(255)
-#  last_name              :string(255)
-#  public_page            :boolean
-#  username               :string(255)
-#  public_card_id         :integer
-#  provider               :string(255)
-#  uid                    :string(255)
-#  invitation_token       :string(60)
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  cards_purchased        :integer
-#  user_agent             :string(255)
-#
-
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def valid_attributes(overrides = {})
+    {
+      email: 'new_user@test.com',
+      username: 'new_user',
+      first_name: 'new',
+      last_name: 'user',
+      password: 'password123',
+      password_confirmation: 'password123'
+    }.merge(overrides)
+  end
+
+  test 'a complete set of attributes is valid' do
+    assert User.new(valid_attributes).valid?
+  end
+
+  test 'first_name is required' do
+    user = User.new(valid_attributes(first_name: nil))
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :first_name
+  end
+
+  test 'last_name is required' do
+    user = User.new(valid_attributes(last_name: nil))
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :last_name
+  end
+
+  test 'username is required' do
+    user = User.new(valid_attributes(username: nil))
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :username
+  end
+
+  test 'email must be unique regardless of case' do
+    user = User.new(valid_attributes(email: users(:one).email.upcase))
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :email
+  end
+
+  test 'username must be unique regardless of case' do
+    user = User.new(valid_attributes(username: users(:one).username.upcase))
+    assert_not user.valid?
+    assert_includes user.errors.attribute_names, :username
+  end
+
+  test 'name is an alias for first_name' do
+    assert_equal users(:one).first_name, users(:one).name
+  end
+
+  test 'full_name capitalises both names' do
+    assert_equal 'Test One', users(:one).full_name
+  end
+
+  test 'full_name is blank when a name part is missing' do
+    assert_equal '', User.new(first_name: 'test').full_name
+    assert_equal '', User.new(last_name: 'one').full_name
+    assert_equal '', User.new.full_name
+  end
+
+  test 'admin? is false for a regular address' do
+    assert_not users(:one).admin?
+  end
+
+  test 'admin? matches the allow list case insensitively' do
+    assert User.new(email: 'Example@Email.com').admin?
+  end
+
+  test 'has many cards' do
+    assert_includes users(:one).cards, cards(:one)
+  end
+
+  test 'has many teams through memberships' do
+    assert_includes users(:one).teams, teams(:one)
+  end
+
+  test 'has one public page' do
+    assert_equal public_pages(:one), users(:one).public_page
+  end
 end

@@ -51,7 +51,7 @@ class User < ApplicationRecord
 	# Validations
 	validates_presence_of :first_name, :last_name, :username
 	validates_uniqueness_of :email, :case_sensitive => false
-	validates_uniqueness_of :username, :case_sensitve => false
+	validates_uniqueness_of :username, :case_sensitive => false
 
 	alias_attribute :name, :first_name
 
