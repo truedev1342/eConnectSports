@@ -76,26 +76,26 @@ class Card < ApplicationRecord
 
   validates_length_of :highlights, :maximum => 100, :allow_blank => true
 
-  has_many :card_phones
+  has_many :card_phones, dependent: :destroy
   accepts_nested_attributes_for :card_phones, allow_destroy: true
 
-  has_many :card_emails
+  has_many :card_emails, dependent: :destroy
   accepts_nested_attributes_for :card_emails, allow_destroy: true
 
-  has_many :card_websites
+  has_many :card_websites, dependent: :destroy
   accepts_nested_attributes_for :card_websites, allow_destroy: true
 
-  has_many :card_socials
+  has_many :card_socials, dependent: :destroy
   accepts_nested_attributes_for :card_socials, allow_destroy: true
 
-  has_many :stats
+  has_many :stats, dependent: :destroy
   accepts_nested_attributes_for :stats, allow_destroy: true
 
 
 
-  has_many :shares, as: :shareable
+  has_many :shares, as: :shareable, dependent: :destroy
 
-  has_many :contacts
+  has_many :contacts, dependent: :destroy
 
   mount_uploader :image, ImageUploader
   mount_uploader :background, BackgroundUploader
