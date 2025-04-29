@@ -50,7 +50,7 @@ class Card < ApplicationRecord
   after_update :crop_image
 
   belongs_to :user
-  belongs_to :public_page
+  has_one :public_page
   belongs_to :membership, :dependent => :destroy
   has_one :team, :through => :membership
   has_many :payments
