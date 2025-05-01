@@ -22,7 +22,7 @@ class PromoCode < ApplicationRecord
   before_create :set_code
   # attr_accessible :cards, :code, :used
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :code, presence: true, uniqueness: true
 

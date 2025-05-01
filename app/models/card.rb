@@ -49,9 +49,9 @@ class Card < ApplicationRecord
   after_destroy :release_payment
   after_update :crop_image
 
-  belongs_to :user
+  belongs_to :user, optional: true
   has_one :public_page
-  belongs_to :membership, :dependent => :destroy
+  belongs_to :membership, optional: true, dependent: :destroy
   has_one :team, :through => :membership
   has_many :payments
 

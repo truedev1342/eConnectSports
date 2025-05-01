@@ -25,7 +25,7 @@ class Payment < ApplicationRecord
   end
   
   before_save :activate_period
-  belongs_to :card
+  belongs_to :card, optional: true
   belongs_to :user
 
   PROCESSING, FAILED, SUCCESS = 1, 2, 3

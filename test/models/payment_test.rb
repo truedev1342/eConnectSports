@@ -1,27 +1,56 @@
-# == Schema Information
-#
-# Table name: payments
-#
-#  id                    :integer          not null, primary key
-#  status                :string(255)
-#  amount                :integer
-#  email                 :string(255)
-#  transaction_number    :string(255)
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  stripe_customer_token :string(255)
-#  user_id               :integer
-#  cards_purchased       :integer
-#  card_id               :integer
-#  paid_to               :datetime
-#  parent_id             :integer
-#  period                :integer          default(8)
-#
-
 require 'test_helper'
 
 class PaymentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'cards_purchased is required' do
+    payment = Payment.new(user: users(:one))
+    assert_not payment.valid?
+    assert_includes payment.errors.attribute_names, :cards_purchased
+  end
+
+  test 'cards_purchased must be greater than zero' do
+    payment = Payment.new(user: users(:one), cards_purchased: 0)
+    assert_not payment.valid?
+    assert_includes payment.errors.attribute_names, :cards_purchased
+  end
+
+  test 'a child payment without a card is valid' do
+    payment = Payment.new(user: users(:one), cards_purchased: 1, parent_id: payments(:one).id)
+    assert_nil payment.card
+    assert payment.valid?
+  end
+
+  test 'belongs to a card and a user' do
+    assert_equal cards(:one), payments(:one).card
+    assert_equal users(:one), payments(:one).user
+  end
+
+  test 'activate_period sets paid_to from the period when a card is present' do
+    payment = Payment.new(user: users(:one), card: cards(:one), cards_purchased: 1, period: 8)
+    payment.save!
+    assert_not_nil payment.paid_to
+    assert_in_delta 8.weeks.from_now.to_i, payment.paid_to.to_i, 60
+  end
+
+  test 'activate_period leaves paid_to alone when it is already set' do
+    existing = 1.year.from_now.change(usec: 0)
+    payment = Payment.new(user: users(:one), card: cards(:one), cards_purchased: 1,
+                          period: 8, paid_to: existing)
+    payment.save!
+    assert_equal existing, payment.paid_to
+  end
+
+  test 'activate_period does nothing without a card' do
+    payment = Payment.new(user: users(:one), cards_purchased: 1, period: 8)
+    payment.save!
+    assert_nil payment.paid_to
+  end
+
+  test 'price constants describe the card pricing in cents' do
+    assert_equal 499, Payment::PRICE
+    assert_equal 299, Payment::PRICE_PER_CARD
+  end
+
+  test 'status constants are ordered processing, failed, success' do
+    assert_equal [1, 2, 3], [Payment::PROCESSING, Payment::FAILED, Payment::SUCCESS]
+  end
 end

@@ -20,6 +20,6 @@ class Activity < ApplicationRecord
     ["action", "browser", "controller", "created_at", "id", "id_value", "ip_address", "note", "params", "updated_at", "user_id"]
   end
 
-  belongs_to :user
+  belongs_to :user, optional: true
   # attr_accessible :action, :browser, :controller, :ip_address, :note, :params
 end
