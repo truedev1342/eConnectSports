@@ -45,6 +45,24 @@ class PaymentTest < ActiveSupport::TestCase
     assert_nil payment.paid_to
   end
 
+  test 'a stripe error is reported on the record instead of raising' do
+    payment = Payment.new(user: users(:two), card: cards(:two), cards_purchased: 1, period: 8)
+    def payment.save!(*)
+      raise Stripe::StripeError, 'card declined'
+    end
+    payment.purchase
+    assert_equal Payment::FAILED.to_s, payment.status
+    assert payment.errors[:base].any? { |m| m.include?('There was a problem with your credit card.') }
+  end
+
+  test 'a programming error is no longer swallowed as a card problem' do
+    payment = Payment.new(user: users(:two), card: cards(:two), cards_purchased: 1, period: 8)
+    def payment.save!(*)
+      raise NotImplementedError, 'boom'
+    end
+    assert_raises(NotImplementedError) { payment.purchase }
+  end
+
   test 'price constants describe the card pricing in cents' do
     assert_equal 499, Payment::PRICE
     assert_equal 299, Payment::PRICE_PER_CARD

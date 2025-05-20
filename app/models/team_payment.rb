@@ -51,7 +51,7 @@ class TeamPayment < ApplicationRecord
 	    end
 	    save!
     end
-  rescue Exception => e
+  rescue StandardError => e
     errors.add :base, "There was a problem with your credit card."
     self.status = FAILED
     return self

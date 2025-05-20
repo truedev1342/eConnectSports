@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
       new_sub['name']="#{params[:user][:first_name]} #{params[:user][:last_name]}"
       begin
         aweber.account.lists[AWEBER[:list_id]].subscribers.create(new_sub)
-      rescue  Exception => e
+      rescue StandardError => e
         Rails.logger.error("Failed to add subscriber to AWeber: #{e.message}")
       end
 
