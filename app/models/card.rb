@@ -106,6 +106,36 @@ class Card < ApplicationRecord
     (paid_to_time && paid_to_time > Time.zone.now)
   end
 
+  PHONE_LOCATIONS = { 1 => 'home', 2 => 'cell', 3 => 'work', 4 => 'work' }.freeze
+
+  # Builds the vCard used by the download action and the vCard mailer.
+  def to_vcard
+    card = self
+    Vpim::Vcard::Maker.make2 do |maker|
+      maker.add_name do |name|
+        name.given = card.first_name.to_s
+        name.family = card.last_name.to_s
+      end
+
+      maker.org = card.team_name.to_s if card.team_name.present?
+      maker.title = card.position.to_s if card.position.present?
+
+      card.card_phones.each do |phone|
+        next if phone.nmbr.blank?
+
+        location = PHONE_LOCATIONS[phone.location] || 'work'
+        maker.add_tel("+1#{phone.nmbr}") do |tel|
+          tel.location = location
+          tel.capability = 'fax' if phone.location == 4
+        end
+      end
+
+      card.card_emails.each do |email|
+        maker.add_email(email.address.to_s) if email.address.present?
+      end
+    end
+  end
+
   def send_notification
     if self.user_id.blank?
       Notifications.new_card(self).deliver_now

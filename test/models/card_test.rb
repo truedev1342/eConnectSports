@@ -53,6 +53,52 @@ class CardTest < ActiveSupport::TestCase
     assert_equal paid_to, card.reload.paid_to
   end
 
+  test 'to_vcard carries the player name' do
+    vcard = cards(:one).to_vcard.to_s
+    assert_includes vcard, 'first'
+    assert_includes vcard, 'player'
+  end
+
+  test 'to_vcard uses the team name as the organisation' do
+    assert_includes cards(:one).to_vcard.to_s, 'First Team'
+  end
+
+  test 'to_vcard uses the position as the title' do
+    assert_includes cards(:one).to_vcard.to_s, 'Pitcher'
+  end
+
+  test 'to_vcard includes phone numbers' do
+    assert_includes cards(:one).to_vcard.to_s, '555-0100'
+  end
+
+  test 'to_vcard includes email addresses' do
+    assert_includes cards(:one).to_vcard.to_s, 'first@example.com'
+  end
+
+  test 'to_vcard skips phone rows with no number' do
+    card = cards(:one)
+    card.card_phones.create!(nmbr: nil, location: 1)
+    assert_nothing_raised { card.reload.to_vcard }
+  end
+
+  test 'to_vcard works for a card with no details at all' do
+    card = Card.create!(card_name: 'Bare Card')
+    assert_nothing_raised { card.to_vcard }
+  end
+
+  test 'to_vcard marks a fax number with the fax capability' do
+    card = cards(:one)
+    card.card_phones.create!(nmbr: '555-0444', location: 4)
+    assert_includes card.reload.to_vcard.to_s.downcase, 'fax'
+  end
+
+  test 'phone locations map to vcard location names' do
+    assert_equal 'home', Card::PHONE_LOCATIONS[1]
+    assert_equal 'cell', Card::PHONE_LOCATIONS[2]
+    assert_equal 'work', Card::PHONE_LOCATIONS[3]
+    assert_equal 'work', Card::PHONE_LOCATIONS[4]
+  end
+
   test 'destroying a card destroys its phone numbers' do
     card = cards(:one)
     phone = card.card_phones.create!(nmbr: '555-0999', location: 1)
