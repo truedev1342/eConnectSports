@@ -2,7 +2,7 @@ class Notifications < ApplicationMailer
   default from: "info@idigitallsports.com", to: "info@idigitallsports.com"
 
   def contact(email_params, sent_at = Time.now)
-    @subject = "I Dig It All Sports Website Contact Form: " << email_params[:subject]
+    @subject = "I Dig It All Sports Website Contact Form: #{email_params[:subject]}"
     @recipients = "info@idigitallsports.com"
     @from = email_params[:name]+"<"+email_params[:address]+">"
     @sent_on = sent_at
@@ -15,17 +15,12 @@ class Notifications < ApplicationMailer
   def new_signup(user)
     @subject = "New Sign Up at iDigitallSports!"
     @user = user
-    if user.user_agent.include? 'Mobile'
+    if user.user_agent.to_s.include?('Mobile')
       @type = 'mobile device'
     else
       @type = 'desktop'
     end
     mail(:subject => @subject, :from => "notifier@idigitallsports.com")
-  end
-
-  def first_touch_message(user)
-    @user = user
-    mail to: user.email, subject: "iDigItAll Sports | Congratulations! #{@user.first_name}"
   end
 
   def new_card(card)
