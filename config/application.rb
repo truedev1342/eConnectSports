@@ -21,5 +21,8 @@ module Players
     config.filter_parameters += [:password, :password_confirmation]
 
     config.i18n.enforce_available_locales = false
+
+    # Background work runs through Resque.
+    config.active_job.queue_adapter = :resque
   end
 end
