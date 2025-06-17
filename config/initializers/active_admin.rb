@@ -1,4 +1,3 @@
-require 'admin_footer'
 ActiveAdmin.setup do |config|
 
   # == Site Title
@@ -149,6 +148,11 @@ ActiveAdmin.setup do |config|
   # Set the CSV builder separator (default is ",")
   # config.csv_column_separator = ','
 
-  # == Custom Footer
-  config.view_factory.footer = AdminFooter
+end
+
+# AdminFooter lives in app/components and is autoloaded, so it must not be
+# `require`d, and it has to be re-resolved after each reload rather than
+# captured once while the initializers run.
+Rails.application.config.to_prepare do
+  ActiveAdmin.application.view_factory.footer = AdminFooter
 end
