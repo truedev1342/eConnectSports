@@ -1,4 +1,4 @@
-class PublicKiosksController < InheritedResources::Base
+class PublicKiosksController < ApplicationController
   before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 

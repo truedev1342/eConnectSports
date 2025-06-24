@@ -1,4 +1,20 @@
-class TeamPaymentsController < InheritedResources::Base
+class TeamPaymentsController < ApplicationController
+  before_action :set_team_payment, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @team_payments = TeamPayment.all
+  end
+
+  def show
+  end
+
+  def new
+    @team_payment = TeamPayment.new
+  end
+
+  def edit
+  end
+
   def create
     @team_payment = TeamPayment.new(team_payment_params)
     @current_team = Team.find_by(id: params[:team_payment][:team_id])
@@ -18,7 +34,26 @@ class TeamPaymentsController < InheritedResources::Base
       render :new
     end
   end
+
+  def update
+    if @team_payment.update(team_payment_params)
+      redirect_to @team_payment, notice: 'Team payment was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @team_payment.destroy
+    redirect_to team_payments_path, notice: 'Team payment was deleted.'
+  end
+
   private
+
+  def set_team_payment
+    @team_payment = TeamPayment.find(params[:id])
+  end
+
   def team_payment_params
 		params.require(:team_payment).permit(:stripe_card_token, :stripe_customer_token, :email, :amount, :memberships_purchased, :team_id)
 	end
