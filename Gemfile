@@ -37,6 +37,7 @@ gem 'vpim'
 gem 'best_in_place'
 
 gem 'will_paginate'
+gem 'ransack'
 # gem 'meta_search'
 
 # Development dependencies

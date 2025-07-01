@@ -2,24 +2,18 @@ class ContactsController < ApplicationController
 before_action :authenticate_user!
 
   def index
-    require 'will_paginate/array'
     @user = User.find(params[:user_id])
-    # @contacts = @user.contacts.find(:all)
-    @contacts = @user.contacts.all
-    @search = Contact.search(params[:search], :user_id => params[:user_id])
+    @contacts = @user.contacts
+    @search = @contacts.ransack(params[:q])
+    @paginated_contacts = @search.result
+                                 .includes(:card)
+                                 .paginate(page: params[:page], per_page: 10)
 
-    if params[:search]
-      @paginated_contacts = @search.all.paginate(:page => params[:page], :per_page => 10)
-    else
-      @paginated_contacts = @contacts.paginate(:page => params[:page], :per_page => 10)
-    end
-
-    # @activities = Activity.find_all_by_user_id(current_user.id, :order => 'created_at DESC', :limit => 5)
     @activities = Activity.where(user_id: current_user.id).order(created_at: :desc).limit(5)
 
     respond_to do |format|
       format.html
-      format.json { render json: @cards }
+      format.json { render json: @contacts }
     end
   end
 

@@ -74,10 +74,10 @@
             <% end %>
 
       <h4>Directory</h4>
-      <%= form_for @search, :url => user_contacts_path(current_user), :html => {:method => :get, :class => "form-inline"} do |f| %>
+      <%= search_form_for @search, :url => user_contacts_path(current_user), :html => {:method => :get, :class => "form-inline"} do |f| %>
         <i class="icon-search"></i>
-        <%= f.text_field :card_first_name_equals, :placeholder => "First Name" %>
-        <%= f.text_field :card_last_name_equals, :placeholder => "Last Name" %>
+        <%= f.search_field :card_first_name_eq, :placeholder => "First Name" %>
+        <%= f.search_field :card_last_name_eq, :placeholder => "Last Name" %>
         <%= f.submit "Search", :class => "btn btn-mini" %>
       <% end %>
       <table class="table">
