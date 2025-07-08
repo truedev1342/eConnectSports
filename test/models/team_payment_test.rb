@@ -115,6 +115,11 @@ class TeamPaymentTest < ActiveSupport::TestCase
                  [TeamPayment::PROCESSING, TeamPayment::FAILED, TeamPayment::SUCCESS]
   end
 
+  test 'the transaction column is transaction_number' do
+    assert_includes TeamPayment.column_names, 'transaction_number'
+    assert_not_includes TeamPayment.column_names, 'transaction'
+  end
+
   test 'belongs to a team' do
     assert_equal teams(:one), team_payments(:one).team
   end
