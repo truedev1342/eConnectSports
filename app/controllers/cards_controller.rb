@@ -103,7 +103,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       record_activity("Deleted <b>"+@card.card_name+"</b> card") #This will call application controller record_activity
-      format.html { redirect_back(fallback_location: root_path) }
+      format.html { redirect_back(fallback_location: root_path, allow_other_host: false) }
       format.json { head :no_content }
     end
   end
@@ -125,7 +125,7 @@ class CardsController < ApplicationController
     @card = Card.find(params[:card_id])
     VcardMailer.send_vcard(params[:vcard_email], @card).deliver_now
     flash[:notice] = "Email was sent successfully."
-    redirect_back(fallback_location: root_path)
+    redirect_back(fallback_location: root_path, allow_other_host: false)
   end
 
   def new_demo_card

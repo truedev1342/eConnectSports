@@ -87,14 +87,14 @@ class TeamsController < ApplicationController
                           notice: "You have created the #{@membership.team.name} team. Please fill out your details below for your member card."
             end            
           else
-            format.html { redirect_back(fallback_location: teams_path, notice: "Could not create card.") }
+            format.html { redirect_back(fallback_location: teams_path, allow_other_host: false, notice: "Could not create card.") }
           end
         else
-          format.html { redirect_back(fallback_location: teams_path, notice: "Could not create membership.") }
+          format.html { redirect_back(fallback_location: teams_path, allow_other_host: false, notice: "Could not create membership.") }
         end
       end
     else
-      format.html { redirect_back(fallback_location: root_path, notice: "Could not create team.") }
+      format.html { redirect_back(fallback_location: root_path, allow_other_host: false, notice: "Could not create team.") }
       format.json { render json: @team.errors, status: :unprocessable_entity }
     end
   end

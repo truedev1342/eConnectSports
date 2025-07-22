@@ -57,7 +57,8 @@ class ApplicationController < ActionController::Base
 
     def force_www!
 	  if Rails.env.production? and request.host[0..18] == "idigitallsports.com"
-	    redirect_to "#{request.protocol}www.#{request.host_with_port}#{request.fullpath}", :status => 301
+	    redirect_to "#{request.protocol}www.#{request.host_with_port}#{request.fullpath}",
+	                :status => 301, :allow_other_host => true
 	  end
 	end
 

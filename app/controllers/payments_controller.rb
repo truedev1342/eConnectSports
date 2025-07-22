@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
       end
       redirect_to card, notice: notice
     else
-      redirect_back(fallback_location: root_path)
+      redirect_back(fallback_location: root_path, allow_other_host: false)
     end
   end
 
@@ -60,7 +60,7 @@ class PaymentsController < ApplicationController
         Payment.new(period: 12, user_id: current_user.id, card_id: params[:card_id]).save(validate: false)
         redirect_to root_path, notice: "You got #{pluralize(@promo.cards, 'card')}!" and return
       else
-        redirect_back(fallback_location: root_path, alert: 'Wrong promo code.') and return
+        redirect_back(fallback_location: root_path, allow_other_host: false, alert: 'Wrong promo code.') and return
       end
     end
     if @payment.purchase(@buy_more)

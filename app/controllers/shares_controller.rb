@@ -31,7 +31,7 @@ class SharesController < ApplicationController
 		return if request.xhr?
 	    redirect_to [current_user, :shares], notice: "#{type} shared with #{recipient}."
 	  else
-	    redirect_back(fallback_location: root_path)
+	    redirect_back(fallback_location: root_path, allow_other_host: false)
 	  end
 	end
 
@@ -42,7 +42,7 @@ class SharesController < ApplicationController
 		message = email["message"]
 		ShareMailer.contact(recipient, subject, message).deliver_now
 		return if request.xhr?
-		redirect_back(fallback_location: root_path)
+		redirect_back(fallback_location: root_path, allow_other_host: false)
 	end
 
 private

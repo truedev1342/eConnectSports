@@ -24,7 +24,7 @@ before_action :authenticate_user!
 
     respond_to do |format|
       if @membership.update(membership_params)
-        format.html { redirect_back(fallback_location: root_path, notice: 'Membership was successfully updated.') }
+        format.html { redirect_back(fallback_location: root_path, allow_other_host: false, notice: 'Membership was successfully updated.') }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -40,7 +40,7 @@ before_action :authenticate_user!
     @membership.destroy
 
     respond_to do |format|
-      format.html { redirect_back(fallback_location: root_path, notice: 'Member removed.') }
+      format.html { redirect_back(fallback_location: root_path, allow_other_host: false, notice: 'Member removed.') }
       format.json { head :no_content }
     end
   end
@@ -67,14 +67,14 @@ before_action :authenticate_user!
     if @card
       redirect_to edit_membership_card_path(@membership, @card), notice: "You are now a member of #{@membership.team.name}. Please fill out your details below."
     else
-      redirect_back(fallback_location: root_path, notice: "There was a problem adding your team card #{@card}")
+      redirect_back(fallback_location: root_path, allow_other_host: false, notice: "There was a problem adding your team card #{@card}")
     end
   end
 
   def decline
     @membership = Membership.find(params[:id])
     @membership.update_attribute(:approved, false)
-    redirect_back(fallback_location: root_path, notice: "You declined membership to #{@membership.team.name}.")
+    redirect_back(fallback_location: root_path, allow_other_host: false, notice: "You declined membership to #{@membership.team.name}.")
   end
 
   def make_admin
