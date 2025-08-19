@@ -32,11 +32,9 @@ module ApplicationHelper
   end
 
   def total_cards_purchased
-    if current_user.cards_purchased == nil || current_user.cards_purchased == ''
-      0
-    else
-      current_user.cards_purchased
-    end
+    return 0 unless user_signed_in?
+
+    current_user.cards_purchased.presence || 0
   end
 
   def android_app_link
