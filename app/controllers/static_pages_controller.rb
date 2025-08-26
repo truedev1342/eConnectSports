@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
     Notifications.contact(params[:email]).deliver_now
     flash[:notice] = "Email was sent successfully."
     
-    redirect_to contact_path
+    redirect_to contact_us_path
   end
 
   def first_touch_email
