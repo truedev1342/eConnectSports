@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get 'first-touch-message', to: 'static_pages#first_touch_email'
 
   resources :team_payments
-  resources :stats
   resources :payments
   resources :public_kiosks do
     resource :team
@@ -51,14 +50,11 @@ Rails.application.routes.draw do
       end
       delete 'saved_cards', to: 'saved_cards#destroy'
       post 'save', to: 'saved_cards#create'
-      resources :card_phones
-      resources :card_websites
-      resources :shares # Removed redundant shares
-      resources :stats # Removed redundant stats
+      resources :shares
 
     end
     resources :contacts do # Removed nested cards,shares, and stats.  These are already accessible through the user.
-      resources :card_phones, :card_websites, :shares, :stats
+      resources :shares
     end
     resources :shares # Removed redundant shares
     resources :teams
@@ -87,7 +83,7 @@ Rails.application.routes.draw do
   end
 
   resources :cards do # Removed redundant member routes and nested resources.
-    resources :card_phones, :card_websites, :shares, :stats
+    resources :shares
     resources :contacts
   end
 
