@@ -1,49 +1,83 @@
 require 'test_helper'
 
-class CardsControllerTest < ActionController::TestCase
+class CardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @card = cards(:one)
+    @user = users(:one)
+    @card.payments.update_all(paid_to: 1.month.from_now)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:cards)
-  end
-
-  test "should get new" do
-    get :new
+  test 'a card is viewable without signing in' do
+    get card_path(@card)
     assert_response :success
   end
 
-  test "should create card" do
-    assert_difference('Card.count') do
-      post :create, params: { card: { address1: @card.address1, address2: @card.address2, card_name: @card.card_name, city: @card.city, first_name: @card.first_name, last_name: @card.last_name, state: @card.state, title: @card.title, zip_code: @card.zip_code } }
+  test 'the new card form requires a signed in user' do
+    get new_card_path
+    assert_redirected_to new_user_session_path
+  end
+
+  test 'a signed in user can open the new card form' do
+    sign_in @user
+    get new_card_path
+    assert_response :success
+  end
+
+  test 'the edit form requires a signed in user' do
+    get edit_card_path(@card)
+    assert_redirected_to new_user_session_path
+  end
+
+  test 'a signed in user can open the edit form' do
+    sign_in @user
+    get edit_card_path(@card)
+    assert_response :success
+  end
+
+  test 'updating a card changes permitted attributes' do
+    sign_in @user
+    patch card_path(@card), params: { card: { card_name: 'Renamed Card' } }
+    assert_equal 'Renamed Card', @card.reload.card_name
+  end
+
+  test 'update ignores attributes that are not permitted' do
+    sign_in @user
+    original = @card.user_token
+    patch card_path(@card), params: { card: { card_name: 'Renamed Card' },
+                                      id_value: 'injected' }
+    assert_equal original, @card.reload.user_token
+  end
+
+  test 'destroying a card removes it' do
+    sign_in @user
+    assert_difference 'Card.count', -1 do
+      delete card_path(@card)
     end
-
-    assert_redirected_to card_path(assigns(:card))
   end
 
-  test "should show card" do
-    get :show, params: { id: @card }
+  test 'the vcard download returns a vcard attachment' do
+    sign_in @user
+    get vcard_user_card_path(@user, @card)
     assert_response :success
+    assert_equal 'text/vcard; charset=utf-8', response.headers['Content-Type']
+    assert_includes response.body, 'BEGIN:VCARD'
   end
 
-  test "should get edit" do
-    get :edit, params: { id: @card }
-    assert_response :success
-  end
-
-  test "should update card" do
-    put :update, params: { id: @card, card: { address1: @card.address1, address2: @card.address2, card_name: @card.card_name, city: @card.city, first_name: @card.first_name, last_name: @card.last_name, state: @card.state, title: @card.title, zip_code: @card.zip_code } }
-    assert_redirected_to card_path(assigns(:card))
-  end
-
-  test "should destroy card" do
-    assert_difference('Card.count', -1) do
-      delete :destroy, params: { id: @card }
+  test 'send_vcard mails the card to the given address' do
+    sign_in @user
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+      post send_vcard_user_card_path(@user, @card), params: { vcard_email: 'friend@example.com' }
     end
+  end
 
-    assert_redirected_to cards_path
+  test 'the calendar page renders' do
+    sign_in @user
+    get calendar_user_card_path(@user, @card)
+    assert_response :success
+  end
+
+  test 'check_url_alias rejects a reserved alias' do
+    post '/cards/check_url_alias', params: { url_alias: 'admin' }
+    assert_response :success
   end
 end

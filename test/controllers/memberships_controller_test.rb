@@ -1,49 +1,56 @@
 require 'test_helper'
 
-class MembershipsControllerTest < ActionController::TestCase
+class MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @membership = memberships(:one)
+    @user = users(:two)
+    @membership = memberships(:two)
   end
 
-  test "should get index" do
-    get :index
+  test 'the invites list requires a signed in user' do
+    get invites_path
+    assert_redirected_to new_user_session_path
+  end
+
+  test 'a signed in user sees their pending invites' do
+    @membership.update!(approved: nil)
+    sign_in @user
+    get invites_path
     assert_response :success
-    assert_not_nil assigns(:memberships)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create membership" do
-    assert_difference('Membership.count') do
-      post :create, params: { membership: {  } }
+  test 'approving a membership creates a team card' do
+    @membership.update!(approved: nil)
+    sign_in @user
+    assert_difference 'Card.count', 1 do
+      get approve_user_membership_path(@user, @membership)
     end
-
-    assert_redirected_to membership_path(assigns(:membership))
+    assert @membership.reload.approved?
   end
 
-  test "should show membership" do
-    get :show, params: { id: @membership }
-    assert_response :success
+  test 'declining a membership marks it declined' do
+    @membership.update!(approved: nil)
+    sign_in @user
+    get decline_user_membership_path(@user, @membership)
+    assert_equal false, @membership.reload.approved
   end
 
-  test "should get edit" do
-    get :edit, params: { id: @membership }
-    assert_response :success
+  test 'make_admin promotes the member' do
+    sign_in @user
+    get make_admin_user_membership_path(@user, @membership)
+    assert @membership.reload.admin?
   end
 
-  test "should update membership" do
-    put :update, params: { id: @membership, membership: {  } }
-    assert_redirected_to membership_path(assigns(:membership))
+  test 'make_member demotes the member' do
+    @membership.update!(admin: true)
+    sign_in @user
+    get make_member_user_membership_path(@user, @membership)
+    assert_not @membership.reload.admin?
   end
 
-  test "should destroy membership" do
-    assert_difference('Membership.count', -1) do
-      delete :destroy, params: { id: @membership }
+  test 'destroying a membership removes it' do
+    sign_in @user
+    assert_difference 'Membership.count', -1 do
+      delete user_membership_path(@user, @membership)
     end
-
-    assert_redirected_to memberships_path
   end
 end
