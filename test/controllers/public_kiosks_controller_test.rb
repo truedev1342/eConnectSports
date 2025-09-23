@@ -1,49 +1,37 @@
 require 'test_helper'
 
-class PublicKiosksControllerTest < ActionController::TestCase
+class PublicKiosksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @public_kiosk = public_kiosks(:one)
+    @kiosk = public_kiosks(:one)
+    @team = teams(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:public_kiosks)
-  end
-
-  test "should get new" do
-    get :new
+  test 'a kiosk is viewable by anyone' do
+    get public_kiosk_path(@kiosk)
     assert_response :success
   end
 
-  test "should create public_kiosk" do
-    assert_difference('PublicKiosk.count') do
-      post :create, params: { public_kiosk: { background: @public_kiosk.background, background_tile: @public_kiosk.background_tile, logo: @public_kiosk.logo } }
-    end
-
-    assert_redirected_to public_kiosk_path(assigns(:public_kiosk))
-  end
-
-  test "should show public_kiosk" do
-    get :show, params: { id: @public_kiosk }
+  test 'a kiosk can be reached through its team' do
+    get team_public_kiosk_path(@team)
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, params: { id: @public_kiosk }
-    assert_response :success
+  test 'updating a kiosk requires a signed in user' do
+    patch public_kiosk_path(@kiosk), params: { public_kiosk: { description: 'Changed' } }
+    assert_redirected_to new_user_session_path
   end
 
-  test "should update public_kiosk" do
-    put :update, params: { id: @public_kiosk, public_kiosk: { background: @public_kiosk.background, background_tile: @public_kiosk.background_tile, logo: @public_kiosk.logo } }
-    assert_redirected_to public_kiosk_path(assigns(:public_kiosk))
+  test 'a signed in user can update the description' do
+    sign_in users(:one)
+    patch public_kiosk_path(@kiosk), params: { public_kiosk: { description: 'Changed' } }
+    assert_equal 'Changed', @kiosk.reload.description
+    assert_redirected_to public_kiosk_path(@kiosk)
   end
 
-  test "should destroy public_kiosk" do
-    assert_difference('PublicKiosk.count', -1) do
-      delete :destroy, params: { id: @public_kiosk }
-    end
-
-    assert_redirected_to public_kiosks_path
+  test 'update ignores attributes that are not permitted' do
+    sign_in users(:one)
+    patch public_kiosk_path(@kiosk), params: { public_kiosk: { description: 'Changed',
+                                                              team_id: teams(:two).id } }
+    assert_equal 'Changed', @kiosk.reload.description
   end
 end
