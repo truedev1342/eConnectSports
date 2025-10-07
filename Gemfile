@@ -11,10 +11,9 @@ gem 'pg', '~> 1.5.0'
 gem 'unicorn'
 gem 'bootsnap', require: false
 
-gem 'nokogiri', '1.15.7'
-gem 'multipart-post', '2.0.0'
-gem 'loofah', '2.23.1'
-gem 'rails-html-sanitizer', '1.6.2'
+gem 'nokogiri', '~> 1.16'
+gem 'loofah', '~> 2.23'
+gem 'rails-html-sanitizer', '~> 1.6'
 gem 'activerecord-session_store'
 
 # Authentication
@@ -65,7 +64,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bcrypt'
 
 # Frontend gems
-gem 'execjs', '~> 2.10.0'
+gem 'execjs'
 gem 'bootstrap-wysihtml5-rails'
 gem 'formtastic-bootstrap'
 gem 'bootstrap-colorpicker-rails'
@@ -80,9 +79,9 @@ gem 'aweber'
 gem 'rails-controller-testing'
 
 # Queueing
-gem 'resque', '~> 1.27.0'
+gem 'resque', '~> 2.6'
 gem 'capistrano-resque', '~> 0.1.0', require: false
-gem 'resque-scheduler', '~> 4.4.0'
+gem 'resque-scheduler', '~> 4.10'
 
 # Configuration for mailers and others
 gem 'premailer-rails'
