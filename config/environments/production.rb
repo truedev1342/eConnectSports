@@ -21,7 +21,7 @@ Rails.application.configure do
 
   # Assets are precompiled at deploy time, so don't compile them on request.
   config.assets.compile = false
-  config.assets.js_compressor = :uglifier
+  config.assets.js_compressor = :terser
 
   config.middleware.use Rack::SslEnforcer, only: '/payments'
 
