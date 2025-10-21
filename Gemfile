@@ -22,7 +22,6 @@ gem 'devise_invitable'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-gem 'rack-ssl-enforcer'
 
 # Uploads
 gem 'carrierwave'

@@ -23,7 +23,9 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.js_compressor = :terser
 
-  config.middleware.use Rack::SslEnforcer, only: '/payments'
+  # nginx terminates TLS in front of the app.
+  config.assume_ssl = true
+  config.force_ssl = true
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
