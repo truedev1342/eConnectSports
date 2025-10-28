@@ -15,12 +15,6 @@ module Players
     # -- all .rb files in that directory are automatically loaded.
     config.load_defaults 7.2
 
-    # 7.0 switches signed/encrypted cookie key derivation to SHA256, which
-    # invalidates every existing session and "remember me" cookie. Stay on SHA1
-    # for one release so users are not all signed out by the deploy, then remove
-    # this line.
-    config.active_support.key_generator_hash_digest_class = OpenSSL::Digest::SHA1
-
     config.encoding = 'utf-8'
 
     # Disable logging of passwords.
