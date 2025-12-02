@@ -58,6 +58,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-ui-themes'
 gem 'sprockets', '~> 3.7'
+gem 'sprockets-rails'
 gem 'terser'
 
 gem 'bcrypt'
