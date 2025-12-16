@@ -18,9 +18,7 @@ class Contact < ApplicationRecord
   end
   belongs_to :user
   belongs_to :card
-  # attr_accessible :card_id, :user_id
 
   validates_presence_of :card_id
-
 
 end

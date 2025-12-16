@@ -17,5 +17,4 @@ class Stat < ApplicationRecord
     ["abbr", "card_id", "created_at", "id", "kind", "name", "updated_at", "value"]
   end
   belongs_to :card
-  # attr_accessible :abbr, :name, :value, :kind
 end

@@ -14,5 +14,4 @@ class CardEmail < ApplicationRecord
     ["address", "card_id", "created_at", "id", "updated_at"]
   end
   belongs_to :card
-  # attr_accessible :address
 end

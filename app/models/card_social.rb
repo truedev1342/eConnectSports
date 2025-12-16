@@ -17,5 +17,4 @@ class CardSocial < ApplicationRecord
     ["card_id", "created_at", "id", "kind", "updated_at", "url"]
   end
   belongs_to :card
-  # attr_accessible :kind, :url
 end

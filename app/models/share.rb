@@ -20,7 +20,6 @@ class Share < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["shareable", "user"]
   end
-  # attr_accessible :destination_email, :user_id, :message, :contact_card
   belongs_to :shareable, polymorphic: true
   belongs_to :user
 end

@@ -13,11 +13,9 @@
 class CardWebsite < ApplicationRecord
   include SanitizableUrl
 
-
   def self.ransackable_attributes(auth_object = nil)
     ["card_id", "created_at", "id", "name", "updated_at", "url"]
   end
   
   belongs_to :card
-  # attr_accessible :url, :name
 end

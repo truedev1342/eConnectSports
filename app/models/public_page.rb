@@ -21,7 +21,6 @@ class PublicPage < ApplicationRecord
     ["card", "shares", "user"]
   end
   belongs_to :user
-  # attr_accessible :background, :logo, :status, :user_id, :card_id, :background_tile, :remove_background
   belongs_to :card, optional: true
   mount_uploader :background, BackgroundUploader
 

@@ -20,7 +20,6 @@ class PublicKiosk < ApplicationRecord
     ["background", "background_tile", "created_at", "description", "id", "logo", "team_id", "updated_at"]
   end
   belongs_to :team
-  # attr_accessible :background, :background_tile, :logo, :team_id, :description, :remove_background, :remove_logo
 
   mount_uploader :logo, LogoUploader
   mount_uploader :background, BackgroundUploader

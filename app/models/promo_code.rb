@@ -20,7 +20,6 @@ class PromoCode < ApplicationRecord
   end
   after_initialize :set_code
   before_create :set_code
-  # attr_accessible :cards, :code, :used
 
   belongs_to :user, optional: true
 

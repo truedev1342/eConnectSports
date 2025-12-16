@@ -24,5 +24,4 @@ class Membership < ApplicationRecord
     ["admin", "approved", "created_at", "id", "team_id", "updated_at", "user_id"]
   end
 
-  # attr_accessible :approved, :admin, :user_id, :team_id
 end

@@ -18,7 +18,6 @@ class Team < ApplicationRecord
 	def self.ransackable_attributes(auth_object = nil)
 		["created_at", "id", "memberships_purchased", "name", "owner_id", "updated_at"]
 	end
-	# attr_accessible :name, :owner_id, :memberships_purchased
 	has_one :public_kiosk
 	has_many :memberships, :dependent => :destroy
 	has_many :users, :through => :memberships
