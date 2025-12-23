@@ -25,3 +25,7 @@ Thumbs.*
 /public/assets*
 /public/_*
 /config/fog_credentials.yml
+
+# Editor and browser artifacts
+.tags*
+libpeerconnection.log
