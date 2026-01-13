@@ -23,7 +23,7 @@ before_fork do |server, worker|
   end
 
   defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
+      ActiveRecord::Base.connection_handler.clear_all_connections!
 
   old_pid = "#{server.config[:pid]}.oldbin"
   if old_pid != server.pid
