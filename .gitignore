@@ -29,3 +29,4 @@ Thumbs.*
 # Editor and browser artifacts
 .tags*
 libpeerconnection.log
+/config/aweber.yml

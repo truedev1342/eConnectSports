@@ -2,11 +2,17 @@ require_relative 'boot'
 
 require 'rails/all'
 
-# Aweber config, needed before the initializers run.
-AWEBER = YAML.safe_load(File.read(File.expand_path('../aweber.yml', __FILE__)))
-AWEBER.symbolize_keys!
-
 Bundler.require(*Rails.groups)
+
+# Aweber newsletter credentials. Kept as a top-level constant because the
+# registrations controller has always read it that way.
+AWEBER = {
+  consumer_key: ENV['AWEBER_CONSUMER_KEY'],
+  consumer_secret: ENV['AWEBER_CONSUMER_SECRET'],
+  access_token: ENV['AWEBER_ACCESS_TOKEN'],
+  access_token_secret: ENV['AWEBER_ACCESS_TOKEN_SECRET'],
+  list_id: ENV['AWEBER_LIST_ID']&.to_i
+}.freeze
 
 module Players
   class Application < Rails::Application
