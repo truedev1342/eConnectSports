@@ -41,6 +41,9 @@ gem 'ransack'
 # Development dependencies
 group :development do
   gem 'capistrano', '~> 3.19.0'
+  gem 'capistrano-rails', '~> 1.6'
+  gem 'capistrano-bundler', '~> 2.1'
+  gem 'capistrano-rbenv', '~> 2.2'
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -80,7 +83,7 @@ gem 'rails-controller-testing'
 
 # Queueing
 gem 'resque', '~> 2.6'
-gem 'capistrano-resque', '~> 0.1.0', require: false
+gem 'capistrano-resque', '~> 0.2.2', require: false
 gem 'resque-scheduler', '~> 4.10'
 
 # Configuration for mailers and others
