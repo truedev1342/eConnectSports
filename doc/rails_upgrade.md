@@ -129,6 +129,16 @@ Dependencies
 - `ransack` and `sprockets-rails` are now declared explicitly instead of being
   relied on transitively.
 
+Deployment
+----------
+
+`config/deploy.rb` and `config/recipes/` were Capistrano 2 (`run`, `sudo`, `put`,
+per-task `roles:`, `callbacks`) while the Gemfile had Capistrano 3, and the file
+still required `rvm/capistrano` from a gem that is no longer installed. The
+config was rewritten for Capistrano 3 with rbenv, and the Capistrano 2 recipe
+collection was removed. Credentials are delivered through `linked_files` rather
+than a checked-in sample.
+
 Secrets removed from the repository
 -----------------------------------
 
@@ -159,5 +169,3 @@ Still outstanding
 - The `status` columns on `payments` and `team_payments` are strings while the
   `PROCESSING`/`FAILED`/`SUCCESS` constants are integers, so values round-trip as
   `"1"`, `"2"`, `"3"`.
-- `config/recipes/` and `config/deploy.rb` are still Capistrano 2 while the
-  Gemfile has Capistrano 3.
