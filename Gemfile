@@ -73,7 +73,7 @@ gem 'formtastic-bootstrap'
 gem 'bootstrap-colorpicker-rails'
 gem 'font-awesome-rails'
 gem 'formtastic'
-gem 'activeadmin'
+gem 'activeadmin', '~> 3.5'
 
 gem 'stripe'
 gem 'paypal-recurring'

@@ -16,7 +16,6 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
-Gemfile.lock
 .env
 .idea
 Thumbs.*
