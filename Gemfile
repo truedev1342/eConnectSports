@@ -80,6 +80,7 @@ gem 'paypal-recurring'
 
 gem 'aweber'
 gem 'rails-controller-testing'
+gem 'minitest', '~> 5.25'
 
 # Queueing
 gem 'resque', '~> 2.6'
