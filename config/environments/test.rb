@@ -24,6 +24,9 @@ Rails.application.configure do
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection = false
 
+  # Queue jobs in memory so assert_enqueued_* work.
+  config.active_job.queue_adapter = :test
+
   config.active_storage.service = :test
   config.action_mailer.perform_caching = false
 

@@ -1,7 +1,18 @@
 require 'test_helper'
 
 class ApplicationHelperTest < ActionView::TestCase
-  include Devise::Test::ControllerHelpers
+  # current_user / user_signed_in? are injected by Devise into controllers and
+  # views. A helper test has no controller, so stand them in here and let the
+  # helper's own logic and queries run for real.
+  attr_reader :current_user
+
+  def user_signed_in?
+    @current_user.present?
+  end
+
+  def sign_in(user)
+    @current_user = user
+  end
 
   test 'app_url points at the public site' do
     assert_equal 'https://idigitallsports.com', app_url
