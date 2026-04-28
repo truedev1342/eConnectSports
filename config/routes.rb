@@ -82,9 +82,25 @@ Rails.application.routes.draw do
     resources :shares
   end
 
-  resources :cards do # Removed redundant member routes and nested resources.
+  resources :cards do
+    member do
+      get :share
+      get :vcard
+      get :calendar
+      post :send_vcard
+    end
     resources :shares
     resources :contacts
+  end
+
+  resources :memberships, only: [:destroy] do
+    member do
+      get :approve
+      get :decline
+      get :make_admin
+      get :make_member
+    end
+    resources :cards, only: [:edit, :update]
   end
 
   get '/create-demo-card', to: 'cards#new_demo_card', as: :new_demo_card # Changed to symbol

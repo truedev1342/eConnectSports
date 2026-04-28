@@ -32,7 +32,7 @@
                           <div class="card flow-card">
                             <div class="flow-card-nav">
                               <%= link_to "View", contact.card %>&nbsp;&#953;
-                              <%= link_to 'Delete'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, "data-icon" => "delete" %>&nbsp;&#953;
+                              <%= link_to 'Delete'.html_safe, user_contact_path(current_user, contact), method: :delete, data: { confirm: 'Are you sure?' }, "data-icon" => "delete" %>&nbsp;&#953;
                               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Share <span class="caret"></span></a>
                               <ul class="dropdown-menu">
                                 <li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
