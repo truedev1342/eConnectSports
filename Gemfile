@@ -69,7 +69,6 @@ gem 'bcrypt'
 # Frontend gems
 gem 'execjs'
 gem 'bootstrap-wysihtml5-rails'
-gem 'formtastic-bootstrap'
 gem 'bootstrap-colorpicker-rails'
 gem 'font-awesome-rails'
 gem 'formtastic'

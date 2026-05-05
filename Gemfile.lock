@@ -225,8 +225,6 @@ GEM
       reline
     formtastic (6.0.0)
       actionpack (>= 7.2.0)
-    formtastic-bootstrap (3.1.1)
-      formtastic (>= 3.0)
     formtastic_i18n (0.7.0)
     fugit (1.13.0)
       et-orbi (~> 1.4)
@@ -600,7 +598,6 @@ DEPENDENCIES
   fog-aws
   font-awesome-rails
   formtastic
-  formtastic-bootstrap
   jquery-rails
   jquery-ui-rails
   jquery-ui-themes
@@ -710,7 +707,6 @@ CHECKSUMS
   font-awesome-rails (4.7.0.9) sha256=b45044908fbf3178b8d84fbae415dae4b9bf847612bcb1170d88ed13842c8732
   formatador (1.2.3) sha256=19fa898133c2c26cdbb5d09f6998c1e137ad9427a046663e55adfe18b950d894
   formtastic (6.0.0) sha256=c398906b65978fec3d045d6792f82cf9641f086ac9f17357b2b382f723126165
-  formtastic-bootstrap (3.1.1) sha256=b5071bc9c51d9c36e0b251d39eb3631b3f61dcc6ca110c776109889cb8972fc8
   formtastic_i18n (0.7.0) sha256=ecef51c9e9030c00f19e69d2483b77f4515c9587d74268b76cf4b6e7988c8e78
   fugit (1.13.0) sha256=a4f093fce740da52f216740a5041e2a594ea763cdb89e8b2754ca4399634ab18
   globalid (1.4.0) sha256=037f12fbf1d9d7a014d501c2d5c77356fd4ddd96d7a7991d6700bba96706f427

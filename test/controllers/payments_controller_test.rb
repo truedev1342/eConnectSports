@@ -60,7 +60,21 @@ class PaymentsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     post payments_path, params: { promo_code: promo.code }
     assert_equal before + promo.cards, @user.reload.cards_purchased
-  rescue ActionController::RoutingError, AbstractController::ActionNotFound
-    skip 'promo redemption is not routed as a create action'
+    assert promo.reload.used?
+    assert_equal @user.id, promo.user_id
+  end
+
+  test 'an unknown promo code is rejected' do
+    before = @user.cards_purchased
+    sign_in @user
+    post payments_path, params: { promo_code: 'NOSUCHCODE' }
+    assert_equal 'Wrong promo code.', flash[:alert]
+    assert_equal before, @user.reload.cards_purchased
+  end
+
+  test 'an already used promo code is rejected' do
+    sign_in @user
+    post payments_path, params: { promo_code: promo_codes(:two).code }
+    assert_equal 'Wrong promo code.', flash[:alert]
   end
 end

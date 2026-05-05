@@ -5,6 +5,7 @@ class TeamPaymentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @team = teams(:one)
     @team_payment = team_payments(:one)
+    sign_in users(:one)
   end
 
   def stub_stripe
@@ -15,6 +16,12 @@ class TeamPaymentsControllerTest < ActionDispatch::IntegrationTest
         yield
       end
     end
+  end
+
+  test 'the payment list requires a signed in user' do
+    sign_out users(:one)
+    get team_payments_path
+    assert_redirected_to new_user_session_path
   end
 
   test 'the payment list renders' do

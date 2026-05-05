@@ -14,7 +14,7 @@
   <% end %>
   <style>
     #card-front-wrapper {
-      <% if @card.image? %>
+      <% if @card&.image? %>
       background-image: url(<%= @card.image_url(:card).to_s %>);
       <% else %>
       background-image: url('/assets/app/person-placeholder.jpg');

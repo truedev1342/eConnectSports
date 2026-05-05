@@ -25,7 +25,7 @@ class TeamPayment < ApplicationRecord
   attr_accessor :stripe_card_token
 
   validates :memberships_purchased, :presence => true, :numericality => { :greater_than => 0 }
-  validates :stripe_card_token, :presence => true
+  validates :stripe_card_token, :presence => true, :unless => :persisted?
   validates :email, :presence => true
 
   def purchase

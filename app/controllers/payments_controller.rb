@@ -36,19 +36,6 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = Payment.new(payment_params)
-    @payment.user = current_user
-    @payment.email = current_user.email
-    @previous_purchased = current_user.cards_purchased
-    #set unlimated period
-    @payment.period = 120
-    @new_purchased = @payment.cards_purchased
-    if !current_user.nil? && !current_user.cards_purchased.nil?
-      @buy_more = current_user.cards_purchased > 0 ? true : false
-    else
-      @buy_more = false
-    end
-
     if params[:promo_code].present?
       @promo = PromoCode.find_by(code: params[:promo_code])
       if @promo && !@promo.used
@@ -63,6 +50,20 @@ class PaymentsController < ApplicationController
         redirect_back(fallback_location: root_path, allow_other_host: false, alert: 'Wrong promo code.') and return
       end
     end
+
+    @payment = Payment.new(payment_params)
+    @payment.user = current_user
+    @payment.email = current_user.email
+    @previous_purchased = current_user.cards_purchased
+    #set unlimated period
+    @payment.period = 120
+    @new_purchased = @payment.cards_purchased
+    if !current_user.nil? && !current_user.cards_purchased.nil?
+      @buy_more = current_user.cards_purchased > 0 ? true : false
+    else
+      @buy_more = false
+    end
+
     if @payment.purchase(@buy_more)
       if  @payment.status.to_i == 3
         if true #@payment.renew_payment == "false" || !@payment.renew_payment

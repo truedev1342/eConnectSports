@@ -13,6 +13,7 @@ class SharesController < ApplicationController
 	  
 	def create
 	  @share = @shareable.shares.new(share_params)
+	  @share.user = current_user
 	  if @share.save
 		recipient = @share.destination_email
 		sender_name = current_user.full_name
@@ -65,7 +66,7 @@ private
 	end
 	
 	def share_params
-		params.require(:share).permit(:destination_email, :user_id, :message, :contact_card)
+		params.require(:share).permit(:destination_email, :message, :contact_card)
 	end
 
 	def user_params

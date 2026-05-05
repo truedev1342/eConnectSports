@@ -85,6 +85,7 @@
 				    <tbody>
 				      <% @admin_memberships.each do |admin| %>
 				      	<% admincard = Card.find_by(membership_id: admin.id) %>
+			      	<% next if admincard.nil? %>
 				        <tr>
 				          <td>
 				          	<%= admin.user.full_name %>
@@ -177,7 +178,7 @@
 			<div class="tab-pane" id="message">
 				<div class="row row-fluid">
 					<div class="span8">
-						<%= form_for :user, :url => send_message_path, :html => {:method => :post, :id => "send_message_to_team"} do |f| %>
+						<%= form_for :user, :url => send_team_message_path, :html => {:method => :post, :id => "send_message_to_team"} do |f| %>
 							<h4>Message</h4>
 							<div class="control-group">
 								<div class="controls">

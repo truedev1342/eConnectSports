@@ -1,4 +1,5 @@
 class TeamPaymentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_team_payment, only: [:show, :edit, :update, :destroy]
 
   def index

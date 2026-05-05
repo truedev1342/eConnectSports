@@ -86,7 +86,7 @@
           <tr>
             <td style="vertical-align:middle;"><%= contact.card.first_name.to_s %> <%= contact.card.last_name.to_s %></td>
             <td><center><%= link_to '<i class="icon-eye-open"></i>'.html_safe, contact.card, :class => "remove_fields", :title => "View Card" %></center></td>
-            <td><center><%= link_to '<i class="icon-minus-sign"></i>'.html_safe, contact, method: :delete, data: { confirm: 'Are you sure?' }, :class => "remove_fields", :title => "Remove Card from Collection" %></center></td>
+            <td><center><%= link_to '<i class="icon-minus-sign"></i>'.html_safe, user_contact_path(current_user, contact), method: :delete, data: { confirm: 'Are you sure?' }, :class => "remove_fields", :title => "Remove Card from Collection" %></center></td>
           </tr>
         <% end %>
       <% end %>
