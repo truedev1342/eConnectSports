@@ -51,7 +51,7 @@ class PaymentTest < ActiveSupport::TestCase
       raise Stripe::StripeError, 'card declined'
     end
     payment.purchase
-    assert_equal Payment::FAILED.to_s, payment.status
+    assert_equal Payment::FAILED, payment.status
     assert payment.errors[:base].any? { |m| m.include?('There was a problem with your credit card.') }
   end
 

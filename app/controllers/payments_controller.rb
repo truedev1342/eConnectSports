@@ -65,7 +65,7 @@ class PaymentsController < ApplicationController
     end
 
     if @payment.purchase(@buy_more)
-      if  @payment.status.to_i == 3
+      if @payment.status == Payment::SUCCESS
         if true #@payment.renew_payment == "false" || !@payment.renew_payment
           @total_purchased = @previous_purchased.to_i+@new_purchased
           current_user.update_column('cards_purchased', @total_purchased)

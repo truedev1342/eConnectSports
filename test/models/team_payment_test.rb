@@ -86,13 +86,13 @@ class TeamPaymentTest < ActiveSupport::TestCase
   test 'a paid charge is marked successful' do
     payment = valid_payment
     stub_stripe(paid: true) { payment.purchase }
-    assert_equal TeamPayment::SUCCESS.to_s, payment.status
+    assert_equal TeamPayment::SUCCESS, payment.status
   end
 
   test 'an unpaid charge is marked failed' do
     payment = valid_payment
     stub_stripe(paid: false) { payment.purchase }
-    assert_equal TeamPayment::FAILED.to_s, payment.status
+    assert_equal TeamPayment::FAILED, payment.status
   end
 
   test 'a stripe error is reported on the record instead of raising' do
@@ -100,14 +100,15 @@ class TeamPaymentTest < ActiveSupport::TestCase
     Stripe::Customer.stub(:create, ->(*) { raise Stripe::StripeError, 'card declined' }) do
       payment.purchase
     end
-    assert_equal TeamPayment::FAILED.to_s, payment.status
+    assert_equal TeamPayment::FAILED, payment.status
     assert_includes payment.errors[:base], 'There was a problem with your credit card.'
   end
 
-  test 'status is stored as a string even though the constants are integers' do
+  test 'status is stored as an integer matching the constants' do
     payment = valid_payment
     stub_stripe { payment.purchase }
-    assert_kind_of String, payment.status
+    assert_kind_of Integer, payment.status
+    assert_equal :integer, TeamPayment.type_for_attribute('status').type
   end
 
   test 'status constants are ordered processing, failed, success' do
