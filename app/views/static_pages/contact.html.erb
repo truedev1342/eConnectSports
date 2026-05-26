@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
+    <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39350804-1']);
@@ -51,7 +51,7 @@
   <%= stylesheet_link_tag 'application-website' %>
   <%= javascript_include_tag 'application-website' %>
 
-    <script>(function () {
+    <script nonce="<%= content_security_policy_nonce %>">(function () {
         if (navigator.userAgent.match(/Iemobile\/10\.0/)) {
             var msViewportStyle = document.createElement("style");
             msViewportStyle.appendChild(document.createTextNode("@-ms-viewport {width:auto!important}"));
@@ -151,8 +151,8 @@
     <a href="#top"><span></span>Back to Top</a>
 </nav>
 <!-- end back-top -->
-<script>$('input, textarea').placeholder();</script>
-<script type="text/javascript">
+<script nonce="<%= content_security_policy_nonce %>">$('input, textarea').placeholder();</script>
+<script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
    var _mfq = _mfq || [];
    (function() {
        var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;

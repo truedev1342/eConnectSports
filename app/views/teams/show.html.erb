@@ -1,6 +1,6 @@
 <% @page = "teams" %>
 <%= content_for :head do %>
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
 	$(document).ready(function(){
 		$('#memberTab a').click(function (e) {
 			e.preventDefault();
@@ -284,7 +284,7 @@
 										  <div class="modal-body">
 										  	<h3>Description</h3>
 										    <%= f.text_area :description, :rows => "5", :style => "width:450px;" %>
-										    <script type="text/javascript">
+										    <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
 											    $('#public_kiosk_description').wysihtml5({"image": false});
 											</script>
 											<h3>Background</h3>
@@ -321,13 +321,13 @@
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://www.facebook.com/share.php?u=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>" ><i class="icon-facebook-sign"></i> Facebook</a></li>
 
-									<li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= current_user.username %>&title=<%= current_user.full_name %>&summary=<%=u 'Checkout my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= current_user.username %>&title=<%= current_user.full_name %>&summary=<%=u 'Checkout my I Dig It All Sports card.' %>" ><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
 
-									<li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= current_user.full_name %> - <%= app_url %>/<%= current_user.username %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://twitter.com/home?status=<%= current_user.full_name %> - <%= app_url %>/<%= current_user.username %>" ><i class="icon-twitter-sign"></i> Twitter</a></li>
 
-									<li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="https://plus.google.com/share?url=<%= app_url %>/<%= current_user.username %>&t=<%= current_user.full_name %>" ><i class="icon-google-plus-sign"></i> Google+</a></li>
 
 									<li><a href="#"><i class='icon-envelope-alt'></i> Email</a></li>
 								</ul>

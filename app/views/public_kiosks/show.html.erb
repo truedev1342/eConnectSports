@@ -16,7 +16,7 @@
 		  }
 		  </style>
 		<% elsif @public_kiosk.background? %>
-		  <script>
+		  <script nonce="<%= content_security_policy_nonce %>">
 		  $.backstretch("<%= @public_kiosk.background_url.to_s %>");
 		  </script>
 		<% end %>

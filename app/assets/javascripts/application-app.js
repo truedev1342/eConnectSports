@@ -18,6 +18,7 @@
 //= require best_in_place
 //= require bootstrap-colorpicker
 //= require_tree ./app
+//= require share_popup
 
 $(document).ready(function(){
 	// Twitter Bootstrap iPad fix for dropdown top nav

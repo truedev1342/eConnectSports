@@ -13,7 +13,7 @@
 		<%= link_to "<i class='icon-minus-sign'></i>".html_safe, '#', :class => "remove_fields" %>
 	</div>
 </fieldset>
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
 	var sportValue = $('#sport').val();
     if(sportValue == 'Baseball') {
     	$('#kind-select-div<%=unique_id.to_s%>').append('<%= f.select(:kind, [

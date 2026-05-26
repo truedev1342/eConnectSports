@@ -46,25 +46,19 @@
 									<% end %>
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#">Trade <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-                                        <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
-                                                'app_id=348916705210945&' +
-                                                'link=<%=u card_url(card) %>&' +
-                                                'redirect_uri=http://www.idigitallsports.com&' +
-                                                'picture=<%= card.image_url(:card).to_s %>&' +
-                                                'name=Check out my IdigItAllSports Trading Card!&' +
-                                                'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                                        <li><a class="hrefless js-share-popup" data-share-url="https://www.facebook.com/dialog/feed?app_id=348916705210945&link=<%=u card_url(card) %>&redirect_uri=http://www.idigitallsports.com&picture=<%= card.image_url(:card).to_s %>&name=Check out my IdigItAllSports Trading Card!&description=The next generation trading card, Fun for all ages." >
                                             <i class="icon-facebook-sign"> </i>Facebook</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>" ><i class="icon-linkedin-sign"></i>
                                                 LinkedIn</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>" ><i class="icon-twitter-sign"></i>
                                                 Twitter</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>" ><i class="icon-google-plus-sign"></i>
                                                 Google+</a></li>
 
                                         <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_card_path(@user, card).to_s+"/shares/new" %></li>
@@ -223,13 +217,13 @@
 									<span class="caret"></span>
 								</a>
 								<ul class="dropdown-menu">
-									<li><a class="hrefless" onClick="window.open('http://www.facebook.com/share.php?u=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-facebook-sign"></i> Facebook</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://www.facebook.com/share.php?u=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>" ><i class="icon-facebook-sign"></i> Facebook</a></li>
 
-									<li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= @user.username %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/<%= @user.username %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>" ><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
 
-									<li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/<%= @user.username %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/<%= @user.username %>" ><i class="icon-twitter-sign"></i> Twitter</a></li>
 
-									<li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+									<li><a class="hrefless js-share-popup" data-share-url="https://plus.google.com/share?url=<%= app_url %>/<%= @user.username %>&t=<%= @user.full_name %>" ><i class="icon-google-plus-sign"></i> Google+</a></li>
 
 									<li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_public_page_path(@user, @public_page).to_s+"/shares/new" %></li>
 								</ul>
@@ -336,25 +330,19 @@
 									<% end %>
 									<a class="dropdown-toggle" data-toggle="dropdown" href="#">Trade <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-                                        <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
-                                                'app_id=348916705210945&' +
-                                                'link=<%=u card_url(card) %>&' +
-                                                'redirect_uri=http://www.idigitallsports.com&' +
-                                                'picture=<%= card.image_url(:card).to_s %>&' +
-                                                'name=Check out my IdigItAllSports Trading Card!&' +
-                                                'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                                        <li><a class="hrefless js-share-popup" data-share-url="https://www.facebook.com/dialog/feed?app_id=348916705210945&link=<%=u card_url(card) %>&redirect_uri=http://www.idigitallsports.com&picture=<%= card.image_url(:card).to_s %>&name=Check out my IdigItAllSports Trading Card!&description=The next generation trading card, Fun for all ages." >
                                             <i class="icon-facebook-sign"> </i>Facebook</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="http://www.linkedin.com/shareArticle?mini=true&url=<%= app_url %>/cards/<%= card.id %>&title=<%= @user.full_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>" ><i class="icon-linkedin-sign"></i>
                                                 LinkedIn</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="http://twitter.com/home?status=<%= @user.full_name %> - <%= app_url %>/cards/<%= card.id %>" ><i class="icon-twitter-sign"></i>
                                                 Twitter</a></li>
 
                                         <li>
-                                            <a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i>
+                                            <a class="hrefless js-share-popup" data-share-url="https://plus.google.com/share?url=<%= app_url %>/cards/<%= card.id %>&t=<%= @user.full_name %>" ><i class="icon-google-plus-sign"></i>
                                                 Google+</a></li>
 
                                         <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, user_card_path(@user, card).to_s+"/shares/new" %></li>

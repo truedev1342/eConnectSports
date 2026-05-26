@@ -1,5 +1,5 @@
 <% content_for :head do %>
-    <script>
+    <script nonce="<%= content_security_policy_nonce %>">
         function changePrice(){
           var quantity = parseInt($("#payment_cards_purchased").val()) ? parseInt($("#payment_cards_purchased").val()) : 0;
           var period = parseInt($('select#payment_period :selected').val())

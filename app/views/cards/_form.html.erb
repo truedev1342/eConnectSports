@@ -13,7 +13,7 @@
      }
    </style>
 
-   <script type="text/javascript" charset="utf-8">
+   <script nonce="<%= content_security_policy_nonce %>" type="text/javascript" charset="utf-8">
     $(document).ready(function() {
       <% unless old_ie? %>
         $(":file").filestyle({

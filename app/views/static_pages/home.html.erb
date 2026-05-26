@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
+    <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39350804-1']);
@@ -46,7 +46,7 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
-  <script>(
+  <script nonce="<%= content_security_policy_nonce %>">(
         function() {
           if (navigator.userAgent.match(/Iemobile\/10\.0/))
             {
@@ -321,7 +321,7 @@
   <nav id="back-top">
   <a href="#top"><span></span>Back to Top</a>
   </nav><!-- end back-top -->
-<script type="text/javascript">
+<script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
    var _mfq = _mfq || [];
    (function() {
        var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;
