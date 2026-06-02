@@ -114,10 +114,10 @@
         <!--  START FLIGHT  -->
         <div class="one-half">
             <%= form_tag('/email', :id => 'contact_form', :autocomplete => 'off' ) do %>
-                <%= text_field :email, :name, :id => "contact-name",  :autocomplete => 'none', :class => "contact-name", :placeholder => "Name", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %> 
-                <%= text_field :email, :address, :id => "contact-email", :class => "contact-email", :placeholder => "Email", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
-                <%= text_field :email, :website, :id => "contact-website", :class => "contact-website", :placeholder => "Website", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
-                <%= text_field :email, :subject, :id => "contact-subject", :class => "contact-subject", :placeholder => "Subject", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
+                <%= text_field :email, :name, :id => "contact-name",  :autocomplete => 'none', :class => "contact-name", :placeholder => "Name" %> 
+                <%= text_field :email, :address, :id => "contact-email", :class => "contact-email", :placeholder => "Email" %>
+                <%= text_field :email, :website, :id => "contact-website", :class => "contact-website", :placeholder => "Website" %>
+                <%= text_field :email, :subject, :id => "contact-subject", :class => "contact-subject", :placeholder => "Subject" %>
                 <%= text_area :email, :body, :rows => "6", :cols => "25", :id => "contact-message", :class => "contact-message", :placeholder => "Message" %>
                 <br><br>
                 <%= submit_tag "Send", :id => "contact-submit", :value => "Send Request", :class => "medium button contact-submit" %>
