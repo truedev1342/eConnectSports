@@ -151,21 +151,107 @@ environment.
 Rails secret token, AWS access keys, the SendGrid SMTP password, the Redis
 password, and the AWeber API keys.
 
+Verified running
+----------------
+
+The upgrade was run end to end on Ruby 3.4.2 / Rails 8.1.0 against PostgreSQL
+and Redis:
+
+- `bundle install` resolves and installs (190 gems).
+- The app boots, `db:schema:load` and `db:migrate` run clean.
+- `bin/rails test` is green: 316 runs, 625 assertions, 0 failures, 0 errors.
+- `RAILS_ENV=production bin/rails assets:precompile` writes 603 files; terser
+  minifies application-app.js from 1.12 MB to 530 KB and sassc compiles the SCSS.
+- Puma serves the site; sign-in, dashboard, teams, contacts, invites, the card
+  page, the payment form, the ActiveAdmin login and the vCard download all
+  return 200, and the vCard contains the expected name/org/title.
+
+Problems found by actually running it
+-------------------------------------
+
+- **minitest 6 breaks the Rails 8.1 test runner.** `activesupport` allows
+  `minitest >= 5.1` with no ceiling, so bundler picked 6.0.6, whose
+  `Runnable.run_suite` passes three arguments to `Rails::LineFiltering#run`,
+  which takes two. Pinned to `~> 5.25`.
+- **`sass-rails ~> 5.0` made the Gemfile unresolvable**, which is why the
+  repository had no lockfile. Replaced with `sassc-rails`.
+- **`Gemfile.lock` was gitignored.** An application has to commit it or CI and
+  production resolve different gem versions. Now tracked.
+- **No `.env.test`**, so moving `database.yml` to environment variables left the
+  test environment with no database credentials.
+- **A live Stripe secret key was committed** in
+  `config/initializers/stripe.rb`. Moved to `STRIPE_SECRET_KEY`.
+- **`TeamPaymentsController` had no authentication at all** - its index listed
+  every customer's email and Stripe customer token publicly.
+- **Share ownership came from a hidden `user_id` form field.** Creation failed
+  whenever the field was missing, and it could be forged when present. The
+  controller now assigns `current_user`.
+- **`UserMailer#password_reset` was dead and broken**, calling
+  `@user.password_reset_token` (Devise's column is `reset_password_token`) and
+  `edit_password_reset_url`, which is not a route. Devise sends its own reset
+  mail; both the action and its view were removed.
+- **Top-level card and membership member routes had been deleted** while the
+  views and controllers still called `vcard_card_path`,
+  `approve_membership_path`, `edit_membership_card_path` and friends. Restored.
+- **`TeamsController#index` had no template.**
+- **Promo redemption crashed before it ran.** `Payment#create` built
+  `Payment.new(payment_params)` before the promo branch, so a promo-only
+  submission raised `ActionController::ParameterMissing`.
+- **`TeamPayment` required `stripe_card_token` on every save**, so any later
+  edit of a persisted payment was invalid. Now only required for a new record.
+- **`formtastic-bootstrap` (last released 2015) calls `Formtastic::Util`**,
+  removed in Formtastic 6. It styled a single form, which is now a plain
+  `form_with`, and the gem was dropped.
+- Several views called methods on possibly-nil associations
+  (`m.card.image?`, `@card.image?`, `admincard`, `@card.image_url` in the share
+  mailer) and a polymorphic `contact` with no `contact_path`.
+- `CarrierWave#fog_provider` is deprecated in CarrierWave 3 and had no effect.
+
+Content Security Policy
+-----------------------
+
+The policy is now enforced rather than report-only, with `script-src` on a nonce
+and no `'unsafe-inline'`:
+
+- The 31 inline `onClick="window.open(...)"` social share handlers became
+  `class="js-share-popup" data-share-url="..."` plus one delegated listener in
+  `app/assets/javascripts/share_popup.js`. Inline handlers are the one thing a
+  nonce cannot allow, so they were the blocker.
+- All 38 inline `<script>` blocks carry `nonce="<%= content_security_policy_nonce %>"`.
+- Four pre-HTML5 `onfocus`/`onblur` placeholder emulations on the contact form
+  were removed; the fields already have real `placeholder` attributes.
+- `style-src` keeps `'unsafe-inline'`: many views use `style="..."` attributes,
+  which a nonce cannot cover.
+
+`test/integration/content_security_policy_test.rb` asserts the policy is
+enforced, that the header and body nonces match, that no page carries an inline
+handler, and that every inline script is nonced - so a reintroduced handler fails
+CI rather than silently breaking in a browser.
+
 Still outstanding
 -----------------
 
-- **Asset pipeline.** Still on `sprockets ~> 3.7` with `sassc-rails`, which is
-  itself unmaintained. Moving to Sprockets 4 needs an
-  `app/assets/config/manifest.js` and the 19 `.css.scss` files renamed, or a move
-  to `dartsass-sprockets`. Held back because it cannot be verified without
-  running an asset precompile.
-- **ActiveAdmin** is unpinned. Confirm which release supports Rails 8.1 and pin
-  it; ActiveAdmin 4 changes how its assets are built.
-- **Content Security Policy** is report-only. Several views use inline handlers,
-  so the inline-script allowance has to stay until those are moved into the asset
-  pipeline.
-- **`Payment#purchase` and `TeamPayment#purchase`** still have their Stripe calls
-  commented out and return mock transaction ids.
-- The `status` columns on `payments` and `team_payments` are strings while the
-  `PROCESSING`/`FAILED`/`SUCCESS` constants are integers, so values round-trip as
-  `"1"`, `"2"`, `"3"`.
+- **Stripe charging is still mocked.** `Payment#purchase` and
+  `TeamPayment#purchase` set `mock_stripe_customer_...` / `MOCK_TRANSACTION_...`
+  instead of calling Stripe, and the real calls sit commented out. They cannot
+  simply be uncommented: the commented code uses
+  `Stripe::Customer.create(card: token)` and `Stripe::Charge.create`, and the
+  installed gem (19.x) pins API version `2026-06-24.dahlia`, where raw card
+  tokens on customers are gone and charging goes through PaymentIntents. Doing
+  this properly means client-side Stripe Elements, PaymentIntents with SCA
+  handling, and webhooks - a payments project needing real keys and a test
+  account, not a mechanical edit. Deliberately left alone rather than shipped
+  untested.
+- **Sprockets is still 3.7 with `sassc-rails`.** This works: assets compile in
+  development and `assets:precompile` succeeds in production. But `sassc-rails`
+  is unmaintained, so moving to `dartsass-sprockets` with Sprockets 4 is worth
+  doing eventually. It needs `app/assets/config/manifest.js` and the 19
+  `.css.scss` / 17 `.js.coffee` files renamed, so it is a standalone piece of
+  work rather than part of the version bump.
+- **Rails 8.2 deprecation:** `config/routes.rb` line 19 passes a hash to
+  `resource`; keyword arguments will be required.
+- The `vpim` gem emits "literal string will be frozen" warnings on Ruby 3.4.
+- Several views have duplicate `class` attributes (pre-existing markup bugs in
+  `cards/_form.html.erb`, `cards/components/_modals.html.erb`,
+  `static_pages/contact.html.erb`), so the second one is ignored.
+- Google+ share links remain in the views; that service shut down in 2019.

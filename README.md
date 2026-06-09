@@ -37,6 +37,7 @@ Nothing secret is committed to this repository. The following need to be set:
 | `SMTP_ADDRESS`, `SMTP_PORT`, `SMTP_DOMAIN`, `SMTP_USER_NAME`, `SMTP_PASSWORD` | Outbound mail |
 | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | CarrierWave uploads to S3 |
 | `AWEBER_CONSUMER_KEY`, `AWEBER_CONSUMER_SECRET`, `AWEBER_ACCESS_TOKEN`, `AWEBER_ACCESS_TOKEN_SECRET`, `AWEBER_LIST_ID` | Newsletter signup |
+| `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY` | Card payments |
 | `RAILS_LOG_LEVEL`, `RAILS_LOG_TO_STDOUT`, `RAILS_SERVE_STATIC_FILES` | Logging and static files |
 
 Running the app
@@ -48,7 +49,7 @@ Running the app
 Tests
 -----
 
-    bin/rails test                # everything
+    bin/rails test                # everything (316 runs, 625 assertions)
     bin/rails test test/models    # one directory
 
 Tests are Minitest with fixtures, laid out under `test/models`,
