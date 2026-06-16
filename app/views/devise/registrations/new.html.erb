@@ -4,7 +4,7 @@
 	
 	<div class="container">
       <div class="content-container span8 centered-span"><div class="content">
-  		<%= devise_error_messages! %>
+  		<%= render "devise/shared/error_messages", resource: resource %>
         <h2>Sign Up</h2>
             <%= f.text_field :username, :placeholder => "Username" %>
 			<%= f.email_field :email, :placeholder => "email@example.com" %>

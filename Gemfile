@@ -17,7 +17,7 @@ gem 'rails-html-sanitizer', '~> 1.6'
 gem 'activerecord-session_store'
 
 # Authentication
-gem 'devise', '~> 4.9'
+gem 'devise', '~> 5.0'
 gem 'devise_invitable'
 gem 'omniauth', '~> 2.0'
 gem 'omniauth-facebook'
