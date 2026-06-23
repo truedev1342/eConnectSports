@@ -207,6 +207,15 @@ Problems found by actually running it
   mailer) and a polymorphic `contact` with no `contact_path`.
 - `CarrierWave#fog_provider` is deprecated in CarrierWave 3 and had no effect.
 
+Devise 5
+--------
+
+`devise_for` in Devise 4.9 passed a hash to `resource`, which Rails 8.2 will
+reject, so Devise was moved to 5.0 (devise_invitable allows `devise >= 4.6`).
+Devise 5 removed `devise_error_messages!`; the eight views that called it now
+render `devise/shared/error_messages`. The application boots with no deprecation
+warnings.
+
 Content Security Policy
 -----------------------
 
@@ -248,10 +257,5 @@ Still outstanding
   doing eventually. It needs `app/assets/config/manifest.js` and the 19
   `.css.scss` / 17 `.js.coffee` files renamed, so it is a standalone piece of
   work rather than part of the version bump.
-- **Rails 8.2 deprecation:** `config/routes.rb` line 19 passes a hash to
-  `resource`; keyword arguments will be required.
 - The `vpim` gem emits "literal string will be frozen" warnings on Ruby 3.4.
-- Several views have duplicate `class` attributes (pre-existing markup bugs in
-  `cards/_form.html.erb`, `cards/components/_modals.html.erb`,
-  `static_pages/contact.html.erb`), so the second one is ignored.
 - Google+ share links remain in the views; that service shut down in 2019.

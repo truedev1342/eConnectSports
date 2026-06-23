@@ -42,10 +42,11 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
 
   test 'update ignores attributes that are not permitted' do
     sign_in @user
-    original = @card.user_token
-    patch card_path(@card), params: { card: { card_name: 'Renamed Card' },
-                                      id_value: 'injected' }
-    assert_equal original, @card.reload.user_token
+    @card.update_column(:advanced_data, 'original value')
+    patch card_path(@card), params: { card: { card_name: 'Renamed Card',
+                                              advanced_data: 'injected' } }
+    assert_equal 'Renamed Card', @card.reload.card_name
+    assert_equal 'original value', @card.advanced_data
   end
 
   test 'destroying a card removes it' do
