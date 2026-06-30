@@ -237,6 +237,26 @@ enforced, that the header and body nonces match, that no page carries an inline
 handler, and that every inline script is nonced - so a reintroduced handler fails
 CI rather than silently breaking in a browser.
 
+Containers
+----------
+
+`Dockerfile` (multi-stage) and `docker-compose.yml` run the app, PostgreSQL,
+Redis, a Resque worker and the Resque scheduler. Two code changes were needed:
+
+- `puma` was in the `:development` group, so a production image had no TCP app
+  server (`config/unicorn.rb` listens on a unix socket for the nginx deploy).
+  Puma is now a top-level dependency; unicorn is untouched.
+- `config.force_ssl` / `config.assume_ssl` were hardcoded to true, which
+  301-redirects every plain HTTP request. They now read `RAILS_FORCE_SSL` /
+  `RAILS_ASSUME_SSL` and still default to true, so the nginx deploy is unchanged.
+
+Verified by building and running the stack: the 482 MB image builds, `db:prepare`
+runs from the entrypoint (25 tables), pages and digested assets are served, CSP
+is still enforced, `bin/rails test` passes inside the container (316 runs), and a
+`NotifyCardExpirationJob` enqueued on the `notify_card` queue was picked up by
+the worker within five seconds. `procps` is installed in the runtime stage
+because Resque shells out to `ps` to prune dead workers.
+
 Still outstanding
 -----------------
 

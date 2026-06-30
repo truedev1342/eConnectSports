@@ -9,6 +9,7 @@ gem 'pg', '~> 1.5.0'
 
 # Web server
 gem 'unicorn'
+gem 'puma'
 gem 'bootsnap', require: false
 
 gem 'nokogiri', '~> 1.16'
@@ -47,7 +48,6 @@ group :development do
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'puma'
 
   gem 'listen', '~> 3.3'
 end

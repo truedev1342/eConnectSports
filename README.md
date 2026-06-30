@@ -46,6 +46,54 @@ Running the app
     bin/rails server              # web
     bundle exec rake resque:work  # background jobs
 
+Docker
+------
+
+`docker-compose.yml` brings up the app, PostgreSQL, Redis, a Resque worker and
+the Resque scheduler.
+
+    cp .env.docker.example .env.docker
+    docker compose build
+    docker compose run --rm web bin/rails secret     # paste into SECRET_KEY_BASE
+    docker compose up -d
+    open http://localhost:3000
+
+The web container prepares the database on boot (`DB_PREPARE=true` runs
+`db:prepare` once PostgreSQL is reachable), so no separate setup step is needed.
+
+Useful commands:
+
+    docker compose logs -f web
+    docker compose exec web bin/rails console
+    docker compose exec web bin/rails db:migrate
+    docker compose run --rm -e RAILS_ENV=test -e DB_PREPARE=false web bin/rails db:test:prepare
+    docker compose run --rm -e RAILS_ENV=test -e DB_PREPARE=false web bin/rails test
+    docker compose down                              # stop
+    docker compose down -v                           # stop and drop the volumes
+
+Notes:
+
+- The image is built for `RAILS_ENV=production` and assets are precompiled into
+  it, so a rebuild is needed after changing assets. There is no source bind mount.
+- `RAILS_FORCE_SSL=false` and `RAILS_ASSUME_SSL=false` are set in
+  `.env.docker.example` so the container is reachable over plain HTTP. Remove
+  them (or set them to `true`) once TLS terminates in front of it, otherwise the
+  app will not issue the HTTPS redirect it does in the nginx deployment.
+- `RAILS_SERVE_STATIC_FILES=1` lets Puma serve the precompiled assets. Behind a
+  reverse proxy, drop it and let the proxy serve `public/`.
+- Uploads go to S3 via CarrierWave. The `uploads` volume only covers
+  `public/system`, so set `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` for
+  uploads to work.
+- `.env.*` is excluded from the image (see `.dockerignore`); the committed
+  `.env.production` holds stale values, so configuration comes from
+  `.env.docker` via compose instead.
+- Assets are served under their digested filenames in production. Requesting
+  `/assets/application-website.css` returns 404 by design; the page references
+  `/assets/application-website-<digest>.css`.
+- Background jobs need `SMTP_USER_NAME` / `SMTP_PASSWORD`. Without them
+  `NotifyCardExpirationJob` runs, queries and renders correctly, then fails at
+  the send with `Net::SMTPAuthenticationError`.
+
 Tests
 -----
 

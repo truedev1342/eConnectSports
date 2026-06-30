@@ -23,9 +23,11 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.js_compressor = :terser
 
-  # nginx terminates TLS in front of the app.
-  config.assume_ssl = true
-  config.force_ssl = true
+  # nginx terminates TLS in front of the app. Both can be turned off (for a
+  # container running behind a proxy that terminates TLS elsewhere, or for local
+  # testing over plain HTTP) with RAILS_ASSUME_SSL/RAILS_FORCE_SSL=false.
+  config.assume_ssl = ENV.fetch('RAILS_ASSUME_SSL', 'true') != 'false'
+  config.force_ssl = ENV.fetch('RAILS_FORCE_SSL', 'true') != 'false'
 
   # Specifies the header that your server uses for sending files
   config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
