@@ -1,4 +1,4 @@
-class TeamMailer < ActionMailer::Base
+class TeamMailer < ApplicationMailer
   #default from: "do_not_reply@idigitallsports.com"
   default from: "I Dig It All Sports <do_not_reply@idigitallsports.com>"
 

@@ -1,5 +1,5 @@
 <%= content_for :head do %>
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
 $(document).ready(function() {
     $('#calendar').fullCalendar({
     })

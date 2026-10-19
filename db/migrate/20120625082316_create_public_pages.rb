@@ -1,4 +1,4 @@
-class CreatePublicPages < ActiveRecord::Migration
+class CreatePublicPages < ActiveRecord::Migration[7.2]
   def change
     create_table :public_pages do |t|
       t.boolean :status
@@ -8,6 +8,8 @@ class CreatePublicPages < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :public_pages, :user_id
+    unless index_exists?(:public_pages, :user_id)
+      add_index :public_pages, :user_id
+    end
   end
 end

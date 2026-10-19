@@ -1,12 +1,12 @@
-class PublicKiosksController < InheritedResources::Base
-  before_filter :authenticate_user!,
+class PublicKiosksController < ApplicationController
+  before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 
   # GET /public_kiosks/1
   # GET /public_kiosks/1.json
   def show
     if params[:team_id]
-      @team = Team.find_by_id(params[:team_id].to_s)
+      @team = Team.find_by(id: params[:team_id].to_s)
       @public_kiosk = @team.public_kiosk
       @approved_memberships = @team.memberships.where(:approved => true)
     else
@@ -24,7 +24,7 @@ class PublicKiosksController < InheritedResources::Base
   # POST /public_kiosks.json
   def create
     @team = Team.find(params[:team_id])
-    @public_kiosk = @team.public_kiosk.new(params[:public_kiosk])
+    @public_kiosk = @team.build_public_kiosk(public_kiosk_params)
   end
 
   # PUT /public_kiosks/1
@@ -32,11 +32,11 @@ class PublicKiosksController < InheritedResources::Base
   def update
     @public_kiosk = PublicKiosk.find(params[:id])
 
-    if @public_kiosk.update_attributes(params[:public_kiosk])
+    if @public_kiosk.update(public_kiosk_params)
     	record_activity("You updated your <b>public kiosk</b>") #This will call application controller record_activity
     	redirect_to @public_kiosk, notice: 'Public kiosk was successfully updated.'
     else
-    	redirect_to :back, error: 'Sorry, something went wrong.'
+    	redirect_back(fallback_location: root_path, allow_other_host: false, flash: { error: 'Sorry, something went wrong.' })
     end
   end
 
@@ -52,5 +52,13 @@ class PublicKiosksController < InheritedResources::Base
       format.html { redirect_to team_path(@team) }
       format.json { head :no_content }
     end
+  end
+  private
+  def public_kiosk_params
+    params.require(:public_kiosk).permit(:background, :background_tile, :logo, :team_id, :description, :remove_background, :remove_logo)
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
   end
 end

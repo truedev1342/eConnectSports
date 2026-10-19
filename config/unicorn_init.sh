@@ -11,7 +11,7 @@
 . /lib/lsb/init-functions
 
 APP_NAME=idigitallsports
-PATH=/usr/local/rvm/wrappers/$APP_NAME:/usr/local/sbin:/usr/local/bin:$PATH
+PATH=/usr/local/rbenv/shims:/usr/local/rbenv/bin:/usr/local/sbin:/usr/local/bin:$PATH
 prog=unicorn
 DAEMON_NAME=$prog"_$APP_NAME"
 RAILS_ROOT=/home/apps/$APP_NAME/current

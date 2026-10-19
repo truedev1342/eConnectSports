@@ -8,7 +8,7 @@
   <meta property="og:description" content="Check out my IdigItAllSports Trading Card! Play Sports? Create yours today!"/>
   <meta property="og:site_name" content="I Dig It All Sports"/>
   <title><%= content_for?(:title) ? yield(:title) : "I Dig It All Sports" %></title>
-    <script type="text/javascript">
+    <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39350804-1']);
@@ -33,7 +33,7 @@
   <%= csrf_meta_tag %>
   <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
   <%= yield(:head) %>
-  <script>
+  <script nonce="<%= content_security_policy_nonce %>">
     $(document).ready(function(){
       $('input, textarea').placeholder();
     });
@@ -143,7 +143,7 @@
         <p>&copy; <%= Time.now.strftime('%Y') %> I Dig It All Sports
         <a style="display: none" href="https://www.shareasale.com/shareasale.cfm?merchantID=47937" target="_blank">&nbsp;|&nbsp;Join our Affiliate Program</a></p>
   </div>
-<script type="text/javascript">
+<script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
    var _mfq = _mfq || [];
    (function() {
        var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;

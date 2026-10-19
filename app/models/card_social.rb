@@ -10,15 +10,11 @@
 #  updated_at :datetime         not null
 #
 
-class CardSocial < ActiveRecord::Base
-  belongs_to :card
-  attr_accessible :kind, :url
+class CardSocial < ApplicationRecord
+  include SanitizableUrl
 
-  def sanitized_url
-    if self.url.starts_with? 'http://' || 'https://'
-      self.url
-    else
-      'http://'+self.url
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    ["card_id", "created_at", "id", "kind", "updated_at", "url"]
   end
+  belongs_to :card
 end

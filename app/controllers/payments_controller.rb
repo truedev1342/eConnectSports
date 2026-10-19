@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   include ActionView::Helpers::TextHelper
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def index #use existing payment for card
     if params[:card_id]
@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
       end
       redirect_to card, notice: notice
     else
-      redirect_to :back
+      redirect_back(fallback_location: root_path, allow_other_host: false)
     end
   end
 
@@ -36,7 +36,22 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    @payment = Payment.new(params[:payment])
+    if params[:promo_code].present?
+      @promo = PromoCode.find_by(code: params[:promo_code])
+      if @promo && !@promo.used
+        total_purchased = current_user.cards_purchased.to_i + @promo.cards
+        current_user.update(cards_purchased: total_purchased)
+        @promo.user_id = current_user.id
+        @promo.used = true
+        @promo.save
+        Payment.new(period: 12, user_id: current_user.id, card_id: params[:card_id]).save(validate: false)
+        redirect_to root_path, notice: "You got #{pluralize(@promo.cards, 'card')}!" and return
+      else
+        redirect_back(fallback_location: root_path, allow_other_host: false, alert: 'Wrong promo code.') and return
+      end
+    end
+
+    @payment = Payment.new(payment_params)
     @payment.user = current_user
     @payment.email = current_user.email
     @previous_purchased = current_user.cards_purchased
@@ -49,22 +64,8 @@ class PaymentsController < ApplicationController
       @buy_more = false
     end
 
-    if params[:promo_code].present?
-      @promo = PromoCode.find_by_code(params[:promo_code])
-      if @promo && !@promo.used
-        total_purchased = current_user.cards_purchased.to_i + @promo.cards
-        current_user.update_attributes(:cards_purchased => total_purchased)
-        @promo.user_id = current_user.id
-        @promo.used = true
-        @promo.save
-        Payment.new(period: 12, user_id: current_user.id, card_id: params[:card_id]).save(validate: false)
-        redirect_to root_path, notice: "You got #{pluralize(@promo.cards, 'card')}!" and return
-      else
-        redirect_to :back, alert: 'Wrong promo code.' and return
-      end
-    end
     if @payment.purchase(@buy_more)
-      if  @payment.status.to_i == 3
+      if @payment.status == Payment::SUCCESS
         if true #@payment.renew_payment == "false" || !@payment.renew_payment
           @total_purchased = @previous_purchased.to_i+@new_purchased
           current_user.update_column('cards_purchased', @total_purchased)
@@ -105,5 +106,16 @@ class PaymentsController < ApplicationController
       p_id=params[:trans_id]
       redirect_to new_payment_path unless d_id==p_id
     end
+  end
+  def card_params
+    params.require(:card).permit(:first_name, :last_name, :position, :highlights, :team_name, :card_name, :remove_image, :background, :background_tile, :remove_background, :card_phones_attributes, :card_emails_attributes, :card_websites_attributes, :card_socials_attributes, :stats_attributes, :membership_id, :user_id, :background1_color, :background2_color, :details_color, :name_color, :icon_color, :sport, :hometown, :season, :year, :league, :handed, :image, :crop_x, :crop_y, :crop_w, :crop_h, :user_token,:url_alias, :library_image, :background_cache)
+  end
+
+  def payment_params
+    params.require(:payment).permit(:stripe_card_token, :stripe_customer_token, :email, :amount, :cards_purchased, :card_id, :period, :renew_payment, :user_id)
+  end
+
+  def promo_code_params
+    params.require(:promo_code).permit(:cards, :code, :used)
   end
 end

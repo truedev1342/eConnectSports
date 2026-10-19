@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script type="text/javascript">
+    <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
 
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39350804-1']);
@@ -51,7 +51,7 @@
   <%= stylesheet_link_tag 'application-website' %>
   <%= javascript_include_tag 'application-website' %>
 
-    <script>(function () {
+    <script nonce="<%= content_security_policy_nonce %>">(function () {
         if (navigator.userAgent.match(/Iemobile\/10\.0/)) {
             var msViewportStyle = document.createElement("style");
             msViewportStyle.appendChild(document.createTextNode("@-ms-viewport {width:auto!important}"));
@@ -93,7 +93,7 @@
         <div id="social-wrapper">
             <a href="http://idigitallsports.com/#" style="display: none"><img
             class="footer-social-icon hover-fade" alt="RSS Feed" src="assets/website/icons/social/rss.png"></a><a href="https://www.facebook.com/pages/Idigitallsports/585501764811875?fref=ts"><img
-        class="footer-social-icon hover-fade" alt="Facebook" src="assets/website/icons/social/facebook.png"></a><a style="display: none" href="https://twitter.com/iDigitallSports"><img class="footer-social-icon hover-fade" class="footer-social-icon hover-fade" alt="linkedIn" src="assets/website/icons/social/linkedin.png"></a><a style="display: none"  href="https://pinterest.com/idigitallSports/"><img class="footer-social-icon hover-fade"  <a style="display: none"  href="mailto:info@idigitallsports.com?Subject=IDigitallSports Website Contact"><img src="assets/website/icons/social/email.png" alt="email" class="footer-social-icon hover-fade"></a>
+        class="footer-social-icon hover-fade" alt="Facebook" src="assets/website/icons/social/facebook.png"></a><a style="display: none" href="https://twitter.com/iDigitallSports"><img class="footer-social-icon hover-fade" alt="linkedIn" src="assets/website/icons/social/linkedin.png"></a><a style="display: none"  href="https://pinterest.com/idigitallSports/"><img class="footer-social-icon hover-fade"  <a style="display: none"  href="mailto:info@idigitallsports.com?Subject=IDigitallSports Website Contact"><img src="assets/website/icons/social/email.png" alt="email" class="footer-social-icon hover-fade"></a>
             <!-- <script src="http://www.manta.com/js/widget_embed.js"></script>
             <a class="manta" href="http://www.manta.com/cpl-edit/mxdhmsq#widget:recommendations;w:250;h:470;emid:mxdhmsq"><img src="assets/website/icons/social/manta.png" alt="Manta" class="footer-social-icon hover-fade"></a> -->
         </div>
@@ -114,10 +114,10 @@
         <!--  START FLIGHT  -->
         <div class="one-half">
             <%= form_tag('/email', :id => 'contact_form', :autocomplete => 'off' ) do %>
-                <%= text_field :email, :name, :id => "contact-name",  :autocomplete => 'none', :class => "contact-name", :placeholder => "Name", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %> 
-                <%= text_field :email, :address, :id => "contact-email", :class => "contact-email", :placeholder => "Email", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
-                <%= text_field :email, :website, :id => "contact-website", :class => "contact-website", :placeholder => "Website", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
-                <%= text_field :email, :subject, :id => "contact-subject", :class => "contact-subject", :placeholder => "Subject", :onfocus => "if(this.value==this.defaultValue)this.value='';", :onblur => "if(this.value=='')this.value=this.defaultValue;" %>
+                <%= text_field :email, :name, :id => "contact-name",  :autocomplete => 'none', :class => "contact-name", :placeholder => "Name" %> 
+                <%= text_field :email, :address, :id => "contact-email", :class => "contact-email", :placeholder => "Email" %>
+                <%= text_field :email, :website, :id => "contact-website", :class => "contact-website", :placeholder => "Website" %>
+                <%= text_field :email, :subject, :id => "contact-subject", :class => "contact-subject", :placeholder => "Subject" %>
                 <%= text_area :email, :body, :rows => "6", :cols => "25", :id => "contact-message", :class => "contact-message", :placeholder => "Message" %>
                 <br><br>
                 <%= submit_tag "Send", :id => "contact-submit", :value => "Send Request", :class => "medium button contact-submit" %>
@@ -151,8 +151,8 @@
     <a href="#top"><span></span>Back to Top</a>
 </nav>
 <!-- end back-top -->
-<script>$('input, textarea').placeholder();</script>
-<script type="text/javascript">
+<script nonce="<%= content_security_policy_nonce %>">$('input, textarea').placeholder();</script>
+<script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
    var _mfq = _mfq || [];
    (function() {
        var mf = document.createElement("script"); mf.type = "text/javascript"; mf.async = true;

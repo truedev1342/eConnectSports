@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :new, :edit]
 
   @@disallowed_aliases = %w(contacts plans shares admin resque users memberships teams public_pages cards appointments easily-accessible customer-interaction-points schedule-appointments personal-digidex create-teams email-signatures qr-code tutorials single-shop industry-connect privacy-policy qrcode-store email 404 422 500)
@@ -34,10 +34,10 @@ class CardsController < ApplicationController
   def create
     if current_user
       @user = current_user
-      @card = @user.cards.new(params[:card])
+      @card = @user.cards.new(card_params)
     else
       token = session[:user_token] || cookies[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(params[:card])
+      @card = Card.find_by(user_token: token) || Card.new(card_params)
       if @card.id?
         render 'show' and return
       end
@@ -81,7 +81,7 @@ class CardsController < ApplicationController
     check_availability_of_url_alias
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.update(card_params)
         if params[:card][:image].present?
           format.html { render :crop }
         else
@@ -103,7 +103,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       record_activity("Deleted <b>"+@card.card_name+"</b> card") #This will call application controller record_activity
-      format.html { redirect_to :back }
+      format.html { redirect_back(fallback_location: root_path, allow_other_host: false) }
       format.json { head :no_content }
     end
   end
@@ -115,78 +115,27 @@ class CardsController < ApplicationController
   end
 
   def vcard
-    @card = @card = Card.find(params[:id])
+    @card = Card.find(params[:id])
 
-    card = Vpim::Vcard::Maker.make2 do |maker|
-      maker.add_name do |name|
-        name.given = @card.first_name
-        name.family = @card.last_name
-      end
-
-      maker.add_addr do |addr|
-        addr.preferred = true
-        addr.location = 'work'
-        addr.street = @card.address1.to_s+', '+@card.address2.to_s
-        addr.region = @card.state.to_s
-        addr.country = 'United States'
-        addr.postalcode = @card.zip_code.to_s
-      end
-
-      #maker.add_photo do |photo|
-      #  photo.link = 'http://example.com/image.png'
-      #end
-
-      #maker.add_photo do |photo|
-      #  photo.image = "File.open('drdeath.jpg').read # a fake string, real data is too large :-)"
-      #  photo.type = 'jpeg'
-      #end
-
-      maker.org = @card.business_name.to_s
-
-      maker.title = @card.title.to_s
-
-      @card.card_phones.each do |phone|
-        if phone.location == 1
-          @location = 'home'
-        elsif phone.location == 2
-          @location = 'cell'
-        elsif phone.location == 3
-          @location = 'work'
-        end
-        if phone.location == 4
-          maker.add_tel('+1'+phone.nmbr) do |tel|
-            tel.location = 'work'
-            tel.capability = 'fax'
-          end
-        else
-          maker.add_tel('+1'+phone.nmbr) { |t| t.location = @location}
-        end
-      end
-
-      @card.card_emails.each do |email|
-        unless email.blank?
-            maker.add_email(email.address.to_s)
-        end
-      end
-    end
-
-    send_data(card.to_s, :type => 'text/vcard; charset=utf-8', :filename => "contact.vcf", :disposition => 'attachment')
+    send_data(@card.to_vcard.to_s, type: 'text/vcard; charset=utf-8',
+                                   filename: 'contact.vcf', disposition: 'attachment')
   end
 
   def send_vcard
-    @card = Card.find(params[:card_id])
-    VcardMailer.send_vcard(params[:vcard_email], @card).deliver
+    @card = Card.find(params[:id] || params[:card_id])
+    VcardMailer.send_vcard(params[:vcard_email], @card).deliver_now
     flash[:notice] = "Email was sent successfully."
-    redirect_to :back
+    redirect_back(fallback_location: root_path, allow_other_host: false)
   end
 
   def new_demo_card
     if session[:user_token].present?
       token = session[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(user_token: token)
+      @card = Card.find_by(user_token: token) || Card.new(user_token: token)
+
     elsif cookies[:user_token].present?
       token = cookies[:user_token]
-      @card = Card.find_by_user_token(token) || Card.new(user_token: token)
+      @card = Card.find_by(user_token: token) || Card.new(user_token: token)
     else
       token = Devise.friendly_token
       @card = Card.new(user_token: token)
@@ -208,11 +157,12 @@ class CardsController < ApplicationController
       render json: {result: 'busy'} and return
     end
     status = 'free'
-    card = Card.find_by_url_alias(params[:url_alias])
+    card = Card.find_by(url_alias: params[:url_alias])
+
     if card
       status = 'busy'
     else
-      user = User.find_by_username(params[:url_alias])
+      user = User.find_by(username: params[:url_alias])
       status = user ? 'busy' : 'free'
     end
     render json: {result: status}
@@ -225,5 +175,51 @@ class CardsController < ApplicationController
           params[:card].delete(:url_alias)
         end
       end
+    end
+    
+    def card_params
+      params.require(:card).permit(
+        :first_name,
+        :last_name,
+        :position,
+        :highlights,
+        :team_name,
+        :card_name,
+        :remove_image,
+        :background,
+        :background_tile,
+        :remove_background,
+        :membership_id,
+        :user_id,
+        :background1_color,
+        :background2_color,
+        :details_color,
+        :name_color,
+        :icon_color,
+        :sport, :hometown,
+        :season,
+        :year,
+        :league,
+        :handed,
+        :image,
+        :crop_x,
+        :crop_y,
+        :crop_w,
+        :crop_h,
+        :user_token,
+        :url_alias,
+        :library_image,
+        :background_cache,
+
+        stats_attributes: [:kind, :abbr, :value, :_destroy],
+        card_websites_attributes: [:name, :url, :_destroy],
+        card_socials_attributes: [:url, :kind, :_destroy],
+        card_phones_attributes: [:location, :nmbr, :_destroy],
+        card_emails_attributes: [:address, :_destroy]        
+      )
+    end
+
+    def user_params
+      params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
     end
 end

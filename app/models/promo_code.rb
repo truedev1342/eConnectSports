@@ -11,12 +11,17 @@
 #  updated_at :datetime         not null
 #
 
-class PromoCode < ActiveRecord::Base
+class PromoCode < ApplicationRecord
+  def self.ransackable_associations(auth_object = nil)
+    ["user"]
+  end
+  def self.ransackable_attributes(auth_object = nil)
+    ["cards", "code", "created_at", "id", "updated_at", "used", "user_id"]
+  end
   after_initialize :set_code
   before_create :set_code
-  attr_accessible :cards, :code, :used
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :code, presence: true, uniqueness: true
 

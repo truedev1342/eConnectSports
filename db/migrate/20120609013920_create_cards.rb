@@ -1,4 +1,4 @@
-class CreateCards < ActiveRecord::Migration
+class CreateCards < ActiveRecord::Migration[7.2]
   def change
     create_table :cards do |t|
       t.string :first_name
@@ -11,6 +11,8 @@ class CreateCards < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :cards, :user_id
+    unless index_exists?(:cards, :user_id)
+      add_index :cards, :user_id
+    end
   end
 end

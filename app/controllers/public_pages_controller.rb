@@ -1,6 +1,6 @@
 class PublicPagesController < ApplicationController
   include UsersHelper
-  before_filter :authenticate_user!,
+  before_action :authenticate_user!,
     :only => [:destroy, :create, :update]
 
   # GET /public_pages/1
@@ -12,9 +12,9 @@ class PublicPagesController < ApplicationController
       params[:username] = params[:username].to_s + '.' + params[:format].to_s
     end
     # debugger
-    @user = User.find_by_username(params[:username].to_s)
+    @user = User.find_by(username: params[:username].to_s)
     if @user.nil?
-      @public_card = @card = Card.find_by_url_alias(params[:username])
+      @public_card = @card = Card.find_by(url_alias: params[:username])
       if @card.nil?
         render 'static_pages/not_found', status: 404
         return
@@ -25,12 +25,13 @@ class PublicPagesController < ApplicationController
       end
     end
     # debugger
-    render nothing: true and return if @user.nil? # perhaps just a request to a missing route
+    # render nothing: true and return if @user.nil? # perhaps just a request to a missing route
+    head :ok and return if @user.nil? # perhaps just a request to a missing route
 
     @public_page = @user.public_page
 
     if @public_page.status?
-	    @public_card = Card.find_by_id(@public_page.card_id)
+	    @public_card = Card.find_by(id: @public_page.card_id)
 
 	    respond_to do |format|
 	      format.html # show.html.erb
@@ -46,7 +47,7 @@ class PublicPagesController < ApplicationController
   # POST /public_pages.json
   def create
     @user = current_user
-    @public_page = @user.public_page.new(params[:public_page])
+    @public_page = @user.build_public_page(public_page_params)
   end
 
   # PUT /public_pages/1
@@ -55,11 +56,11 @@ class PublicPagesController < ApplicationController
     @user = User.find(params[:user_id])
     @public_page = @user.public_page
 
-    if @public_page.update_attributes(params[:public_page])
+    if @public_page.update(public_page_params)
     	record_activity("You updated your <b>public page</b>") #This will call application controller record_activity
     	redirect_to "/#{@user.username}", notice: 'Public page was successfully updated.'
     else
-    	redirect_to :back, error: 'Sorry, something went wrong.'
+    	redirect_back(fallback_location: root_path, allow_other_host: false, flash: { error: 'Sorry, something went wrong.' })
     end
   end
 
@@ -76,5 +77,17 @@ class PublicPagesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  private
+  def card_params
+    params.require(:card).permit(:first_name, :last_name, :position, :highlights, :team_name, :card_name, :remove_image, :background, :background_tile, :remove_background, :card_phones_attributes, :card_emails_attributes, :card_websites_attributes, :card_socials_attributes, :stats_attributes, :membership_id, :user_id, :background1_color, :background2_color, :details_color, :name_color, :icon_color, :sport, :hometown, :season, :year, :league, :handed, :image, :crop_x, :crop_y, :crop_w, :crop_h, :user_token,:url_alias, :library_image, :background_cache)
+  end
 
+  def public_page_params
+		params.require(:public_page).permit(:background, :logo, :status, :user_id, :card_id, :background_tile, :remove_background)
+	end
+
+  def user_params
+		params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+	end
+  
 end

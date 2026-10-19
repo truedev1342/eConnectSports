@@ -26,3 +26,4 @@
 //= require ./website/retina/retina
 //= require ./website/placeholder/placeholder
 //= require ./website/bootstrap.min
+//= require share_popup

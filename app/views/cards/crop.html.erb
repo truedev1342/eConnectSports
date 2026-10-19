@@ -1,5 +1,5 @@
 <%= content_for :head do %>
-	<script>
+	<script nonce="<%= content_security_policy_nonce %>">
 		var ImageCropper,
 		  __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 

@@ -10,15 +10,12 @@
 #  name       :string(255)
 #
 
-class CardWebsite < ActiveRecord::Base
-  belongs_to :card
-  attr_accessible :url, :name
+class CardWebsite < ApplicationRecord
+  include SanitizableUrl
 
-  def sanitized_url
-    if self.url.starts_with? 'http://' || 'https://'
-      self.url
-    else
-      'http://'+self.url
-    end
+  def self.ransackable_attributes(auth_object = nil)
+    ["card_id", "created_at", "id", "name", "updated_at", "url"]
   end
+  
+  belongs_to :card
 end

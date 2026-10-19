@@ -19,5 +19,5 @@
 
 # Learn more: http://github.com/javan/whenever
 every 1.days do
-  runner "Resque.enqueue(NotifyCardExpiration)"
+  runner "NotifyCardExpirationJob.perform_later"
 end

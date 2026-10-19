@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery
+	protect_from_forgery with: :exception
 
-	before_filter :force_www!
-	# before_filter :set_cache_buster
+	before_action :force_www!
+	# before_action :set_cache_buster
 
 	def default_url_options
 		if Rails.env.production?
@@ -10,10 +10,6 @@ class ApplicationController < ActionController::Base
 		else  
 			{}
 		end
-	end
-
-	rescue_from CanCan::AccessDenied do |exception|
-		redirect_to root_path, :alert => exception.message
 	end
 
 	def record_activity(note)
@@ -61,7 +57,8 @@ class ApplicationController < ActionController::Base
 
     def force_www!
 	  if Rails.env.production? and request.host[0..18] == "idigitallsports.com"
-	    redirect_to "#{request.protocol}www.#{request.host_with_port}#{request.fullpath}", :status => 301
+	    redirect_to "#{request.protocol}www.#{request.host_with_port}#{request.fullpath}",
+	                :status => 301, :allow_other_host => true
 	  end
 	end
 
@@ -69,5 +66,11 @@ class ApplicationController < ActionController::Base
 		response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
 		response.headers["Pragma"] = "no-cache"
 		response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+	end
+
+	private
+
+	def activity_params
+		params.require(:activity).permit(:action, :browser, :controller, :ip_address, :note, :params)
 	end
 end

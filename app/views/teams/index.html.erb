@@ -1,0 +1,21 @@
+<div class="content-container"><div class="content">
+  <h2>Teams</h2>
+
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Members</th>
+    </tr>
+
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, team %></td>
+        <td><%= team.owner.try(:full_name) %></td>
+        <td><%= team.memberships.where(approved: true).count %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to 'Create a team', new_team_path, class: 'btn' %>
+</div></div>

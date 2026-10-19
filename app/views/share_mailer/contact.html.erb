@@ -11,9 +11,11 @@
 
 <table cellpadding="20" height="140" width:="320" style="border:3px solid #ccc">
 	<tr valign="top">
+		<% if @card %>
 		<td style="vertical-align:middle;">
 			<%= image_tag @card.image_url(:thumb).to_s, :class => "roundedImage", :height => "100" %>
 		</td>
+		<% end %>
 		<td style="vertical-align:middle;">
 			<p>
 				<strong><%= @sender_name %></strong>

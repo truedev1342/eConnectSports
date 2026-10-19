@@ -13,12 +13,12 @@ class Users::InvitationsController < Devise::InvitationsController
     else
       found_memberships = Array.new
       params[:email_list].split(",").each do |email|
-        found_user = User.find_by_email(email)
+        found_user = User.find_by(email: email)
         if found_user
-          found_membership = team.memberships.find_by_user_id(found_user.id)
+          found_membership = team.memberships.find_by(user_id: found_user.id)
           if found_membership == '' || found_membership == nil
             team.users << found_user
-            TeamMailer.invite(found_user, team, current_user, current_host).deliver
+            TeamMailer.invite(found_user, team, current_user, current_host).deliver_now
           else
             found_memberships << found_user
           end
@@ -36,4 +36,13 @@ class Users::InvitationsController < Devise::InvitationsController
       redirect_to team, notice: "Invite sent. The people you invite must accept membership. Once they do, they will show up in the Members tab below. #{members_found_notification}"
     end
   end
+
+  private
+  def team_params
+    params.require(:team).permit(:name, :owner_id, :memberships_purchased)
+  end
+
+  def user_params
+		params.require(:user).permit(:public_page_attributes, :username, :admin, :first_name, :last_name, :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :cards_purchased)
+	end
 end

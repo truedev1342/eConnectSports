@@ -23,7 +23,7 @@
 				    <td>
 				    	<% if share.shareable_type == "Card" %>
 				    		<% cardid = share.shareable_id %>
-				    		<% card = Card.find_by_id(cardid) %>
+				    		<% card = Card.find_by(id: cardid) %>
 				    		<% unless card.blank? %>
 				    		  <%= card.card_name %> Card
 				    		<% end %>

@@ -1,4 +1,4 @@
-class CreatePublicKiosks < ActiveRecord::Migration
+class CreatePublicKiosks < ActiveRecord::Migration[7.2]
   def change
     create_table :public_kiosks do |t|
       t.references :team
@@ -8,6 +8,8 @@ class CreatePublicKiosks < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :public_kiosks, :team_id
+    unless index_exists?(:public_kiosks, :team_id)
+      add_index :public_kiosks, :team_id
+    end
   end
 end

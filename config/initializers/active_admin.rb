@@ -101,6 +101,7 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   # config.allow_comments = true
+  config.comments = false
   #
   # You can turn them on and off for any given namespace by using a
   # namespace config block.
@@ -123,7 +124,7 @@ ActiveAdmin.setup do |config|
   # You can add before, after and around filters to all of your
   # Active Admin resources from here.
   #
-  # config.before_filter :do_something_awesome
+  # config.before_action :do_something_awesome
 
 
   # == Register Stylesheets & Javascripts
@@ -147,6 +148,11 @@ ActiveAdmin.setup do |config|
   # Set the CSV builder separator (default is ",")
   # config.csv_column_separator = ','
 
-  # == Custom Footer
-  config.view_factory.footer = AdminFooter
+end
+
+# AdminFooter lives in app/components and is autoloaded, so it must not be
+# `require`d, and it has to be re-resolved after each reload rather than
+# captured once while the initializers run.
+Rails.application.config.to_prepare do
+  ActiveAdmin.application.view_factory.footer = AdminFooter
 end

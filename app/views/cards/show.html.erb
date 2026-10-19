@@ -7,7 +7,7 @@
       }
       </style>
     <% elsif @card.background? %>
-      <script>
+      <script nonce="<%= content_security_policy_nonce %>">
       $.backstretch("<%= @card.background_url.to_s %>");
       </script>
     <% end %>
@@ -77,17 +77,11 @@
           </a>
           <% if current_user %>
             <ul class="dropdown-menu">
-                <li><a class="hrefless" onClick="window.open('https://www.facebook.com/dialog/feed?' +
-                        'app_id=348916705210945&' +
-                        'link=<%=card_url(@card) %>&' +
-                        'redirect_uri=http://www.idigitallsports.com&' +
-                        'picture=<%= @card.image_url(:card).to_s %>&' +
-                        'name=Check out my IdigItAllSports Trading Card!&' +
-                        'description=The next generation trading card, Fun for all ages.','socialshare','width=600,height=400')">
+                <li><a class="hrefless js-share-popup" data-share-url="https://www.facebook.com/dialog/feed?app_id=348916705210945&link=<%=card_url(@card) %>&redirect_uri=http://www.idigitallsports.com&picture=<%= @card.image_url(:card).to_s %>&name=Check out my IdigItAllSports Trading Card!&description=The next generation trading card, Fun for all ages." >
                     <i class="icon-facebook-sign"> </i>Facebook</a></li>
-              <li><a class="hrefless" onClick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=<%= card_url(@card) %>&title=<%=u @card.card_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>','socialshare','width=600,height=400')"><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
-              <li><a class="hrefless" onClick="window.open('http://twitter.com/home?status=<%=u @card.card_name %> - <%= card_url(@card) %>','socialshare','width=600,height=400')"><i class="icon-twitter-sign"></i> Twitter</a></li>
-              <li><a class="hrefless" onClick="window.open('https://plus.google.com/share?url=<%= card_url(@card) %>&t=<%=u @card.card_name %>','socialshare','width=600,height=400')"><i class="icon-google-plus-sign"></i> Google+</a></li>
+              <li><a class="hrefless js-share-popup" data-share-url="http://www.linkedin.com/shareArticle?mini=true&url=<%= card_url(@card) %>&title=<%=u @card.card_name %>&summary=<%=u 'Check out my I Dig It All Sports card.' %>" ><i class="icon-linkedin-sign"></i> LinkedIn</a></li>
+              <li><a class="hrefless js-share-popup" data-share-url="http://twitter.com/home?status=<%=u @card.card_name %> - <%= card_url(@card) %>" ><i class="icon-twitter-sign"></i> Twitter</a></li>
+              <li><a class="hrefless js-share-popup" data-share-url="https://plus.google.com/share?url=<%= card_url(@card) %>&t=<%=u @card.card_name %>" ><i class="icon-google-plus-sign"></i> Google+</a></li>
               <li><%= link_to "<i class='icon-envelope-alt'></i> Email".html_safe, card_url(@card).to_s+"/shares/new" %></li>
             </ul>
           <% else %>
@@ -193,10 +187,10 @@
         </p>
       </div>
     </div>
-    <%= form_for(Contact.new) do |f| %>
-      <%= hidden_field :contact, :card_id, { :value => @card.id } %>
-      <%= f.submit "+ Add to Collection", :class => "add-contact" %>
-    <% end %>
+    <%= form_for([@card, Contact.new]) do |f| %>
+      <%= f.hidden_field :card_id, value: @card.id %>
+      <%= f.submit "+ Add to Collection", class: "add-contact" %>
+    <% end %>    
   </div>
 </div>
 <div class="modal hide fade" id="qrModal">
@@ -245,7 +239,7 @@
       </div>
     <% end %>
   </div>
-  <script type="text/javascript">
+  <script nonce="<%= content_security_policy_nonce %>" type="text/javascript">
     $('body').click(function(){
       $('#demo-card-modal').modal('show');
     });

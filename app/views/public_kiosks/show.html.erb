@@ -16,7 +16,7 @@
 		  }
 		  </style>
 		<% elsif @public_kiosk.background? %>
-		  <script>
+		  <script nonce="<%= content_security_policy_nonce %>">
 		  $.backstretch("<%= @public_kiosk.background_url.to_s %>");
 		  </script>
 		<% end %>
@@ -64,6 +64,7 @@
 			</div>
 			<% if @approved_memberships.count > 0 %>
 				<% @approved_memberships.each do |m| %>
+					<% next if m.card.blank? %>
 					<%= link_to(m.card) do %>
 						<div class="card flow-card" style="float:left;margin:5px;width:290px;height:170px;line-height:12px;">
 							<table align="center" cellpadding="10" height="120" style="margin-top:15px;">

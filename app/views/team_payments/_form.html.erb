@@ -1,15 +1,31 @@
-<%= semantic_form_for @team_payment do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :status %>
-    <%= f.input :amount %>
-    <%= f.input :email %>
-    <%= f.input :transaction %>
-    <%= f.input :stripe_customer_token %>
-    <%= f.input :team %>
-    <%= f.input :memberships_purchased %>
+<%= form_with model: @team_payment do |f| %>
+  <% if @team_payment.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@team_payment.errors.count, "error") %> prevented this payment from being saved</h2>
+      <ul>
+        <% @team_payment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
 
-  <%= f.actions do %>
-    <%= f.action :submit, :as => :input %>
-  <% end %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :memberships_purchased, "Memberships" %>
+    <%= f.number_field :memberships_purchased, min: 1 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount, "Amount (cents)" %>
+    <%= f.number_field :amount %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: "btn" %>
+  </div>
 <% end %>

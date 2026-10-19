@@ -14,17 +14,18 @@
 #  updated_at            :datetime         not null
 #
 
-class TeamPayment < ActiveRecord::Base
+class TeamPayment < ApplicationRecord
+	def self.ransackable_attributes(auth_object = nil)
+		["amount", "created_at", "email", "id", "memberships_purchased", "status", "stripe_customer_token", "team_id", "transaction_number", "updated_at"]
+	end
   belongs_to :team
 
   PROCESSING, FAILED, SUCCESS = 1, 2, 3
 
-  attr_accessible :stripe_card_token, :stripe_customer_token, :email, :amount, :memberships_purchased, :team_id
-
   attr_accessor :stripe_card_token
 
   validates :memberships_purchased, :presence => true, :numericality => { :greater_than => 0 }
-  validates :stripe_card_token, :presence => true
+  validates :stripe_card_token, :presence => true, :unless => :persisted?
   validates :email, :presence => true
 
   def purchase
@@ -48,7 +49,7 @@ class TeamPayment < ActiveRecord::Base
 	    end
 	    save!
     end
-  rescue Exception => e
+  rescue StandardError => e
     errors.add :base, "There was a problem with your credit card."
     self.status = FAILED
     return self

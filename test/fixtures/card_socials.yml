@@ -1,23 +1,11 @@
-# == Schema Information
-#
-# Table name: card_socials
-#
-#  id         :integer          not null, primary key
-#  url        :string(255)
-#  kind       :integer
-#  card_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  url: MyString
+  url: twitter.com/first
   kind: 1
-  card: 
+  card: one
 
 two:
-  url: MyString
-  kind: 1
-  card: 
+  url: https://facebook.com/second
+  kind: 2
+  card: two

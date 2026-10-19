@@ -10,8 +10,14 @@
 #  memberships_purchased :integer
 #
 
-class Team < ActiveRecord::Base
-	attr_accessible :name, :owner_id, :memberships_purchased
+class Team < ApplicationRecord
+	def self.ransackable_associations(auth_object = nil)
+		["cards", "memberships", "owner", "public_kiosk", "team_payments", "users"]
+	end
+
+	def self.ransackable_attributes(auth_object = nil)
+		["created_at", "id", "memberships_purchased", "name", "owner_id", "updated_at"]
+	end
 	has_one :public_kiosk
 	has_many :memberships, :dependent => :destroy
 	has_many :users, :through => :memberships
@@ -23,9 +29,7 @@ class Team < ActiveRecord::Base
 	after_create :automagic_public_kiosk
 
 	def record_activity(note)
-	    @activity = Activity.new
-	    @activity.user = self.owner
-	    @activity.note = note
+	    @activity = Activity.new(user: self.owner, note: note)
 	    @activity.save
 	end
 
