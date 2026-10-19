@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '3.4.2'
-
 gem 'rails', '8.1.0'
 
 # Database connection
@@ -89,4 +87,3 @@ gem 'resque-scheduler', '~> 4.10'
 # Configuration for mailers and others
 gem 'premailer-rails'
 gem 'whenever'
-# gem 'protected_attributes'
